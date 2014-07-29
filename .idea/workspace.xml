@@ -23,20 +23,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="getBay.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="getBay.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/getBay.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="57" selection-end="270" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="300">
+            <state line="12" column="1" selection-start="287" selection-end="287" vertical-scroll-proportion="0.20224719" vertical-offset="0" max-vertical-offset="890">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getAllShores.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="getAllShores.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/getAllShores.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="12" selection-start="1479" selection-end="1497" vertical-scroll-proportion="0.5730337" vertical-offset="150" max-vertical-offset="1155">
-              <folding />
+            <state line="2" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="-0.625" vertical-offset="15" max-vertical-offset="1815">
+              <folding>
+                <marker date="1406668656000" expanded="true" signature="1159:1566" placeholder="..." />
+                <marker date="1406668656000" expanded="true" signature="1257:1523" placeholder="{...}" />
+                <marker date="1406668656000" expanded="true" signature="1532:1565" placeholder="{...}" />
+                <marker date="1406668656000" expanded="true" signature="1733:2065" placeholder="{...}" />
+                <marker date="1406668656000" expanded="true" signature="1784:2065" placeholder="..." />
+                <marker date="1406668656000" expanded="true" signature="1819:2065" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,8 +58,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/getBay.php" />
         <option value="$PROJECT_DIR$/getAllShores.php" />
+        <option value="$PROJECT_DIR$/getBay.php" />
       </list>
     </option>
   </component>
@@ -93,6 +100,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -113,12 +121,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistory" value="" />
+    <property name="SearchEverywhereHistory" value="xml" />
+    <property name="FullScreen" value="false" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -131,12 +143,29 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="92fbfcc3-f15b-4ee1-9ec3-97b336ca520e" server_name="Shore App">
       <method />
     </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="324cecbe-c262-4654-ad42-7c246bbfb61f" name="Default" comment="" />
@@ -149,17 +178,17 @@
     <frame x="0" y="22" width="1920" height="1011" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17239584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -188,21 +217,42 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/getBay.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="57" selection-end="270" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="300">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bays/ancud.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+        <state line="4" column="0" selection-start="57" selection-end="270" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="300">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/getAllShores.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="12" selection-start="1479" selection-end="1497" vertical-scroll-proportion="0.5730337" vertical-offset="150" max-vertical-offset="1155">
+        <state line="33" column="22" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1155">
+          <folding>
+            <marker date="1406668656000" expanded="true" signature="1159:1566" placeholder="..." />
+            <marker date="1406668656000" expanded="true" signature="1257:1523" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1532:1565" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1733:2065" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1784:2065" placeholder="..." />
+            <marker date="1406668656000" expanded="true" signature="1819:2065" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getAllShores.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="-0.625" vertical-offset="15" max-vertical-offset="1815">
+          <folding>
+            <marker date="1406668656000" expanded="true" signature="1159:1566" placeholder="..." />
+            <marker date="1406668656000" expanded="true" signature="1257:1523" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1532:1565" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1733:2065" placeholder="{...}" />
+            <marker date="1406668656000" expanded="true" signature="1784:2065" placeholder="..." />
+            <marker date="1406668656000" expanded="true" signature="1819:2065" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getBay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="1" selection-start="287" selection-end="287" vertical-scroll-proportion="0.20224719" vertical-offset="0" max-vertical-offset="890">
           <folding />
         </state>
       </provider>
