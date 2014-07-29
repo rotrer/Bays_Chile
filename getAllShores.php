@@ -1,5 +1,7 @@
 <?php
 require_once 'bays.inc.php';
+#Create Json bays
+file_put_contents($dirBays . 'bays.json', json_encode(array("bays" => $baysChile)));
 
 if ($baysChile) foreach ($baysChile as $bay)
 {
