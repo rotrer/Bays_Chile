@@ -1,6 +1,10 @@
 <?php
-$baseUrlShoa = 'http://www.shoa.cl/mareas/';
-$dirBays = 'bays/';
+define('DS', '/');
+define('BASE_DIR', str_replace('/api', '', __DIR__));
+define('BAYS_DIR', BASE_DIR . DS . 'bays');
+define('BASE_URL_SHOA', 'http://www.shoa.cl/mareas/');
+//$baseUrlShoa = 'http://www.shoa.cl/mareas/';
+
 $baysChile = array(
     'ancud',
     'angostura',
