@@ -85,8 +85,8 @@ function writeJsonMarea($bayFile, $timestamp, $mareasDias){
 
                 #Primer tramo día
                 $nodeDay[$monthDay][$timeStamp]['h1st'] = substr($day, 11, 5);
-                $nodeDay[$monthDay][$timeStamp]['h1st'] = substr($day, 17, 4);
-                $nodeDay[$monthDay][$timeStamp]['t1sr'] = substr($day, 22, 1);
+                $nodeDay[$monthDay][$timeStamp]['m1st'] = substr($day, 17, 4);
+                $nodeDay[$monthDay][$timeStamp]['t1st'] = substr($day, 22, 1);
 
 
                 #Segundo tramo día
