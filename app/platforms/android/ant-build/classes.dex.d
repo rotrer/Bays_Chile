@@ -1,7 +1,19 @@
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes.dex : \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$1.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$2.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$3.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$4.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$5.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$6.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$7.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$BannerListener.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$BasicListener.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$InterstitialListener.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/BuildConfig.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R$attr.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R$drawable.class \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R$integer.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R$string.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R$xml.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/com/tides/app/R.class \
@@ -64,3 +76,4 @@
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/org/apache/cordova/statusbar/StatusBar$2.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/classes/org/apache/cordova/statusbar/StatusBar.class \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/dexedLibs/classes-5e1ca1ab4e4b4114474edcd7aa4a79d6.jar \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/dexedLibs/google-play-services-admob-e7b29d7b6170303c4189d7053a5b3aed.jar \

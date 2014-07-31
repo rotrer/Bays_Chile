@@ -22,6 +22,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.rjfun.cordova.plugin.admob/www/AdMob.js",
+        "id": "com.rjfun.cordova.plugin.admob.AdMob",
+        "clobbers": [
+            "window.plugins.AdMob"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -173,7 +180,9 @@ module.exports.metadata =
 {
     "org.apache.cordova.file-transfer": "0.4.4",
     "org.apache.cordova.statusbar": "0.1.6",
-    "org.apache.cordova.file": "1.2.0"
+    "com.rjfun.cordova.plugin.admob": "2.0.0",
+    "org.apache.cordova.file": "1.2.0",
+    "com.google.admobsdk-googleplay": "4.4.0"
 }
 // BOTTOM OF METADATA
 });

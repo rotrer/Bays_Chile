@@ -13,6 +13,7 @@
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/drawable-port-xhdpi/screen.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/drawable-xhdpi/icon.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/values/strings.xml \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/res/values/version.xml \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/xml/config.xml \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/res/drawable/icon.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/res/drawable-hdpi/icon.png \

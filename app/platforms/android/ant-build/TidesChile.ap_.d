@@ -13,6 +13,7 @@
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/drawable-port-xhdpi/screen.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/drawable-xhdpi/icon.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/values/strings.xml \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/res/values/version.xml \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/res/xml/config.xml \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/res/drawable/icon.png \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/ant-build/res/drawable-hdpi/icon.png \
@@ -151,9 +152,12 @@
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/js/index.js \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/js/jquery-1.11.1.min.js \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/js/jquery.mobile-1.4.3.min.js \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/com.rjfun.cordova.plugin.admob \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.file \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.statusbar \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/com.rjfun.cordova.plugin.admob/www \
+/Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/com.rjfun.cordova.plugin.admob/www/AdMob.js \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.file/www \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.file/www/android \
 /Users/cristian/Proyectos/labs/tides/app/platforms/android/assets/www/plugins/org.apache.cordova.file/www/DirectoryEntry.js \
