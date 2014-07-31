@@ -9,6 +9,24 @@
 
         //Configuraciones usuarios
         $('#saveSettings').on('click', saveSettings);
+
+        //Bahía selccionada
+        $(document).on('click', '.baySelect', function(){
+            var selBay = $(this).attr("rel");
+            //Titulo bahía
+            $("#tit_lugar").empty().text( $(this).text() + ' - Mareas Chile' );
+            //Loading
+            $.mobile.loading( "show", {
+                text: "Cargando",
+                textVisible: false,
+                theme: $.mobile.loader.prototype.options.theme,
+                textonly: false,
+                html: ""
+            });
+            //Cargar bahía
+            loadBayByName(selBay);
+            $("#dataBaySelected").empty().text( selBay );
+        });
     });
 }
 )(jQuery);
@@ -16,13 +34,13 @@
 var fSys;
 function onRequestFileSystemSuccess(fileSystem) {
     fSys = fileSystem;
+    //Loading
+    showLoadingApp();
     //Primera carga de datos
     if (localStorage.getItem('firstTimeLoad') === null) {
         localStorage.setItem('firstTimeLoad', 'ok');
-        alert('Primera');
         firstLoadApp();
     } else {
-        alert('Carga local');
         firstLoadBays();
     }
 }
@@ -52,10 +70,8 @@ function firstLoadApp() {
             false
         );
     }, fail);
-}
-
-function loadBayByName(bayName) {
-
+    //Hide loading
+    hideLoadingApp();
 }
 
 function firstLoadBays(){
@@ -69,17 +85,57 @@ function firstLoadBays(){
                 var bays = JSON.parse(evt.target.result);
                 var items = [];
                 $.each( bays.bays, function( key, val ) {
-                    items.push('<li><a href="' + key +'">' + val.toUpperCase() +'</a></li>');
+                    items.push('<li><a class="baySelect" data-transition="slide" href="#bayPage" rel="' + val +'">' + val.toUpperCase() +'</a></li>');
                 });
                 $("#list_bays").empty().append( items.join("") ).listview( "refresh" );
-//                $('.write').append(items.join( "" ));
             };
             reader.readAsText(file);
         }, fail);
     }, fail);
+    //Hide loading
+    hideLoadingApp();
 }
 
-var saveSettings = function() {
+function loadBayByName(bayName) {
+    var uri;
+    var entry;
+    var basePathTides;
+
+    basePathTides = fSys.root.toURL();
+    entry = fSys.root;
+    entry.getDirectory('tide-chile', {create: true, exclusive: false});
+    entry.getFile('tide-chile/' + bayName +'.json', {create: true, exclusive: false}, function(fileEntry){
+        var ft;
+        var localPath;
+        localPath = basePathTides + fileEntry.fullPath.replace('//', '');
+
+        ft = new FileTransfer();
+        uri = 'http://tides.rotrer.com/bays/' + bayName +'.json';
+
+        ft.download(
+            uri,
+            localPath,
+            function(){
+                entry.getFile('tide-chile/' + bayName +'.json', null, function(fileEntry){
+                    fileEntry.file(function(file){
+                        var reader = new FileReader();
+                        reader.onloadend = function(evt) {
+                            var fechas = JSON.parse(evt.target.result);
+                            createTableTides(fechas);
+                            //Hide loading
+                            hideLoadingApp();
+                        };
+                        reader.readAsText(file);
+                    }, fail);
+                }, fail);
+            },
+            fail,
+            false
+        );
+    }, fail);
+}
+
+function saveSettings() {
     try {
         var tipPct = parseFloat( $('#tipPercentage').val() );
         localStorage.setItem('tipPercentage', tipPct);
@@ -88,11 +144,42 @@ var saveSettings = function() {
     } catch (ex) {
         alert('Tip percentage must be a decimal value');
     }
-};
+}
+
+function showLoadingApp(){
+    setTimeout(function(){
+        $.mobile.loading('show');
+    },1);
+}
+
+function hideLoadingApp(){
+    setTimeout(function(){
+        $.mobile.loading('hide');
+    },300);
+}
 
 function fail(error) {
     alert(error.code);
     $('.fail').append(error.code);
+}
+
+function createTableTides(fechas){
+    var items = [];
+    $.each(fechas.data, function (key, val) {
+        if (key == '2014-07' || key == '2014-08') {
+            $.each(val, function (keyDay, valDay) {
+                var fecha = new Date(keyDay*1000);
+                var dia = fecha.getDate();
+                var mes = parseInt(fecha.getMonth()) + 1;
+                var anno = fecha.getFullYear();
+                var formattedTime = dia + '/' + mes + '/' + anno;
+
+                if (mes == 7) {
+                    $("#dataBaySelected").append('<p>'+ formattedTime +'</p>');
+                }
+            });
+        }
+    });
 }
 
 //function gotFileEntry(fileEntry) {

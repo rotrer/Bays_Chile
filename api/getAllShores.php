@@ -70,7 +70,9 @@ function writeJsonMarea($bayFile, $timestamp, $mareasDias){
             $dias[] = $data;
         }
     }
-    // $dias = (array) $mareas->marea->dia; pr($dias);
+
+    #$mareas = new SimpleXMLElement($mareasDias);
+    #$dias = (array) $mareas->marea->dia; pr($dias);
     if ($dias)
     {
         foreach ($dias as $keyDay => $day) {
@@ -79,7 +81,7 @@ function writeJsonMarea($bayFile, $timestamp, $mareasDias){
                 #Dia marea
                 $dayPB = explode('/', substr($day, 0, 10));
                 $monthDay = $dayPB[2] . '-' . $dayPB[1];
-                $timeStamp = strtotime($dayPB[2] . '-' . $dayPB[1] . '-' . $dayPB[0]);
+                $timeStamp = str_replace('/', '-', substr($day, 0, 10));
 
                 #Primer tramo día
                 $nodeDay[$monthDay][$timeStamp]['h1st'] = substr($day, 11, 5);
