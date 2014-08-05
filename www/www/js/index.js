@@ -34,6 +34,8 @@
         } else if (evt.target.id === "moon_phase_togg") {
             var activeNotMoonPhase = $("#moon_phase_togg").hasClass('active') === true ? 'active' : '';
             $("#moon_phase").val(activeNotMoonPhase);
+        } else if ($(evt.target).hasClass('notifBaySel') === true) {
+            notifBayManager($(evt.target).attr('rel') ,$(evt.target).hasClass('active'));
         }
     });
     
@@ -326,11 +328,10 @@ function pageChanged(evt){
     }
     
     if (window.location.pathname.indexOf('settings.html') !== -1) {
-        console.log(localStorage.getItem('weekend'));
-        console.log(localStorage.getItem('moon_phase'));
         if (localStorage.getItem('weekend') !== null) {
             $("#weekend_togg").addClass(localStorage.getItem('weekend'));
             $('#weekend').val(localStorage.getItem('weekend'));
+            loadBaysNotification(localStorage.getItem('weekend'));
         }
         if (localStorage.getItem('moon_phase') !== null) {
             $("#moon_phase_togg").addClass(localStorage.getItem('moon_phase'));
@@ -372,14 +373,19 @@ function loadBaysNotification(state){
             fileEntry.file(function(file){
                 var reader = new FileReader();
                 reader.onloadend = function(evt) {
-                    var bays = JSON.parse(evt.target.result);
+                    var bays = evt.target.result === '' ? null : JSON.parse(evt.target.result);
                     var baysSort = bays.bays.sort();
+                    var notifBays = localStorage.getItem('notifBays') === null ? null : JSON.parse(localStorage.getItem('notifBays'));
                     var items = [];
+                    var activeNotifBay = '';
                     $.each( baysSort, function( key, val ) {
-                        //items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
+                        //Activar toggles de notificaciones por bahi
+                        if (notifBays !== null){
+                            activeNotifBay = notifBays.bays.indexOf(val) !== -1 ? 'active' : '';
+                        }
                         items.push('<li class="table-view-cell">');
                             items.push(val.toUpperCase());
-                            items.push('<div class="toggle">');
+                            items.push('<div class="toggle notifBaySel '+ activeNotifBay +'" rel="' + val +'">');
                                 items.push('<div class="toggle-handle"></div>');
                             items.push('</div>');
                         items.push('</li>');
@@ -393,6 +399,16 @@ function loadBaysNotification(state){
     } else {
         $("#notif_bays").slideUp();
     }
+}
+
+function notifBayManager(bayID, addOrRemove){
+    var notifBays = localStorage.getItem('notifBays') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('notifBays'));
+    if (addOrRemove === true) {
+        notifBays.bays.push(bayID);
+    } else {
+        notifBays.bays.remove(bayID);
+    }
+    localStorage.setItem('notifBays', JSON.stringify(notifBays));
 }
 
 function listFilter(list) { // header is any element, list is an unordered list
