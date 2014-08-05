@@ -2,17 +2,19 @@
     "use strict";
 
     $( document ).on( "deviceready", function(){
+        showLoadingApp();
         StatusBar.overlaysWebView( false );
         StatusBar.backgroundColorByName("gray");
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);
         //Admob
-        initAd();
-        window.plugins.AdMob.createBannerView();
+        //initAd();
+        //window.plugins.AdMob.createBannerView();
     });
 
     //Configuraciones usuarios
-    $('#saveSettings').on('click', saveSettings);
+    //$('#saveSettings').on('click', saveSettings);
+    $(document).on('submit', '#settings_data', saveSettings);
     
     // custom css expression for a case-insensitive contains()
     jQuery.expr[':'].Contains = function(a,i,m){
@@ -22,13 +24,20 @@
     listFilter($("#list_bays"));
 
     window.addEventListener('toggle', function(evt){
-        var bayID = $.urlParam('bayid');
-        if ($("#" + evt.target.id).hasClass('active')) {
-            favManager(bayID ,true);
-        } else {
-            favManager(bayID ,false);
+        if (evt.target.id === "fav_togg") {
+            var bayID = $.urlParam('bayid');
+            favManager(bayID ,$("#" + evt.target.id).hasClass('active'));
+        } else if (evt.target.id === "weekend_togg") {
+            var activeNotWeekend = $("#weekend_togg").hasClass('active') === true ? 'active' : '';
+            $("#weekend").val(activeNotWeekend);
+            loadBaysNotification(activeNotWeekend);
+        } else if (evt.target.id === "moon_phase_togg") {
+            var activeNotMoonPhase = $("#moon_phase_togg").hasClass('active') === true ? 'active' : '';
+            $("#moon_phase").val(activeNotMoonPhase);
         }
     });
+    
+    //$("#fav_togg").addClass("active");
 
     window.addEventListener('push', pageChanged);
 }
@@ -86,12 +95,12 @@ function firstLoadBays(){
                 var bays = JSON.parse(evt.target.result);
                 var baysSort = bays.bays.sort();
                 var items = [];
-                var today = new Date();
                 $.each( baysSort, function( key, val ) {
                     // items.push('<li><a class="baySelect" data-transition="slide" href="#bayPage" rel="' + val +'">' + val.toUpperCase() +'</a></li>');
-                    items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'#day_' + today.getDate() + '"><strong>' + val.toUpperCase() +'</strong></a></li>');
+                    items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
                 });
                 $("#list_bays").empty().append( items.join("") );
+                hideLoadingApp();
             };
             reader.readAsText(file);
         }, fail);
@@ -138,27 +147,37 @@ function loadBayByName(bayName) {
     }, fail);
 }
 
-function saveSettings() {
+function saveSettings(evt) {
+    evt.preventDefault();
     try {
-        var tipPct = parseFloat( $('#tipPercentage').val() );
-        localStorage.setItem('tipPercentage', tipPct);
-        tipPercent = tipPct;
-        window.history.back();
+        $(".settings_form").fadeOut("fast", function(){
+            $(".preload").fadeIn();
+            setTimeout(function(){
+                $(".preload").fadeOut("fast", function(){
+                    $(".settings_form").fadeIn();
+                });
+            }, 1000); 
+        });
+        localStorage.setItem('weekend', $('#weekend').val());
+        localStorage.setItem('moon_phase', $('#moon_phase').val());
+        //window.history.back();
     } catch (ex) {
-        alert('Tip percentage must be a decimal value');
+        alert('Error al guardar configuración');
     }
 }
 
 function showLoadingApp(){
-    setTimeout(function(){
-        $.mobile.loading('show');
-    },1);
+    $(".card").fadeOut("fast", function(){
+        $(".preload").fadeIn(); 
+    });
 }
 
 function hideLoadingApp(){
     setTimeout(function(){
-        $.mobile.loading('hide');
-    },300);
+        $(".preload").fadeOut("fast", function(){
+            $(".card").fadeIn();
+        });
+    }, 700);
 }
 
 function fail(error) {
@@ -217,6 +236,7 @@ function createTableTides(file){
                             moonPhaseDayImg = moonPhase.lq[1];
                         }
                         
+                        //Destacar dia actual de marea
                         if (today.getDate() === dayInt) {
                             todayClass = "today_tide";
                             scrollDivDay = '#day_' + dayInt;
@@ -281,9 +301,14 @@ function initAd(){
 }
 
 function pageChanged(evt){
+    if (window.location.pathname.indexOf('index.html') !== -1) {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);       
+    }
+    
     if (window.location.pathname.indexOf('favorites.html') !== -1) {
         loadFavorites();    
     }
+    
     if (window.location.pathname.indexOf('bay.html') !== -1) {
         var bayID = $.urlParam('bayid');
         if (bayID !== null) {
@@ -299,9 +324,20 @@ function pageChanged(evt){
             alert("Error: Bahía no existe.");
         }
     }
-    if (window.location.pathname.indexOf('index.html') !== -1) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);       
+    
+    if (window.location.pathname.indexOf('settings.html') !== -1) {
+        console.log(localStorage.getItem('weekend'));
+        console.log(localStorage.getItem('moon_phase'));
+        if (localStorage.getItem('weekend') !== null) {
+            $("#weekend_togg").addClass(localStorage.getItem('weekend'));
+            $('#weekend').val(localStorage.getItem('weekend'));
+        }
+        if (localStorage.getItem('moon_phase') !== null) {
+            $("#moon_phase_togg").addClass(localStorage.getItem('moon_phase'));
+            $('#moon_phase').val(localStorage.getItem('moon_phase'));
+        }
     }
+    
 }
 
 function favManager(bayID, addOrRemove){
@@ -321,9 +357,41 @@ function loadFavorites(){
         var favSort = favBays.bays.sort();
         var items = [];
         $.each( favSort, function( key, val ) {
-            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'#day_' + today.getDate() + '"><strong>' + val.toUpperCase() +'</strong></a></li>');
+            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
         });
         $("#list_bays").empty().append( items.join("") );
+    }
+}
+
+function loadBaysNotification(state){
+    if (state === 'active') {
+        var entry;
+
+        entry = fSys.root;
+        entry.getFile("tide-chile/bays.json", null, function(fileEntry){
+            fileEntry.file(function(file){
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+                    var bays = JSON.parse(evt.target.result);
+                    var baysSort = bays.bays.sort();
+                    var items = [];
+                    $.each( baysSort, function( key, val ) {
+                        //items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
+                        items.push('<li class="table-view-cell">');
+                            items.push(val.toUpperCase());
+                            items.push('<div class="toggle">');
+                                items.push('<div class="toggle-handle"></div>');
+                            items.push('</div>');
+                        items.push('</li>');
+                    });
+                    $("#notif_bays_list").empty().append( items.join("") );
+                };
+                reader.readAsText(file);
+            }, fail);
+        }, fail);
+        $("#notif_bays").slideDown();
+    } else {
+        $("#notif_bays").slideUp();
     }
 }
 

@@ -41,6 +41,7 @@
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/plugins \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/ratchet \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/settings.html \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/app.css \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/index.css \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/themes \
@@ -157,6 +158,7 @@
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/logo.png \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/manualunal1.gif \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/new_moon.png \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/preload.gif \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/app.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/index.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/jquery-1.11.1.min.js \
