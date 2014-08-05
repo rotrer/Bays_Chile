@@ -151,10 +151,16 @@
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/themes/images/icons-png/user-white.png \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/themes/images/icons-png/video-black.png \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/css/themes/images/icons-png/video-white.png \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/first_quarter.png \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/full_moon.png \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/last_quarter.png \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/logo.png \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/manualunal1.gif \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/img/new_moon.png \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/app.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/index.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/jquery-1.11.1.min.js \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/jquery-scrollto.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/js/jquery.mobile-1.4.3.min.js \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/plugins/com.rjfun.cordova.plugin.admob \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/assets/www/plugins/org.apache.cordova.file \

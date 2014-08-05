@@ -7,8 +7,8 @@
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);
         //Admob
-        //initAd();
-        //window.plugins.AdMob.createBannerView();
+        initAd();
+        window.plugins.AdMob.createBannerView();
     });
 
     //Configuraciones usuarios
@@ -86,9 +86,10 @@ function firstLoadBays(){
                 var bays = JSON.parse(evt.target.result);
                 var baysSort = bays.bays.sort();
                 var items = [];
+                var today = new Date();
                 $.each( baysSort, function( key, val ) {
                     // items.push('<li><a class="baySelect" data-transition="slide" href="#bayPage" rel="' + val +'">' + val.toUpperCase() +'</a></li>');
-                    items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
+                    items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'#day_' + today.getDate() + '"><strong>' + val.toUpperCase() +'</strong></a></li>');
                 });
                 $("#list_bays").empty().append( items.join("") );
             };
@@ -175,7 +176,7 @@ function createTableTides(file){
         * Calcula fase lunar, arreglo correcion mes
         */
         var fixMonth = { "m1": 0, "m2": 1, "m3": 0, "m4": 1, "m5": 2, "m6": 3, "m7": 4, "m8": 5, "m9": 6, "m10": 7, "m11": 8, "m12": 9 };
-        var moonPhase = { "nm" : "Luena Nueva", "fq" : "Cuarto Creciente", "fm" : "Luna Llena", "lq" : "Cuarto Menguante"};
+        var moonPhase = { "nm" : ["Nueva", "new_moon.png"], "fq" : ["Creciente", "first_quarter.png"], "fm" : ["Llena", "full_moon.png"], "lq" : ["Menguante", "last_quarter.png"]};
        
         //Init table
         $.each(fechas.data, function (key, val) {
@@ -196,29 +197,37 @@ function createTableTides(file){
                         var epacta = (nroAureo - 1) * 99;
                         var edadLunar = epacta + parseInt(fixMonth[monthCorr]) + dayInt;
                         var moonPhaseDay = '';
+                        var moonPhaseDayImg = '';
                         //Correción si es mayor a 30 edad lunar
                         if (edadLunar > 30)
                             edadLunar = edadLunar - 30;
                         
                         //Fases Lunares según edad lunar
                         if (edadLunar >= 0 && edadLunar <= 6) {
-                            moonPhaseDay = moonPhase.nm;
+                            moonPhaseDay = moonPhase.nm[0];
+                            moonPhaseDayImg = moonPhase.nm[1];
                         } else if (edadLunar >= 7 && edadLunar <= 13) {
-                            moonPhaseDay = moonPhase.fq;
+                            moonPhaseDay = moonPhase.fq[0];
+                            moonPhaseDayImg = moonPhase.fq[1];
                         } else if (edadLunar >= 14 && edadLunar <= 21) {
-                            moonPhaseDay = moonPhase.fm;
+                            moonPhaseDay = moonPhase.fm[0];
+                            moonPhaseDayImg = moonPhase.fm[1];
                         } else if (edadLunar >= 22) {
-                            moonPhaseDay = moonPhase.lq;
+                            moonPhaseDay = moonPhase.lq[0];
+                            moonPhaseDayImg = moonPhase.lq[1];
                         }
                         
                         if (today.getDate() === dayInt) {
                             todayClass = "today_tide";
-                            scrollDivDay = 'day_' + dayInt;
+                            scrollDivDay = '#day_' + dayInt;
                         } else {
                             todayClass = "";
                         }
                         items.push(
-                            '<li class="table-view-cell table-view-divider ' + todayClass + '" id="day_' + dayInt +'"><h5 class="pull-left">' + keyDay + '</h5><h6 class="pull-right">' + moonPhaseDay + '</h6></li>'
+                            '<li class="table-view-cell table-view-divider media ' + todayClass + '" id="day_' + dayInt +'">',
+                                '<img class="media-object pull-right icon-moon" src="img/' + moonPhaseDayImg + '">',
+                                '<div class="media-body"><h5 class="pull-left">' + keyDay + '</h5><h6 class="pull-right">' + moonPhaseDay + '</h6></div>',
+                            '</li>'
                         );
                             items.push(
                                 '<li class="table-view-cell">',
@@ -245,7 +254,6 @@ function createTableTides(file){
         });
 
         $("#dataBaySelected").empty().append( items.join("") );
-        //$.mobile.silentScroll( $('#' + scrollDivDay).offset().top );
         
     };
     reader.readAsText(file);
@@ -313,7 +321,7 @@ function loadFavorites(){
         var favSort = favBays.bays.sort();
         var items = [];
         $.each( favSort, function( key, val ) {
-            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
+            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'#day_' + today.getDate() + '"><strong>' + val.toUpperCase() +'</strong></a></li>');
         });
         $("#list_bays").empty().append( items.join("") );
     }
