@@ -10,10 +10,12 @@
         //Admob
         //initAd();
         //window.plugins.AdMob.createBannerView();
+        
+        //Manejar eventos de notificaciones
+        notifEvents();
     });
 
     //Configuraciones usuarios
-    //$('#saveSettings').on('click', saveSettings);
     $(document).on('submit', '#settings_data', saveSettings);
     
     // custom css expression for a case-insensitive contains()
@@ -39,8 +41,6 @@
         }
     });
     
-    //$("#fav_togg").addClass("active");
-
     window.addEventListener('push', pageChanged);
 }
 )(jQuery);
@@ -161,7 +161,8 @@ function saveSettings(evt) {
             }, 1000); 
         });
         localStorage.setItem('weekend', $('#weekend').val());
-        localStorage.setItem('moon_phase', $('#moon_phase').val());
+        //Configurar notificaciones cambio de luna
+        setNotifMoonPhase();
         //window.history.back();
     } catch (ex) {
         alert('Error al guardar configuración');
@@ -429,6 +430,145 @@ function listFilter(list) { // header is any element, list is an unordered list
             // fire the above change event after every letter
             $(this).change();
         });
+}
+
+function setNotifMoonPhase(){
+    var state = $('#moon_phase').val();
+    localStorage.setItem('moon_phase', state);
+    /*
+     * Fases Lunares
+     */
+    var moonPhase = { "nm" : ["Luna Nueva", "nueva"], "fq" : ["Cuarto Creciente", "creciente"], "fm" : ["Luna Llena", "llena"], "lq" : ["Cuarto Menguante", "menguante"]};
+    
+    //Si activa las notificaciones de cambio luna
+    if (state === 'active') {
+        var now = new Date(),
+            yearCurrent = now.getFullYear(),
+            monthCurrent = now.getMonth(),
+            monthCurrentAdd1 = monthCurrent + 1,
+            dayCurrent = now.getDate(),
+            qtyDaysCurrentMmonth = new Date(yearCurrent, monthCurrentAdd1, 0).getDate(),
+            notificationsMoon = { nm: [], fq: [], fm: [], lq: [] };
+        /*
+        * Calcula fase lunar, arreglo correcion mes
+        */
+        var fixMonth = { "m1": 0, "m2": 1, "m3": 0, "m4": 1, "m5": 2, "m6": 3, "m7": 4, "m8": 5, "m9": 6, "m10": 7, "m11": 8, "m12": 9 };
+        var monthCorr = "m" + monthCurrentAdd1;
+        var nroAureo = (parseInt(yearCurrent) + 1) % 19;
+        var epacta = (nroAureo - 1) * 99;
+        
+        //Calcular fase de la luna por mes actual
+        for (var i = dayCurrent; i <= qtyDaysCurrentMmonth; i++) {
+            var edadLunar = epacta + parseInt(fixMonth[monthCorr]) + i;
+            var moonPhaseDay = '';
+            //Correción si es mayor a 30 edad lunar
+            if (edadLunar > 30)
+                edadLunar = edadLunar - 30;
+
+            //Textos futuros y actuales
+            if (dayCurrent !== i) {
+                var cambioStr = 'Cambio de fase lunar',
+                    cicloStr = 'Hoy comienza el ciclo de ',
+                    dateNotif = new Date(yearCurrent, monthCurrent, i, 8, 0);
+            } else {
+                var cambioStr = 'Fase lunar actual',
+                    cicloStr = 'Ciclo de ',
+                    nowTmp = new Date().getTime(),
+                    dateNotif = new Date(nowTmp + 300*1000);
+            }
+            //Fases Lunares según edad lunar
+            if (edadLunar >= 0 && edadLunar <= 6) {
+                if (notificationsMoon.nm.length === 0){
+                    //notificationsMoon.nm.push(moonPhase.nm[0]);
+                    //notificationsMoon.nm.push(moonPhase.nm[1]);
+                    //notificationsMoon.nm.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
+                    notificationsMoon.nm.push(1);
+                    addNotifBay(moonPhase.nm[1], cambioStr, cicloStr + moonPhase.nm[0],  null, dateNotif);
+                }
+            } else if (edadLunar >= 7 && edadLunar <= 13) {
+                if (notificationsMoon.fq.length === 0){
+                    //notificationsMoon.fq.push(moonPhase.fq[0]);
+                    //notificationsMoon.fq.push(moonPhase.fq[1]);
+                    //notificationsMoon.fq.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
+                    notificationsMoon.fq.push(1);
+                    addNotifBay(moonPhase.fq[1], cambioStr, cicloStr + moonPhase.fq[0],  null, dateNotif);
+                }
+            } else if (edadLunar >= 14 && edadLunar <= 21) {
+                if (notificationsMoon.fm.length === 0){
+                    //notificationsMoon.fm.push(moonPhase.fm[0]);
+                    //notificationsMoon.fm.push(moonPhase.fm[1]);
+                    //notificationsMoon.fm.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
+                    notificationsMoon.fm.push(1);
+                    addNotifBay(moonPhase.fm[1], cambioStr, cicloStr + moonPhase.fm[0],  null, dateNotif);
+                }
+            } else if (edadLunar >= 22) {
+                if (notificationsMoon.lq.length === 0){
+                    //notificationsMoon.lq.push(moonPhase.lq[0]);
+                    //notificationsMoon.lq.push(moonPhase.lq[1]);
+                    //notificationsMoon.lq.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
+                    notificationsMoon.lq.push(1);
+                    addNotifBay(moonPhase.lq[1], cambioStr, cicloStr + moonPhase.lq[0],  null, dateNotif);
+                }
+            }
+        }
+    //Si desactiva las notificaciones de cambio d eluna
+    } else {
+        window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
+            $.each(scheduledIds, function (key, val) {
+                cancelNotifByID(val);
+            });
+        });
+    }
+}
+
+function notifEvents(){
+    window.plugin.notification.local.oncancel = function (id, state, json) {
+        console.log('Cancel ID: ' + id + ' state: ' + state);
+        console.log(json);
+    };
+    window.plugin.notification.local.onclick = function (id, state, json) {
+        console.log(id, JSON.parse(json).test);
+    }
+    window.plugin.notification.local.onadd = function (id, state, json) {
+        var now = new Date();
+        console.log('Scheduled IDs: ' + id + ' state: ' + state);
+        //console.log(json);
+    }
+}
+
+function notifScheduled(){
+    window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
+        console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
+    });
+    /*window.plugin.notification.local.isScheduled(id, function (isScheduled) {
+        console.log('Notification with ID ' + id + ' is scheduled: ' + isScheduled);
+    });*/
+}
+
+function cancelNotifByID(id){
+    window.plugin.notification.local.cancel(id);
+}
+
+function addNotifBay(id, title, message, json, dateNotf){
+    var dataNotif = {
+        id:         id,
+        title:      title,
+        message:    message,
+        autoCancel: true
+    };
+    
+    if (json !== null)
+        dataNotif.json = json;
+    
+    if (dateNotf !== null)
+        dataNotif.date = dateNotf;
+    
+    window.plugin.notification.local.add(dataNotif);
+}
+
+function nows(){
+    var now = new Date();
+    console.log(now);
 }
 
 $.urlParam = function(name){
