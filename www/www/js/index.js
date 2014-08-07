@@ -448,7 +448,8 @@ function setNotifMoonPhase(){
             monthCurrentAdd1 = monthCurrent + 1,
             dayCurrent = now.getDate(),
             qtyDaysCurrentMmonth = new Date(yearCurrent, monthCurrentAdd1, 0).getDate(),
-            notificationsMoon = { nm: [], fq: [], fm: [], lq: [] };
+            notificationsMoon = { nm: [], fq: [], fm: [], lq: [] },
+            notificationsMoonTmp = [];
         /*
         * Calcula fase lunar, arreglo correcion mes
         */
@@ -483,6 +484,7 @@ function setNotifMoonPhase(){
                     //notificationsMoon.nm.push(moonPhase.nm[1]);
                     //notificationsMoon.nm.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
                     notificationsMoon.nm.push(1);
+                    notificationsMoonTmp.push(moonPhase.nm[1])
                     addNotifBay(moonPhase.nm[1], cambioStr, cicloStr + moonPhase.nm[0],  null, dateNotif);
                 }
             } else if (edadLunar >= 7 && edadLunar <= 13) {
@@ -491,6 +493,7 @@ function setNotifMoonPhase(){
                     //notificationsMoon.fq.push(moonPhase.fq[1]);
                     //notificationsMoon.fq.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
                     notificationsMoon.fq.push(1);
+                    notificationsMoonTmp.push(moonPhase.fq[1])
                     addNotifBay(moonPhase.fq[1], cambioStr, cicloStr + moonPhase.fq[0],  null, dateNotif);
                 }
             } else if (edadLunar >= 14 && edadLunar <= 21) {
@@ -499,6 +502,7 @@ function setNotifMoonPhase(){
                     //notificationsMoon.fm.push(moonPhase.fm[1]);
                     //notificationsMoon.fm.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
                     notificationsMoon.fm.push(1);
+                    notificationsMoonTmp.push(moonPhase.fm[1])
                     addNotifBay(moonPhase.fm[1], cambioStr, cicloStr + moonPhase.fm[0],  null, dateNotif);
                 }
             } else if (edadLunar >= 22) {
@@ -507,6 +511,7 @@ function setNotifMoonPhase(){
                     //notificationsMoon.lq.push(moonPhase.lq[1]);
                     //notificationsMoon.lq.push(new Date(yearCurrent, monthCurrent, i, 8, 0));
                     notificationsMoon.lq.push(1);
+                    notificationsMoonTmp.push(moonPhase.lq[1])
                     addNotifBay(moonPhase.lq[1], cambioStr, cicloStr + moonPhase.lq[0],  null, dateNotif);
                 }
             }

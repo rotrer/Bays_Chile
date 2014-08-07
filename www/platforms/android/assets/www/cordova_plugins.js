@@ -29,27 +29,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.dialogs/www/notification.js",
-        "id": "org.apache.cordova.dialogs.notification",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.dialogs/www/android/notification.js",
-        "id": "org.apache.cordova.dialogs.notification_android",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
-        "file": "plugins/org.apache.cordova.vibration/www/vibration.js",
-        "id": "org.apache.cordova.vibration.notification",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
         "file": "plugins/org.apache.cordova.device/www/device.js",
         "id": "org.apache.cordova.device.device",
         "clobbers": [
@@ -216,8 +195,6 @@ module.exports.metadata =
     "org.apache.cordova.file-transfer": "0.4.4",
     "org.apache.cordova.statusbar": "0.1.6",
     "com.rjfun.cordova.plugin.admob": "2.0.0",
-    "org.apache.cordova.dialogs": "0.2.8",
-    "org.apache.cordova.vibration": "0.3.9",
     "org.apache.cordova.device": "0.2.10",
     "de.appplant.cordova.plugin.local-notification": "0.7.4",
     "org.apache.cordova.file": "1.2.0",
