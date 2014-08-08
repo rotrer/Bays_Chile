@@ -19,6 +19,8 @@
     <script src="js/jquery-1.11.1.min.js"></script>
     <!-- Include the compiled Ratchet JS -->
     <script src="ratchet/js/ratchet.js"></script>
+    <!-- GA Plugin JS -->
+    <script src="ratchet/js/ratchet.js"></script>
   </head>
   <body>
 
@@ -47,6 +49,12 @@
             <form method="get" action="#" name="settings_data" id="settings_data">
                 <ul class="table-view">
                     <li class="table-view-cell">
+                        Cambio fase lunar
+                        <div class="toggle" id="moon_phase_togg">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </li>
+                    <li class="table-view-cell">
                       Fin de semana
                       <div class="toggle" id="weekend_togg">
                         <div class="toggle-handle"></div>
@@ -68,12 +76,6 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                    </li>
-                    <li class="table-view-cell">
-                        Cambio fase lunar
-                        <div class="toggle" id="moon_phase_togg">
-                            <div class="toggle-handle"></div>
                         </div>
                     </li>
                 </ul>

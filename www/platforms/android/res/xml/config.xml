@@ -24,6 +24,10 @@
     <feature name="LocalNotification">
         <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
     </feature>
+    <icon density="ldpi" src="res/drawable-ldpi/ic_launcher.png" />
+    <icon density="mdpi" src="res/drawable-mdpi/ic_launcher.png" />
+    <icon density="hdpi" src="res/drawable-hdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="res/drawable-xhdpi/ic_launcher.png" />
     <name>Mareas Chile</name>
     <description>
         Mareas de Chile para pesca deportiva.
