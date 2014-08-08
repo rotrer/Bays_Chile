@@ -15,6 +15,8 @@
         notifEvents();
         
         //GA
+        var analyticsAccount = "UA-34567136-2";
+        analytics.startTrackerWithId(analyticsAccount);
         initGA();
     });
 
@@ -47,8 +49,11 @@
     window.addEventListener('push', pageChanged);
 }
 )(jQuery);
-
-var fSys, allCurrentNotifs,
+/*
+ * 
+ * Variables globales para la app.
+ */
+var fSys, allCurrentNotifs, gaPlugin,
     notifBaysToRemove = { "bays" : [] },
     notifBaysToSave = { "bays" : [] },
     isNotifRunning = false,
@@ -308,11 +313,15 @@ function initAd(){
 
 function pageChanged(evt){
     if (window.location.pathname.indexOf('index.html') !== -1) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);       
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);
+        analytics.trackEvent('Button', 'Click', 'Index Nav', new Date());
+        console.log("Button event Index");
     }
     
     if (window.location.pathname.indexOf('favorites.html') !== -1) {
-        loadFavorites();    
+        loadFavorites();
+        analytics.trackEvent('Button', 'Click', 'Favorites Nav', new Date());
+        console.log("Button event Favorites");
     }
     
     if (window.location.pathname.indexOf('bay.html') !== -1) {
@@ -329,6 +338,8 @@ function pageChanged(evt){
         } else {
             alert("Error: Bahía no existe.");
         }
+        analytics.trackEvent('Button', 'Click', 'Bay Nav', new Date());
+        console.log("Button event Settings");
     }
     
     if (window.location.pathname.indexOf('settings.html') !== -1) {
@@ -346,6 +357,8 @@ function pageChanged(evt){
             $("#moon_phase_togg").addClass(localStorage.getItem('moon_phase'));
             $('#moon_phase').val(localStorage.getItem('moon_phase'));
         }
+        analytics.trackEvent('Button', 'Click', 'Settings Nav', new Date());
+        console.log("Button event Settings");
     }
     
 }
@@ -367,7 +380,7 @@ function loadFavorites(){
         var favSort = favBays.bays.sort();
         var items = [];
         $.each( favSort, function( key, val ) {
-            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
+            items.push('<li class="table-view-cell"><a data-transition="slide-in" class="push-right baySelect baySelectFavs" href="bay.html?bayid=' + val +'"><strong>' + val.toUpperCase() +'</strong></a></li>');
         });
         $("#list_bays").empty().append( items.join("") );
     }
@@ -622,6 +635,7 @@ function deleteNotifWeekend(all){
         }
     });
 }
+
 function notifEvents(){
     window.plugin.notification.local.oncancel = function (id, state, json) {
         //console.log('Cancel ID: ' + id + ' state: ' + state);
@@ -686,7 +700,66 @@ function addNotifBay(id, title, message, json, dateNotf){
 }
 
 function initGA(){
-    var analyticsAccount = "UA-34567136-2";
+    //Track an open event
+    console.log("GA init");
+    analytics.trackEvent('App', 'Open', 'App', new Date());
+    console.log("GA init after");
+
+    /*
+     * 
+     * Eventos barra navagación
+     */
+    /*
+    $(document).on('click', '.nav_index', function(){
+        analytics.trackEvent('Button', 'Click', 'Index Nav', new Date());
+        console.log("Button event Index");
+    });
+
+    $(document).on('click', '.nav_favs', function(){
+        analytics.trackEvent('Button', 'Click', 'Favorites Nav', new Date());
+        console.log("Button event Favorites");
+    });
+
+    $(document).on('click', '.nav_settings', function(){
+        analytics.trackEvent('Button', 'Click', 'Settings Nav', new Date());
+        console.log("Button event Settings");
+    });
+    */
+
+    /*
+     * 
+     * Home links bahías
+     */
+    $(document).on('click', '.baySelect', function(){
+        analytics.trackEvent('Button', 'Click', 'Home bays list', new Date());
+        console.log("Button event Home");
+    });
+
+    /*
+     * 
+     * Favorites links bahías
+     */
+    $(document).on('click', '.baySelectFavs', function(){
+        analytics.trackEvent('Button', 'Click', 'Favorites bays list', new Date());
+        console.log("Button event Favoritos");
+    });
+
+    /*
+     * 
+     * Settings touchs
+     */
+    $(document).on('click', '#moon_phase_togg', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif moon phase', new Date());
+        console.log("Button event moon phase");
+    });
+    $(document).on('click', '#weekend_togg', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif weekend', new Date());
+        console.log("Button event weekend_togg");
+    });
+    $(document).on('click', '.notifBaySel', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif weekend bay', new Date());
+        console.log("Button event notifBaySel");
+    });
 }
 
 /*
@@ -735,4 +808,9 @@ function noitfIsScheduled(id){
 
 function fail(error) {
     console.log(error.code);
+}
+
+function errorHandler(e) {
+    //Lame - do nothing	
+    console.log(e.toString());
 }

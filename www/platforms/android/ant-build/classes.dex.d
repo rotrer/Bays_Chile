@@ -1,4 +1,5 @@
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes.dex : \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/com/danielcwilson/plugins/analytics/UniversalAnalyticsPlugin.class \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$1.class \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$2.class \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/com/rjfun/cordova/plugin/AdMob$3.class \
@@ -105,4 +106,5 @@
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/org/apache/cordova/statusbar/StatusBar.class \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/classes/org/apache/cordova/vibration/Vibration.class \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/dexedLibs/classes-ecf7d467a99b83e5a199cb1246e760cb.jar \
+/Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/dexedLibs/libGoogleAnalyticsServices-41456febcbd319106f4c25a04004abcc.jar \
 /Users/cristian/Proyectos/labs/tides/www/platforms/android/ant-build/dexedLibs/google-play-services-admob-5c06dbf36633d312528323cdb425520f.jar \

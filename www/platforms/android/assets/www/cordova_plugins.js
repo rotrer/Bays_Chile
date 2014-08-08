@@ -43,6 +43,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.danielcwilson.plugins.googleanalytics/www/analytics.js",
+        "id": "com.danielcwilson.plugins.googleanalytics.UniversalAnalytics",
+        "clobbers": [
+            "analytics"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -197,6 +204,7 @@ module.exports.metadata =
     "com.rjfun.cordova.plugin.admob": "2.0.0",
     "org.apache.cordova.device": "0.2.10",
     "de.appplant.cordova.plugin.local-notification": "0.7.4",
+    "com.danielcwilson.plugins.googleanalytics": "0.6.0",
     "org.apache.cordova.file": "1.2.0",
     "com.google.admobsdk-googleplay": "4.4.0"
 }
