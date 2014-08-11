@@ -57,3 +57,4 @@ local.properties
 /mobile/tmp/*
 /mobile/test/*
 /mobile/vendor/*
+/mobile/nbproject/private/
