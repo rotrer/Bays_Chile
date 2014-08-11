@@ -651,7 +651,7 @@ function notifEvents(){
                 setTimeout(function(){
                     $('.baySelect').each(function( index ) {
                         if ($(this).attr('href').indexOf(dataNotif.bay) !== -1){
-                            $("#list_bays").hide();
+                            $("#list_bays, #dataBaySelected, .settings_form").hide();
                             $(".response_notif").empty().html('<h3>' + dataNotif.bay.toUpperCase() + '</h3><ul class="table-view" id="dataBaySelected">');
                             loadBayByName(dataNotif.bay);
                             hideLoadingApp();

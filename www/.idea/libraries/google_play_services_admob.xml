@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="google-play-services-admob">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/plugins/com.google.admobsdk-googleplay/src/android/google-play-services-admob.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
