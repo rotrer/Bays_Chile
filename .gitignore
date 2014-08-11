@@ -2,6 +2,7 @@
 /app/nbproject/private/
 /www/nbproject/private/
 /api/nbproject/private/
+/www/www/_grunt/node_modules/
 
 # ANDROID / ECLIPSE
 
@@ -16,9 +17,9 @@
 *.class
 
 # generated files - android project subfolder
-platforms/android/bin/
-platforms/android/gen/
-platforms/android/assets/
+/www/platforms/android/bin/
+/www/platforms/android/gen/
+/www/platforms/android/assets/
 
 
 # Local configuration file (sdk path, etc)
