@@ -315,13 +315,13 @@ function pageChanged(evt){
     if (window.location.pathname.indexOf('index.html') !== -1) {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, fail);
         analytics.trackEvent('Button', 'Click', 'Index Nav', new Date());
-        console.log("Button event Index");
+        //console.log("Button event Index");
     }
     
     if (window.location.pathname.indexOf('favorites.html') !== -1) {
         loadFavorites();
         analytics.trackEvent('Button', 'Click', 'Favorites Nav', new Date());
-        console.log("Button event Favorites");
+        //console.log("Button event Favorites");
     }
     
     if (window.location.pathname.indexOf('bay.html') !== -1) {
@@ -339,7 +339,7 @@ function pageChanged(evt){
             alert("Error: Bahía no existe.");
         }
         analytics.trackEvent('Button', 'Click', 'Bay Nav', new Date());
-        console.log("Button event Settings");
+        //console.log("Button event Settings");
     }
     
     if (window.location.pathname.indexOf('settings.html') !== -1) {
@@ -358,7 +358,7 @@ function pageChanged(evt){
             $('#moon_phase').val(localStorage.getItem('moon_phase'));
         }
         analytics.trackEvent('Button', 'Click', 'Settings Nav', new Date());
-        console.log("Button event Settings");
+        //console.log("Button event Settings");
     }
     
 }
@@ -701,9 +701,9 @@ function addNotifBay(id, title, message, json, dateNotf){
 
 function initGA(){
     //Track an open event
-    console.log("GA init");
+    //console.log("GA init");
     analytics.trackEvent('App', 'Open', 'App', new Date());
-    console.log("GA init after");
+    //console.log("GA init after");
 
     /*
      * 
@@ -732,7 +732,7 @@ function initGA(){
      */
     $(document).on('click', '.baySelect', function(){
         analytics.trackEvent('Button', 'Click', 'Home bays list', new Date());
-        console.log("Button event Home");
+        //console.log("Button event Home");
     });
 
     /*
@@ -741,7 +741,7 @@ function initGA(){
      */
     $(document).on('click', '.baySelectFavs', function(){
         analytics.trackEvent('Button', 'Click', 'Favorites bays list', new Date());
-        console.log("Button event Favoritos");
+        //console.log("Button event Favoritos");
     });
 
     /*
@@ -750,15 +750,15 @@ function initGA(){
      */
     $(document).on('click', '#moon_phase_togg', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif moon phase', new Date());
-        console.log("Button event moon phase");
+        //console.log("Button event moon phase");
     });
     $(document).on('click', '#weekend_togg', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif weekend', new Date());
-        console.log("Button event weekend_togg");
+        //console.log("Button event weekend_togg");
     });
     $(document).on('click', '.notifBaySel', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif weekend bay', new Date());
-        console.log("Button event notifBaySel");
+        //console.log("Button event notifBaySel");
     });
 }
 
