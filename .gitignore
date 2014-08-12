@@ -58,3 +58,6 @@ local.properties
 /mobile/test/*
 /mobile/vendor/*
 /mobile/nbproject/private/
+
+/mobile-base/_gulp/bower_components/
+/mobile-base/_gulp/node_modules/
