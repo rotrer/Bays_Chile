@@ -39,17 +39,43 @@ gulp.task "clean", ->
 	]
 	.pipe clean()
 
-# copy vendor scripts
-gulp.task "copy", ->
+# copy libs scritps
+gulp.task "copy-libs", ->
 	gulp.src [
-		src + "/scripts/libs/jquery-1.10.2.js"
-		src + "/scripts/libs/handlebars-1.1.2.js"
-		src + "/scripts/libs/ember-1.6.1.js"
-		src + "/scripts/app-global.js"
-		src + "/scripts/libs/ratchet.js"
+		"bower_components/angular/angular.min.js"
+		"bower_components/angular-resource/angular-resource.min.js"
+    "bower_components/angular-route/angular-route.min.js"
+		"bower_components/angular-touch/angular-touch.min.js"
+    "bower_components/jquery/jquery.min.js"
+    "bower_components/underscore/underscore-min.js"
+		"/scripts/ratchet.js.js"
 	]
-	# .pipe uglify()
 	.pipe gulp.dest dest + "scripts"
+#copy js scripts app
+gulp.task "copy-app", ->
+  gulp.src [
+    src + "/scripts/app.js"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest dest + "scripts"
+#copy imgs appp
+gulp.task "copy-img", ->
+  gulp.src [
+    src + "/images/*"
+  ]
+  .pipe gulp.dest dest + "img"
+#copy styles app
+gulp.task "copy-styles", ->
+  gulp.src [
+    src + "/styles/*"
+  ]
+  .pipe gulp.dest dest + "styles"
+#copy fonts app
+gulp.task "copy-fonts", ->
+  gulp.src [
+    src + "/fonts/*"
+  ]
+  .pipe gulp.dest dest + "fonts"
 
 # coffee
 # gulp.task "coffee", ->
@@ -111,16 +137,11 @@ gulp.task "copy", ->
 # 		keepSpecialComments: 0
 # 	.pipe gulp.dest dest + "/styles"
 
-# Proxy to existing vhost (version 0.7.0 & greater)
-gulp.task "browser-sync", ->
-  browserSync.init null,
-    proxy: "tides.dev"
-    open: false
-    # server:
-      # baseDir: dest
 
 gulp.task 'watch', ->
-	gulp.watch [src + '/scripts/app*.js'], ['scripts']
+  gulp.watch [src + '/scripts/app*.js'], ['copy-app']
+  gulp.watch [src + '/images/*'], ['copy-img']
+  gulp.watch [src + '/styles/*'], ['copy-styles']
 	# gulp.watch [src + '/styles/**/*.scss'], ['styles']
 	# gulp.watch [src + "/vendor/scripts/plugins/*.js"], ['scripts']
 
@@ -130,10 +151,11 @@ gulp.task 'watch', ->
 
 # default task
 gulp.task 'default', [
-	"copy"
-	# "styles"
-	# "scripts"
-  "browser-sync"
+	"copy-libs"
+  "copy-app"
+  "copy-img"
+  "copy-styles"
+  "copy-fonts"
 	"watch"
 ]
 
