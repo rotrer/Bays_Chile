@@ -1,0 +1,166 @@
+<section class="contacto">
+	<style type="text/css">
+      /* Set a size for our map container, the Google Map will take up 100% of this container */
+      #map {
+          width: 100%;
+          height: 300px;
+      }
+  </style>
+
+  <!--
+      You need to include this script on any page that has a Google Map.
+      When using Google Maps on your own site you MUST signup for your own API key at:
+          https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+      After your sign up replace the key in the URL below or paste in the new script tag that Google provides.
+  -->
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASm3CwaK9qtcZEWYa-iQwHaGi3gcosAJc&sensor=false"></script>
+
+  <script type="text/javascript">
+      // When the window has finished loading create our google map below
+      google.maps.event.addDomListener(window, 'load', init);
+
+
+      function init() {
+      		// donde esta ubicado bowl?
+      		var myLatlng = new google.maps.LatLng(-33.4241067,-70.6198312);
+
+          // Basic options for a simple Google Map
+          // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+          var mapOptions = {
+              // How zoomed in you want the map to start at (always required)
+              zoom: 16,
+
+              scrollwheel: false,
+
+              // The latitude and longitude to center the map (always required)
+              center: myLatlng,
+
+              // How you would like to style the map.
+              // This is where you would paste any style found on Snazzy Maps.
+              styles: [
+											  {
+											    "elementType": "geometry.stroke",
+											    "stylers": [
+											      { "weight": 0.1 }
+											    ]
+											  },{
+											    "elementType": "geometry.fill",
+											    "stylers": [
+											      { "weight": 5 },
+											      { "hue": "#6e63a9" },
+											      { "saturation": -40 },
+											      { "lightness": -25 },
+											      { "gamma": 0.75 }
+											    ]
+											  },{
+											    "elementType": "labels.text.stroke",
+											    "stylers": [
+											      { "visibility": "off" }
+											    ]
+											  },{
+											    "elementType": "labels.text",
+											    "stylers": [
+											      { "color": "#6e63a9" },
+											      { "lightness": 100 }
+											    ]
+											  },{
+											    "featureType": "poi",
+											    "elementType": "labels",
+											    "stylers": [
+											      { "visibility": "off" }
+											    ]
+											  },{
+											    "featureType": "administrative",
+											    "elementType": "labels",
+											    "stylers": [
+											      { "visibility": "off" }
+											    ]
+											  },{
+											    "featureType": "landscape",
+											    "elementType": "labels",
+											    "stylers": [
+											      { "visibility": "off" }
+											    ]
+											  },{
+											    "featureType": "water",
+											    "elementType": "labels",
+											    "stylers": [
+											      { "visibility": "off" }
+											    ]
+											  },{
+											    "featureType": "transit",
+											    "elementType": "labels.text.stroke",
+											    "stylers": [
+											      { "visibility": "on" },
+											      { "weight": 0.1 }
+											    ]
+											  },{
+											    "featureType": "transit",
+											    "elementType": "labels.icon",
+											    "stylers": [
+											      { "visibility": "on" },
+											      { "hue": "#ff8800" }
+											    ]
+											  }
+											]
+          };
+
+          // Get the HTML DOM element that will contain your map
+          // We are using a div with id="map" seen below in the <body>
+          var mapElement = document.getElementById('map');
+
+          // Create the Google Map using out element and options defined above
+          var map = new google.maps.Map(mapElement, mapOptions);
+
+          var image = new google.maps.MarkerImage("images/map-marker.png", null, null, null, new google.maps.Size(30, 50));
+
+          var image_marker = {
+				    url: 'images/map-marker.png',
+				    // This marker is 20 pixels wide by 32 pixels tall.
+				    // The origin for this image is 0,0.
+				    size: new google.maps.Size(68,68)
+				  }
+
+          var marker = new google.maps.Marker({
+			      position: myLatlng,
+			      map: map,
+			      title: 'Bowl',
+			      icon: image
+			  });
+      }
+
+
+  </script>
+
+	<div id="map"></div>
+
+	<div class="inner">
+		<div class="main-title">
+			<h2>contacto</h2>
+		</div>
+
+		<div class="form">
+			<div class="top">
+				<div class="input">
+					<input type="text" placeholder="nombre">
+				</div>
+				<div class="input">
+					<input type="text" placeholder="apellido">
+				</div>
+				<div class="input">
+					<input type="text" placeholder="teléfono">
+				</div>
+				<div class="input">
+					<input type="text" placeholder="email">
+				</div>
+			</div>
+			<div class="bottom">
+				<div class="textarea">
+					<textarea name="" placeholder="mensaje"></textarea>
+				</div>
+
+				<button type="submit" class="btn btn-primary">enviar</button>
+			</div>
+		</div>
+	</div>
+</section>
