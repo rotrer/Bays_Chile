@@ -39,6 +39,14 @@ gulp.task "clean", ->
 	]
 	.pipe clean()
 
+#copy js scripts app
+gulp.task "copy-html", ->
+  gulp.src [
+    src + "/html/**/*.html"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest "../"
+  .pipe livereload(server)
 # copy libs scritps
 gulp.task "copy-libs", ->
 	gulp.src [
@@ -48,16 +56,17 @@ gulp.task "copy-libs", ->
 		"bower_components/angular-touch/angular-touch.min.js"
     "bower_components/jquery/jquery.min.js"
     "bower_components/underscore/underscore-min.js"
-		"/scripts/ratchet.js.js"
+		# src + "/scripts/ratchet.js"
 	]
 	.pipe gulp.dest dest + "scripts"
 #copy js scripts app
-gulp.task "copy-app", ->
+gulp.task "copy-js", ->
   gulp.src [
-    src + "/scripts/app.js"
+    src + "/scripts/*.js"
   ]
   #.pipe uglify()
   .pipe gulp.dest dest + "scripts"
+  .pipe livereload(server)
 #copy imgs appp
 gulp.task "copy-img", ->
   gulp.src [
@@ -139,7 +148,8 @@ gulp.task "copy-fonts", ->
 
 
 gulp.task 'watch', ->
-  gulp.watch [src + '/scripts/app*.js'], ['copy-app']
+  gulp.watch [src + '/scripts/*.js'], ['copy-js']
+  gulp.watch [src + '/html/**/*.html'], ['copy-html']
   gulp.watch [src + '/images/*'], ['copy-img']
   gulp.watch [src + '/styles/*'], ['copy-styles']
 	# gulp.watch [src + '/styles/**/*.scss'], ['styles']
@@ -151,8 +161,9 @@ gulp.task 'watch', ->
 
 # default task
 gulp.task 'default', [
+  "copy-html"
 	"copy-libs"
-  "copy-app"
+  "copy-js"
   "copy-img"
   "copy-styles"
   "copy-fonts"
