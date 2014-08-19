@@ -30,6 +30,38 @@ angular.module('controllers', [])
       delay: 100
   });
 
+  $scope.addFav = function() {
+    $scope.loadingIndicator = $ionicLoading.show({
+        template: '<i class="icon ion-loading-c"></i>',
+        delay: 50
+    });
+
+    var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
+    favBays.bays.push($stateParams.bayId);
+    window.localStorage['baysFav'] = JSON.stringify(favBays);
+    $scope.favAdd = false;
+    $scope.favDelete = true;
+    setTimeout(function(){
+      $ionicLoading.hide();
+    }, 1000);
+  }
+
+  $scope.deleteFav = function() {
+    $scope.loadingIndicator = $ionicLoading.show({
+        template: '<i class="icon ion-loading-c"></i>',
+        delay: 50
+    });
+
+    var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
+    favBays.bays.remove($stateParams.bayId);
+    window.localStorage['baysFav'] = JSON.stringify(favBays);
+    $scope.favAdd = true;
+    $scope.favDelete = false;
+    setTimeout(function(){
+      $ionicLoading.hide();
+    }, 1000);
+  }
+
   bayDetail.getBay($stateParams.bayId).then(function(results) {
     //Ocular loading
     $ionicLoading.hide();
@@ -100,13 +132,26 @@ angular.module('controllers', [])
     $scope.itemDays = items;
 
   });
-
-  $scope.addFav = function(bayId) {
-    console.log(bayId);
-    $scope.loadingIndicator = $ionicLoading.show({
-        template: '<i class="icon ion-loading-c"></i>',
-        delay: 50
-    });
-  }
   
+  //Obtener estado de favorito bahía
+  var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
+  $scope.favAdd = false;
+  $scope.favDelete = true;
+  if (favBays.bays.indexOf($stateParams.bayId) === -1) {
+    $scope.favAdd = true;
+    $scope.favDelete = false;
+  }
+
+  
+})
+
+.controller('favoritesController', function($scope, $ionicLoading) {
+
+  var favBays = window.localStorage['baysFav'] === undefined ? "" : JSON.parse(window.localStorage['baysFav']);
+  $scope.baysAll = favBays.bays;
+
+})
+
+.controller('settingsController', function($scope, $ionicLoading) {
+
 });

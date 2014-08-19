@@ -1,15 +1,5 @@
 <ion-view ng-controller="BayController" title="Bahía de {{nameBay | uppercase}}">
   <ion-content class="has-header">
-    <div class="row row-center">
-      <div class="col">
-        <button class="button button-block button-positive" ng-click="addFav('{{nameBay}}');">
-          Agregar a Favoritos
-        </button>
-        <button class="button button-block button-assertive" ng-click="deleteFav('{{nameBay}}');">
-          Eliminar de Favoritos
-        </button>
-      </div>
-    </div>
     <ion-list>
       <ion-item ng-repeat="day in itemDays">
         <div class="row row-center {{day.todayClass}}">
@@ -41,5 +31,15 @@
         </div>
       </ion-item>
     </ion-list>
+    <div class="row row-center">
+      <div class="col addDeleteFav">
+        <button class="button button-block button-positive fav-add" ng-show="favAdd" ng-click="addFav();">
+          Agregar a Favoritos
+        </button>
+        <button class="button button-block button-assertive fav-delete" ng-show="favDelete" ng-click="deleteFav();">
+          Eliminar de Favoritos
+        </button>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

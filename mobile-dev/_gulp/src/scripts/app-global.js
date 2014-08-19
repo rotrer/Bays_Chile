@@ -1,6 +1,6 @@
 'use strict';
 // Ionic App
-angular.module('tideApp', ['ionic', 'controllers', 'factory'])
+angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -29,44 +29,38 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory'])
           controller: 'BayController'
         }
       }
+    })
+
+    .state('app.favorites', {
+      url: "/favorites",
+      views: {
+        'menuContent' :{
+          templateUrl: "partials/favorites.html",
+          controller: 'favoritesController'
+        }
+      }
+    })
+
+    .state('app.settings', {
+      url: "/settings",
+      views: {
+        'menuContent' :{
+          templateUrl: "partials/settings.html",
+          controller: 'settingsController'
+        }
+      }
     });
-
-    // .state('app.search', {
-    //   url: "/search",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/search.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.browse', {
-    //   url: "/browse",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/browse.html"
-    //     }
-    //   }
-    // })
-    // .state('app.playlists', {
-    //   url: "/playlists",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/playlists.html",
-    //       controller: 'PlaylistsCtrl'
-    //     }
-    //   }
-    // })
-
-    // .state('app.single', {
-    //   url: "/playlists/:playlistId",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/playlist.html",
-    //       controller: 'PlaylistCtrl'
-    //     }
-    //   }
-    // });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
