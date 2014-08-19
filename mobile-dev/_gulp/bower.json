@@ -1,0 +1,21 @@
+{
+  "name": "bower",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rotrer",
+  "authors": [
+    "rotrer <rotrer@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies":{
+    "ionic": "*",
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.2"
+  }
+}
