@@ -21,7 +21,7 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory'])
       }
     })
 
-    .state('app.single', {
+    .state('app.bay', {
       url: "/bay/:bayId",
       views: {
         'menuContent' :{

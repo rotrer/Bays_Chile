@@ -6,8 +6,12 @@ angular.module('factory', [])
 
 .factory('baysList', function($http) {
   return {
-    getAll: function(callback) {
-      $http.get('http://tides.rotrer.com/bays/bays.json').success(callback);
+    getAll: function(bayId) {
+      var url = 'http://tides.rotrer.com/bays/bays.json';
+      var promise = $http.get(url).then(function (response) {
+        return response.data;
+      });
+      return promise;
     }
   };
 })
@@ -15,8 +19,8 @@ angular.module('factory', [])
 .factory('bayDetail', function($http) {
   return {
     getBay: function(bayId) {
-      var urlBay = 'http://tides.rotrer.com/bays/' + bayId + '.json';
-      var promise = $http.get(urlBay).then(function (response) {
+      var url = 'http://tides.rotrer.com/bays/' + bayId + '.json';
+      var promise = $http.get(url).then(function (response) {
         return response.data;
       });
       return promise;
