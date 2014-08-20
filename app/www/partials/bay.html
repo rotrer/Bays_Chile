@@ -1,0 +1,45 @@
+<ion-view ng-controller="BayController" title="Bahía de {{nameBay | uppercase}}">
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="day in itemDays">
+        <div class="row row-center {{day.todayClass}}">
+          <div class="col col-50"><p><strong>{{day.keyDay}}</strong></p></div>
+          <div class="col">
+            <p>{{day.moonPhaseDay}}</p>
+          </div>
+          <div class="col">
+            <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon">
+          </div>
+        </div>
+        <div class="row row-center">
+          <div class="col">
+            <p><b>{{day.data.h1st}} hr</b></p>
+            <p class="p-hora">{{day.data.m1st}} {{day.data.t1st}}</p>
+          </div>
+          <div class="col">
+            <p><b>{{day.data.h2nd}} hr</b></p>
+            <p class="p-hora">{{day.data.m2nd}} {{day.data.t2nd}}</p>
+          </div>
+          <div class="col">
+            <p><b>{{day.data.h3rd}} hr</b></p>
+            <p class="p-hora">{{day.data.m3rd}} {{day.data.t3rd}}</p>
+          </div>
+          <div class="col">
+            <p><b>{{day.data.h4th}} hr</b></p>
+            <p class="p-hora">{{day.data.m4th}} {{day.data.t4th}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div class="row row-center">
+      <div class="col addDeleteFav">
+        <button class="button button-block button-positive fav-add" ng-show="favAdd" ng-click="addFav();">
+          Agregar a Favoritos
+        </button>
+        <button class="button button-block button-assertive fav-delete" ng-show="favDelete" ng-click="deleteFav();">
+          Eliminar de Favoritos
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
