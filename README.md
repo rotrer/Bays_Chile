@@ -26,9 +26,9 @@ Instalar plugins
 ==========
 
 - En raíz proyecto
--- cordova plugin add org.apache.cordova.device
--- cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
--- cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git
--- cordova plugin add org.apache.cordova.statusbar
--- cordova plugin add de.appplant.cordova.plugin.local-notification && cordova prepare
--- cordova plugin add com.google.admobsdk-googleplay
+  cordova plugin add org.apache.cordova.device
+  cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
+  cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git
+  cordova plugin add org.apache.cordova.statusbar
+  cordova plugin add de.appplant.cordova.plugin.local-notification && cordova prepare
+  cordova plugin add com.google.admobsdk-googleplay
