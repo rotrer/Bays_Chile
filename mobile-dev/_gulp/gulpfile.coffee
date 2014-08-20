@@ -23,7 +23,7 @@ server         = lr()
 # paths
 src          = "src"
 dest         = "../assets/"
-destPhonegap = "../../www/www/assets/"
+destPhonegap = "../../app/www/assets/"
 
 #
 #  gulp tasks
@@ -159,7 +159,7 @@ gulp.task "copy-html-p", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  .pipe gulp.dest "../../www/www/"
+  .pipe gulp.dest "../../app/www/"
   .pipe livereload(server)
 # copy libs scritps
 gulp.task "copy-libs-p", ->
@@ -200,8 +200,12 @@ gulp.task 'watch', ->
   gulp.watch [src + '/html/**/*.html'], ['copy-html']
   gulp.watch [src + '/images/*'], ['copy-img']
   gulp.watch [src + '/styles/*'], ['copy-styles']
-  # gulp.watch [src + '/styles/**/*.scss'], ['styles']
-  # gulp.watch [src + "/vendor/scripts/plugins/*.js"], ['scripts']
+
+gulp.task 'watch-p', ->
+  gulp.watch [src + '/scripts/*.js'], ['copy-js-p']
+  gulp.watch [src + '/html/**/*.html'], ['copy-html-p']
+  gulp.watch [src + '/images/*'], ['copy-img-p']
+  gulp.watch [src + '/styles/*'], ['copy-styles-p']
 
 #
 #  main tasks
@@ -228,5 +232,5 @@ gulp.task 'phonegap', [
   "copy-img-p"
   "copy-styles-p"
   "copy-fonts-p"
-  "watch"
+  "watch-p"
 ]

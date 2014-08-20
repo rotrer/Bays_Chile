@@ -1,24 +1,10 @@
 /bays/*
-/app/nbproject/private/
-/www/nbproject/private/
-/api/nbproject/private/
-/www/www/_grunt/node_modules/
 
 # ANDROID / ECLIPSE
 
 # built application files
 **.apk
 **.ap_
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files - android project subfolder
-/www/platforms/*
-
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -50,21 +36,12 @@ local.properties
 .Spotlight-V100
 .Trashes
 
-/mobile/dist/*
-/mobile/node_modules/*
-/mobile/tmp/*
-/mobile/test/*
-/mobile/vendor/*
-/mobile/nbproject/private/
-
-/mobile-base/_gulp/bower_components/
-/mobile-base/_gulp/node_modules/
-/mobile-base/assets/*
-
 /mobile-dev/_gulp/bower_components/
 /mobile-dev/_gulp/node_modules/
 /mobile-dev/assets/*
 /mobile-dev/**.html
 
-/www/www/assets/*
-/www/www/**.html
+/app/www/assets/*
+/app/www/**.html
+/app/www/plugins/*
+/app/www/platforms/*
