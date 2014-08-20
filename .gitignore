@@ -43,5 +43,5 @@ local.properties
 
 /app/www/assets/*
 /app/www/**.html
-/app/www/plugins/*
-/app/www/platforms/*
+/app/plugins/*
+/app/platforms/*
