@@ -48,8 +48,8 @@ angular.module('controllers', [])
 
   $scope.deleteFav = function() {
     $scope.loadingIndicator = $ionicLoading.show({
-        template: '<i class="icon ion-loading-c"></i>',
-        delay: 50
+      template: '<i class="icon ion-loading-c"></i>',
+      delay: 50
     });
 
     var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
@@ -153,5 +153,63 @@ angular.module('controllers', [])
 })
 
 .controller('settingsController', function($scope, $ionicLoading) {
+  $scope.moonPhaseChange = function() {
+    $scope.moonPhaseNotif = ! $scope.moonPhaseNotif;
+    window.localStorage['moonPhaseNotif'] = $scope.moonPhaseNotif;
+  };
+
+  $scope.weekendChange = function() {
+    $scope.weekendNotif = ! $scope.weekendNotif;
+    window.localStorage['weekendNotif'] = $scope.weekendNotif;
+
+    if ($scope.weekendNotif === true)
+      $scope.listBayNotif = true;
+    else
+      $scope.listBayNotif = false;
+  };
+
+  $scope.bayChanged = function(itemBay, itemBayState){
+    if (itemBayState === true) {
+      if (baysNotif.bays.indexOf(itemBay) === -1) {
+        baysNotif.bays.push(itemBay);
+      }
+    } else {
+      baysNotif.bays.remove(itemBay);
+    }
+    window.localStorage['weekendNotifBays'] = JSON.stringify(baysNotif);
+  }
+
+  /**
+  * 
+  * Web local storage, preferencias usuarios notificaciones
+  **/
+  $scope.moonPhaseNotif = window.localStorage['moonPhaseNotif'] === "true" ? true : false;
+  $scope.weekendNotif = window.localStorage['weekendNotif'] === "true" ? true : false;
+  $scope.listBayNotif = window.localStorage['weekendNotif'] === "true" ? true : false;
+  
+  /**
+  * 
+  * Web local storage, arreglo de bahias favoritas con notificacion
+  **/
+  var baysNotif = window.localStorage['weekendNotifBays'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['weekendNotifBays']);
+  console.log(baysNotif);
+
+  /**
+  * 
+  * Lista de favoritos para notificaciones
+  **/
+  var favBays = window.localStorage['baysFav'] === undefined ? "" : JSON.parse(window.localStorage['baysFav']);
+  var favsState = [];
+  var checkedBay;
+  angular.forEach(favBays.bays, function(val, key) {
+    //Busca la bahia en el arreglo local
+    if (baysNotif.bays.indexOf(val) !== -1)
+      checkedBay = true;
+    else
+      checkedBay = false;
+    favsState.push({bay: val, checked: checkedBay});
+  });
+  $scope.baysAll = favsState;
+
 
 });

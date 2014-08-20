@@ -709,22 +709,6 @@ function initGA(){
      * 
      * Eventos barra navagación
      */
-    /*
-    $(document).on('click', '.nav_index', function(){
-        analytics.trackEvent('Button', 'Click', 'Index Nav', new Date());
-        console.log("Button event Index");
-    });
-
-    $(document).on('click', '.nav_favs', function(){
-        analytics.trackEvent('Button', 'Click', 'Favorites Nav', new Date());
-        console.log("Button event Favorites");
-    });
-
-    $(document).on('click', '.nav_settings', function(){
-        analytics.trackEvent('Button', 'Click', 'Settings Nav', new Date());
-        console.log("Button event Settings");
-    });
-    */
 
     /*
      * 

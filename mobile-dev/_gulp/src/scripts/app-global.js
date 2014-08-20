@@ -2,6 +2,7 @@
 // Ionic App
 angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
 
+//Router
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -52,15 +53,30 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
-});
+})
 
-Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
-    while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
+//Constantes App
+.value('dataApp', {
+  endPointBase: 'http://tides.rotrer.com/bays/' 
+})
+
+//Filters
+.filter('capitalize', function() {
+  return function(input, all) {
+    return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+  }
+})
+
+//Basic config phonegap
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
-    return this;
-};
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+});

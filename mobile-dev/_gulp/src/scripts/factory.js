@@ -4,10 +4,10 @@
 angular.module('factory', [])
 
 
-.factory('baysList', function($http) {
+.factory('baysList', function($http, dataApp) {
   return {
     getAll: function(bayId) {
-      var url = 'http://tides.rotrer.com/bays/bays.json';
+      var url = dataApp.endPointBase + 'bays.json';
       var promise = $http.get(url).then(function (response) {
         return response.data;
       });
@@ -16,10 +16,10 @@ angular.module('factory', [])
   };
 })
 
-.factory('bayDetail', function($http) {
+.factory('bayDetail', function($http, dataApp) {
   return {
     getBay: function(bayId) {
-      var url = 'http://tides.rotrer.com/bays/' + bayId + '.json';
+      var url = dataApp.endPointBase + bayId + '.json';
       var promise = $http.get(url).then(function (response) {
         return response.data;
       });

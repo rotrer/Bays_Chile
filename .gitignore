@@ -65,3 +65,6 @@ local.properties
 /mobile-dev/_gulp/node_modules/
 /mobile-dev/assets/*
 /mobile-dev/**.html
+
+/www/www/assets/*
+/www/www/**.html

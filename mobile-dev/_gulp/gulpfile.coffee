@@ -23,6 +23,7 @@ server         = lr()
 # paths
 src          = "src"
 dest         = "../assets/"
+destPhonegap = "../../www/www/assets/"
 
 #
 #  gulp tasks
@@ -51,16 +52,11 @@ gulp.task "copy-html", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  #.pipe uglify()
   .pipe gulp.dest "../"
   .pipe livereload(server)
 # copy libs scritps
 gulp.task "copy-libs", ->
   gulp.src [
-    # "bower_components/angular/angular.min.js"
-    # "bower_components/angular-resource/angular-resource.min.js"
-    # "bower_components/angular-route/angular-route.min.js"
-    # "bower_components/angular-touch/angular-touch.min.js"
     "bower_components/jquery/jquery.min.js"
     "bower_components/underscore/underscore-min.js"
   ]
@@ -151,7 +147,53 @@ gulp.task "copy-fonts", ->
 #   .pipe minifycss
 #     keepSpecialComments: 0
 #   .pipe gulp.dest dest + "/styles"
-
+#copy js scripts app
+gulp.task "copy-ionic-p", ->
+  gulp.src [
+    "bower_components/ionic/release/**"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest destPhonegap + "scripts/ionic"
+#copy html scripts app
+gulp.task "copy-html-p", ->
+  gulp.src [
+    src + "/html/**/*.html"
+  ]
+  .pipe gulp.dest "../../www/www/"
+  .pipe livereload(server)
+# copy libs scritps
+gulp.task "copy-libs-p", ->
+  gulp.src [
+    "bower_components/jquery/jquery.min.js"
+    "bower_components/underscore/underscore-min.js"
+  ]
+  .pipe gulp.dest destPhonegap + "scripts"
+#copy js scripts app
+gulp.task "copy-js-p", ->
+  gulp.src [
+    src + "/scripts/*.js"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest destPhonegap + "scripts"
+  .pipe livereload(server)
+#copy imgs appp
+gulp.task "copy-img-p", ->
+  gulp.src [
+    src + "/images/*"
+  ]
+  .pipe gulp.dest destPhonegap + "img"
+#copy styles app
+gulp.task "copy-styles-p", ->
+  gulp.src [
+    src + "/styles/*"
+  ]
+  .pipe gulp.dest destPhonegap + "styles"
+#copy fonts app
+gulp.task "copy-fonts-p", ->
+  gulp.src [
+    src + "/fonts/*"
+  ]
+  .pipe gulp.dest destPhonegap + "fonts"
 
 gulp.task 'watch', ->
   gulp.watch [src + '/scripts/*.js'], ['copy-js']
@@ -177,7 +219,14 @@ gulp.task 'default', [
   "watch"
 ]
 
-# build task
-gulp.task 'dist', [
-
+# dev phonegap task
+gulp.task 'phonegap', [
+  "copy-html-p"
+  "copy-ionic-p"
+  "copy-libs-p"
+  "copy-js-p"
+  "copy-img-p"
+  "copy-styles-p"
+  "copy-fonts-p"
+  "watch"
 ]
