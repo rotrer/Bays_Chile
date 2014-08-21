@@ -15,15 +15,14 @@ angular.module('controllers', [])
       delay: 100
   });
 
-  baysList.getAll().then(function(results) {   
+  baysList.getAll().then(function(results) {
+    window.localStorage['allBays'] = JSON.stringify(results);
     $scope.baysAll = results.bays;
     $ionicLoading.hide();
   });
 })
 
 .controller('BayController', function($scope, $stateParams, $ionicLoading, bayDetail) {
-
-  $scope.nameBay = $stateParams.bayId;
 
   $scope.loadingIndicator = $ionicLoading.show({
       template: '<i class="icon ion-loading-c"></i>',
@@ -63,6 +62,7 @@ angular.module('controllers', [])
   }
 
   bayDetail.getBay($stateParams.bayId).then(function(results) {
+    $scope.nameBay = results.name;
     //Ocular loading
     $ionicLoading.hide();
     //Mes actual de bahí seleccionada
@@ -147,8 +147,16 @@ angular.module('controllers', [])
 
 .controller('favoritesController', function($scope, $ionicLoading) {
 
-  var favBays = window.localStorage['baysFav'] === undefined ? "" : JSON.parse(window.localStorage['baysFav']);
-  $scope.baysAll = favBays.bays;
+  var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
+  var favBaysList = { "bays" : [] };
+  var allBays = JSON.parse(window.localStorage['allBays']);
+
+  angular.forEach(allBays.bays, function(val, key) {
+    if (favBays.bays.indexOf(val.file) !== -1)
+      favBaysList.bays.push(val);
+  });
+  
+  $scope.baysAll = favBaysList.bays;
 
 })
 
@@ -192,24 +200,29 @@ angular.module('controllers', [])
   * Web local storage, arreglo de bahias favoritas con notificacion
   **/
   var baysNotif = window.localStorage['weekendNotifBays'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['weekendNotifBays']);
-  console.log(baysNotif);
 
   /**
   * 
   * Lista de favoritos para notificaciones
   **/
-  var favBays = window.localStorage['baysFav'] === undefined ? "" : JSON.parse(window.localStorage['baysFav']);
+  var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
+  var favBaysList = { "bays" : [] };
+  var allBays = JSON.parse(window.localStorage['allBays']);
+
+  angular.forEach(allBays.bays, function(val, key) {
+    if (favBays.bays.indexOf(val.file) !== -1)
+      favBaysList.bays.push(val);
+  });
+  
   var favsState = [];
   var checkedBay;
-  angular.forEach(favBays.bays, function(val, key) {
+  angular.forEach(favBaysList.bays, function(val, key) {
     //Busca la bahia en el arreglo local
-    if (baysNotif.bays.indexOf(val) !== -1)
+    if (baysNotif.bays.indexOf(val.file) !== -1)
       checkedBay = true;
     else
       checkedBay = false;
     favsState.push({bay: val, checked: checkedBay});
   });
   $scope.baysAll = favsState;
-
-
 });

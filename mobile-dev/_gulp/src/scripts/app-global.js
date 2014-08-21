@@ -57,7 +57,7 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
 
 //Constantes App
 .value('dataApp', {
-  endPointBase: 'http://tides.rotrer.com/bays/' 
+  endPointBase: 'http://tides.rotrer.com/bays/v2/' 
 })
 
 //Filters
@@ -70,13 +70,11 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
 //Basic config phonegap
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+    var nowTmp = new Date().getTime(),
+        dateNotif = new Date(nowTmp + 5*1000);
+    addNotifBay('first', 'Test Ng', 'Testing Ng Notifications', null, dateNotif);
   });
 });

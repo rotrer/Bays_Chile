@@ -10,9 +10,9 @@
     <content src="index.html" />
     <access origin="*" />
     <platform name="android">
-        <icon src="res/drawable-ldpi/ic_launcher.png" density="ldpi" />
-        <icon src="res/drawable-mdpi/ic_launcher.png" density="mdpi" />
-        <icon src="res/drawable-hdpi/ic_launcher.png" density="hdpi" />
-        <icon src="res/drawable-xhdpi/ic_launcher.png" density="xhdpi" />
+        <icon src="www/res/drawable-ldpi/ic_launcher.png" density="ldpi" />
+        <icon src="www/res/drawable-mdpi/ic_launcher.png" density="mdpi" />
+        <icon src="www/res/drawable-hdpi/ic_launcher.png" density="hdpi" />
+        <icon src="www/res/drawable-xhdpi/ic_launcher.png" density="xhdpi" />
      </platform>
 </widget>

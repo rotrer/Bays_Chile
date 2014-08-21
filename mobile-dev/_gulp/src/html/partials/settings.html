@@ -23,11 +23,11 @@
           <ion-checkbox ng-repeat="item in baysAll"
                         ng-model="item.checked" 
                         ng-checked="item.checked"
-                        ng-change="bayChanged(item.bay, item.checked)">
-            {{item.bay | capitalize}}
+                        ng-change="bayChanged(item.bay.file, item.checked)">
+            {{item.bay.name | capitalize}}
           </ion-checkbox>
         </div>
-        <div class="list" ng-if="baysAll === ''">
+        <div class="list" ng-if="baysAll.length === 0">
           <div class="item item-divider">
             Debes agregar bahías a tus favoritos.
           </div>

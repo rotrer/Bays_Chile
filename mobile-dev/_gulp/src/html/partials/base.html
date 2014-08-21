@@ -4,8 +4,8 @@
   </ion-nav-buttons>
   <ion-content class="has-header" scroll="true">
     <ion-list ng-controller="homeController">
-      <ion-item ng-repeat="bay in baysAll" href="#/app/bay/{{bay}}" class="item item-icon-right">
-        {{bay | uppercase}}
+      <ion-item ng-repeat="bay in baysAll" href="#/app/bay/{{bay.file}}" class="item item-icon-right">
+        {{bay.name | capitalize}}
         <i class="icon ion-ios7-arrow-right"></i>
       </ion-item>
     </ion-list>
