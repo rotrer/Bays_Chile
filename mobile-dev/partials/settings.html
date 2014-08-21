@@ -23,7 +23,7 @@
           <ion-checkbox ng-repeat="item in baysAll"
                         ng-model="item.checked" 
                         ng-checked="item.checked"
-                        ng-change="bayChanged(item.bay.file, item.checked)">
+                        ng-change="bayChanged(item.bay.file, item.checked, item.bay.name)">
             {{item.bay.name | capitalize}}
           </ion-checkbox>
         </div>

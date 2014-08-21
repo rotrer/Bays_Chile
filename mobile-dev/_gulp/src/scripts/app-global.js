@@ -73,8 +73,5 @@ angular.module('tideApp', ['ionic', 'controllers', 'factory', 'directives'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-    var nowTmp = new Date().getTime(),
-        dateNotif = new Date(nowTmp + 5*1000);
-    addNotifBay('first', 'Test Ng', 'Testing Ng Notifications', null, dateNotif);
   });
 });

@@ -43,7 +43,7 @@ angular.module('controllers', [])
     setTimeout(function(){
       $ionicLoading.hide();
     }, 1000);
-  }
+  };
 
   $scope.deleteFav = function() {
     $scope.loadingIndicator = $ionicLoading.show({
@@ -59,7 +59,7 @@ angular.module('controllers', [])
     setTimeout(function(){
       $ionicLoading.hide();
     }, 1000);
-  }
+  };
 
   bayDetail.getBay($stateParams.bayId).then(function(results) {
     $scope.nameBay = results.name;
@@ -69,6 +69,19 @@ angular.module('controllers', [])
     var todayClass = '';
     var items = [];
     var fechas = results.data;
+    var currentMonth = parseInt(new Date().getMonth());
+    var monthToEvCurrent = 0,
+        monthToEvMinusCt = 0;
+
+        //Mes actual menos uno para forma JS 0-11
+        monthToEvCurrent = currentMonth;
+        //Excepciones para primer mes del año
+        if (monthToEvCurrent === 0) {
+          monthToEvMinusCt = 11;
+        } else {
+          monthToEvMinusCt = currentMonth - 1;
+        }
+
     /*
     * Calcula fase lunar, arreglo correcion mes
     */
@@ -76,7 +89,26 @@ angular.module('controllers', [])
     var moonPhase = { "nm" : ["Nueva", "new_moon.png"], "fq" : ["Creciente", "first_quarter.png"], "fm" : ["Llena", "full_moon.png"], "lq" : ["Menguante", "last_quarter.png"]};
    
     angular.forEach(fechas, function(val, key) {
-      if (key === '2014-07' || key === '2014-08') {
+      var monthStr = key.split("-"),
+          monthNumber = parseInt(monthStr[1]),
+          monthToEv = 0,
+          monthToEvMin = 0;
+
+          //Mes actual menos uno para forma JS 0-11
+          monthToEv = monthNumber - 1;
+          //Excepciones para primer mes del año
+          if (monthToEv === 0) {
+            monthToEvMin = 11;
+            monthToEv = 0;
+          } else {
+            monthToEvMin = monthNumber - 2;
+          }
+          
+      if (
+          monthToEvCurrent === monthToEv ||
+          monthToEvMinusCt === monthToEvMin
+          ) {
+
         angular.forEach(val, function(valDay, keyDay) {
           var dateTide = keyDay.split("-");
           var mesInt = parseInt(dateTide[1]);
@@ -146,6 +178,7 @@ angular.module('controllers', [])
 })
 
 .controller('favoritesController', function($scope, $ionicLoading) {
+  notifScheduledLog();
 
   var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
   var favBaysList = { "bays" : [] };
@@ -161,28 +194,40 @@ angular.module('controllers', [])
 })
 
 .controller('settingsController', function($scope, $ionicLoading) {
+  //function listener notificacion cambio de luna
   $scope.moonPhaseChange = function() {
     $scope.moonPhaseNotif = ! $scope.moonPhaseNotif;
     window.localStorage['moonPhaseNotif'] = $scope.moonPhaseNotif;
+    //Set local notifications
+    setNotifMoonPhase($scope.moonPhaseNotif);
   };
 
+  //function listener notificacion fin de semana
   $scope.weekendChange = function() {
     $scope.weekendNotif = ! $scope.weekendNotif;
     window.localStorage['weekendNotif'] = $scope.weekendNotif;
 
-    if ($scope.weekendNotif === true)
+    if ($scope.weekendNotif === true) {
       $scope.listBayNotif = true;
-    else
+    } else {
       $scope.listBayNotif = false;
+      //Delete all notif weekend
+      deleteAllNotifWeekend();
+    }
   };
 
-  $scope.bayChanged = function(itemBay, itemBayState){
+  //function listener notificacion fin de semana por bahia/puerto
+  $scope.bayChanged = function(itemBay, itemBayState, itemBayName){
     if (itemBayState === true) {
       if (baysNotif.bays.indexOf(itemBay) === -1) {
         baysNotif.bays.push(itemBay);
       }
+      //Set local notifications weekend by Bay
+      setNotifBaysWeekend(itemBay, itemBayName);
     } else {
       baysNotif.bays.remove(itemBay);
+      //Delete all notif weekend by Bay
+      deleteNotifWeekendByBay(itemBay);
     }
     window.localStorage['weekendNotifBays'] = JSON.stringify(baysNotif);
   }
