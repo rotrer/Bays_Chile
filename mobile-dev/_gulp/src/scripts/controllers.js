@@ -5,7 +5,6 @@ angular.module('controllers', [])
 
 
 .controller('homeController', function($scope, $ionicSideMenuDelegate, $ionicLoading, baysList) {
-
   $scope.toggleProjects = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
@@ -178,7 +177,6 @@ angular.module('controllers', [])
 })
 
 .controller('favoritesController', function($scope, $ionicLoading) {
-  notifScheduledLog();
 
   var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
   var favBaysList = { "bays" : [] };
