@@ -1,27 +1,20 @@
-<ion-view title="Mareas Chile">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header" scroll="true">
-    <ion-list ng-controller="homeController">
-      <ion-item ng-repeat="bay in baysAll" href="#/app/bay/{{bay.file}}" class="item item-icon-right">
+<ons-navigator title="Home" var="homeVar">
+  <ons-page>
+    <ons-toolbar>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="ons.slidingMenu.toggleMenu()"><ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">Mareas Chile</div>
+      </ons-toolbar>
+    </ons-toolbar>
+
+    <ons-list ng-controller="homeController">
+      <!-- <ons-list-item modifier="tappable"> -->
+      <ons-list-item class="list__item--tappable list__item__line-height" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
         {{bay.name | capitalize}}
-        <i class="icon ion-ios7-arrow-right"></i>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-view>
+      </ons-list-item>
+    </ons-list>
 
-<!--
-<div class="content">
-    <div class="card">
-        <h1>Home</h1>
-        <ul class="table-view" id="list_bays">
-
-        </ul>
-        <!-- notificaciones bahias - ->
-        <div class="response_notif"></div>
-    </div>
-    <div class="preload"><span></span></div>
-</div>
--->
+  </ons-page>
+</ons-navigator>

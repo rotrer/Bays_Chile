@@ -1,45 +1,69 @@
-<ion-view ng-controller="BayController" title="{{nameBay | capitalize}}">
-  <ion-content class="has-header">
-    <ion-list>
-      <ion-item ng-repeat="day in itemDays">
-        <div class="row row-center {{day.todayClass}}">
-          <div class="col col-50"><p><strong>{{day.keyDay}}</strong></p></div>
-          <div class="col">
-            <p>{{day.moonPhaseDay}}</p>
-          </div>
-          <div class="col">
-            <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon">
-          </div>
+<ons-page ng-controller="BayController">
+  <ons-toolbar>
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Volver</ons-back-button></div>
+      <div class="center">{{nameBay | capitalize}}</div>
+    </ons-toolbar>
+  </ons-toolbar>
+  
+  <br>
+  
+  <ons-list ng-repeat="day in itemDays">
+    <div id="current_day_scroll" ng-if="day.todayClass != ''"></div>
+    <ons-list-header class="list__header ons-list-header-inner ng-binding {{day.todayClass}}">
+      <div class="row row-center">
+        <div class="col col-50"><p><strong>{{day.keyDay}}</strong></p></div>
+        <div class="col">
+          <p>{{day.moonPhaseDay}}</p>
         </div>
-        <div class="row row-center">
-          <div class="col">
-            <p><b>{{day.data.h1st}} hr</b></p>
-            <p class="p-hora">{{day.data.m1st}} {{day.data.t1st}}</p>
-          </div>
-          <div class="col">
-            <p><b>{{day.data.h2nd}} hr</b></p>
-            <p class="p-hora">{{day.data.m2nd}} {{day.data.t2nd}}</p>
-          </div>
-          <div class="col">
-            <p><b>{{day.data.h3rd}} hr</b></p>
-            <p class="p-hora">{{day.data.m3rd}} {{day.data.t3rd}}</p>
-          </div>
-          <div class="col">
-            <p><b>{{day.data.h4th}} hr</b></p>
-            <p class="p-hora">{{day.data.m4th}} {{day.data.t4th}}</p>
-          </div>
+        <div class="col">
+          <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon">
         </div>
-      </ion-item>
-    </ion-list>
-    <div class="row row-center">
-      <div class="col addDeleteFav">
-        <button class="button button-block button-positive fav-add" ng-show="favAdd" ng-click="addFav();">
-          Agregar a Favoritos
-        </button>
-        <button class="button button-block button-assertive fav-delete" ng-show="favDelete" ng-click="deleteFav();">
-          Eliminar de Favoritos
-        </button>
       </div>
-    </div>
-  </ion-content>
-</ion-view>
+    </ons-list-header>
+    <ons-list-item>
+      <div class="row row-center">
+        <div class="col">
+          <p>
+            <b>{{day.data.h1st}} hr</b>
+            <span class="p-hora">{{day.data.m1st}} {{day.data.t1st}}</span>
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            <b>{{day.data.h2nd}} hr</b>
+            <span class="p-hora">{{day.data.m2nd}} {{day.data.t2nd}}</span>
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            <b>{{day.data.h3rd}} hr</b>
+            <span class="p-hora">{{day.data.m3rd}} {{day.data.t3rd}}</span>
+          </p>
+          
+        </div>
+        <div class="col">
+          <p ng-show="day.hasH4th == 1">
+            <b>{{day.data.h4th}} hr</b>
+            <span class="p-hora">{{day.data.m4th}} {{day.data.t4th}}</span>
+          </p>
+        </div>
+      </div>
+    </ons-list-item>
+  </ons-list>
+
+  <ul class="list transparent">
+    <li class="list__item register-button-full">
+      <button class="button button--large fav-add" ng-show="favAdd" ng-click="addFav();">
+        <i class="fa fa-plus"></i>
+        Agregar a Favoritos
+      </button>
+
+      <button class="button button--large fav-delete" ng-show="favDelete" ng-click="deleteFav();">
+        <i class="fa fa-trash-o"></i>
+        Eliminar de Favoritos
+      </button>
+      <br>
+    </li>
+  </ul>
+</ons-page>

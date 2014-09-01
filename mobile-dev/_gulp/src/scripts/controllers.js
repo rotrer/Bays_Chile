@@ -4,66 +4,41 @@
 angular.module('controllers', [])
 
 
-.controller('homeController', function($scope, $ionicSideMenuDelegate, $ionicLoading, baysList) {
-  $scope.toggleProjects = function() {
-    $ionicSideMenuDelegate.toggleLeft();
-  };
+.controller('homeController', function($scope, baysList) {
 
-  $scope.loadingIndicator = $ionicLoading.show({
-      template: '<i class="icon ion-loading-c"></i>',
-      delay: 100
-  });
+	$scope.loadBay = function(bayID) {
+	  window.localStorage['currentBay'] = bayID;
+    $scope.ons.navigator.pushPage('partials/bay.html');
+  };
 
   baysList.getAll().then(function(results) {
     window.localStorage['allBays'] = JSON.stringify(results);
     $scope.baysAll = results.bays;
-    $ionicLoading.hide();
   });
+
 })
 
-.controller('BayController', function($scope, $stateParams, $ionicLoading, bayDetail) {
-
-  $scope.loadingIndicator = $ionicLoading.show({
-      template: '<i class="icon ion-loading-c"></i>',
-      delay: 100
-  });
+.controller('BayController', function($scope, $location, $anchorScroll, bayDetail) {
+	var bayIdGet = window.localStorage['currentBay'];
 
   $scope.addFav = function() {
-    $scope.loadingIndicator = $ionicLoading.show({
-        template: '<i class="icon ion-loading-c"></i>',
-        delay: 50
-    });
-
     var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    favBays.bays.push($stateParams.bayId);
+    favBays.bays.push(bayIdGet);
     window.localStorage['baysFav'] = JSON.stringify(favBays);
     $scope.favAdd = false;
     $scope.favDelete = true;
-    setTimeout(function(){
-      $ionicLoading.hide();
-    }, 1000);
   };
 
   $scope.deleteFav = function() {
-    $scope.loadingIndicator = $ionicLoading.show({
-      template: '<i class="icon ion-loading-c"></i>',
-      delay: 50
-    });
-
     var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    favBays.bays.remove($stateParams.bayId);
+    favBays.bays.remove(bayIdGet);
     window.localStorage['baysFav'] = JSON.stringify(favBays);
     $scope.favAdd = true;
     $scope.favDelete = false;
-    setTimeout(function(){
-      $ionicLoading.hide();
-    }, 1000);
   };
 
-  bayDetail.getBay($stateParams.bayId).then(function(results) {
+  bayDetail.getBay(bayIdGet).then(function(results) {
     $scope.nameBay = results.name;
-    //Ocular loading
-    $ionicLoading.hide();
     //Mes actual de bahí seleccionada
     var todayClass = '';
     var items = [];
@@ -151,10 +126,11 @@ angular.module('controllers', [])
               todayClass = "";
             }
             
-            var hasH4th = false;
+            var hasH4th = 0;
             if (valDay.hasOwnProperty("h4th")) {
-              hasH4th = true;
+              hasH4th = 1;
             }
+            
             this.push({data: valDay, todayClass: todayClass, dayInt: dayInt, keyDay: keyDay, moonPhaseDay: moonPhaseDay, moonPhaseDayImg: moonPhaseDayImg, hasH4th: hasH4th});
           }
         }, items);
@@ -162,22 +138,26 @@ angular.module('controllers', [])
     });
     $scope.itemDays = items;
 
+    //Scroll a dia actual
+    $location.hash('current_day_scroll');
+    // call $anchorScroll()
+    setTimeout(function(){
+    	$anchorScroll();
+    }, 500);
   });
   
   //Obtener estado de favorito bahía
   var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
   $scope.favAdd = false;
   $scope.favDelete = true;
-  if (favBays.bays.indexOf($stateParams.bayId) === -1) {
+  if (favBays.bays.indexOf(bayIdGet) === -1) {
     $scope.favAdd = true;
     $scope.favDelete = false;
   }
-
   
 })
 
-.controller('favoritesController', function($scope, $ionicLoading) {
-
+.controller('favoritesController', function($scope) {
   var favBays = window.localStorage['baysFav'] === undefined ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
   var favBaysList = { "bays" : [] };
   var allBays = JSON.parse(window.localStorage['allBays']);
@@ -189,30 +169,45 @@ angular.module('controllers', [])
   
   $scope.baysAll = favBaysList.bays;
 
+  $scope.loadBay = function(bayID) {
+	  window.localStorage['currentBay'] = bayID;
+	  console.log($scope.ons);
+    $scope.ons.navigator.pushPage('partials/bay.html');
+  };
+
 })
 
-.controller('settingsController', function($scope, $ionicLoading) {
-  //function listener notificacion cambio de luna
-  $scope.moonPhaseChange = function() {
-    $scope.moonPhaseNotif = ! $scope.moonPhaseNotif;
-    window.localStorage['moonPhaseNotif'] = $scope.moonPhaseNotif;
-    //Set local notifications
-    setNotifMoonPhase($scope.moonPhaseNotif);
-  };
+.controller('settingsController', function($scope) {
+	//Helper setttings ONS
+	// angular.element("#moonPhaseNotif").attr('checked');
+	ons.ready(function() {
+		if (window.localStorage['moonPhaseNotif'] === 'true') {
+			$("#moonPhaseNotif").attr('checked', 'checked');
+		}
+	});
+	
+	// settingsBay();
+  // //function listener notificacion cambio de luna
+  // $scope.moonPhaseChange = function() {
+  //   $scope.moonPhaseNotif = ! $scope.moonPhaseNotif;
+  //   window.localStorage['moonPhaseNotif'] = $scope.moonPhaseNotif;
+  //   //Set local notifications
+  //   setNotifMoonPhase($scope.moonPhaseNotif);
+  // };
 
-  //function listener notificacion fin de semana
-  $scope.weekendChange = function() {
-    $scope.weekendNotif = ! $scope.weekendNotif;
-    window.localStorage['weekendNotif'] = $scope.weekendNotif;
+  // //function listener notificacion fin de semana
+  // $scope.weekendChange = function() {
+  //   $scope.weekendNotif = ! $scope.weekendNotif;
+  //   window.localStorage['weekendNotif'] = $scope.weekendNotif;
 
-    if ($scope.weekendNotif === true) {
-      $scope.listBayNotif = true;
-    } else {
-      $scope.listBayNotif = false;
-      //Delete all notif weekend
-      deleteAllNotifWeekend();
-    }
-  };
+  //   if ($scope.weekendNotif === true) {
+  //     $scope.listBayNotif = true;
+  //   } else {
+  //     $scope.listBayNotif = false;
+  //     //Delete all notif weekend
+  //     deleteAllNotifWeekend();
+  //   }
+  // };
 
   //function listener notificacion fin de semana por bahia/puerto
   $scope.bayChanged = function(itemBay, itemBayState, itemBayName){
@@ -235,8 +230,8 @@ angular.module('controllers', [])
   * Web local storage, preferencias usuarios notificaciones
   **/
   $scope.moonPhaseNotif = window.localStorage['moonPhaseNotif'] === "true" ? true : false;
-  $scope.weekendNotif = window.localStorage['weekendNotif'] === "true" ? true : false;
-  $scope.listBayNotif = window.localStorage['weekendNotif'] === "true" ? true : false;
+  $scope.weekendNotif 	= window.localStorage['weekendNotif'] === "true" ? true : false;
+  $scope.listBayNotif 	= window.localStorage['weekendNotif'] === "true" ? true : false;
   
   /**
   * 

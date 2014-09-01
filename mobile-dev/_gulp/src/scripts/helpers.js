@@ -181,3 +181,24 @@ function notifScheduledLog(){
     console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
   });
 }
+
+//function listener notificacion cambio de luna
+var moonPhaseChange = function() {
+  window.localStorage['moonPhaseNotif'] = moonPhaseNotif.isChecked();
+  //Set local notifications
+  // setNotifMoonPhase($scope.moonPhaseNotif);
+};
+
+//function listener notificacion fin de semana
+var weekendChange = function() {
+  $scope.weekendNotif = ! $scope.weekendNotif;
+  window.localStorage['weekendNotif'] = $scope.weekendNotif;
+
+  if ($scope.weekendNotif === true) {
+    $scope.listBayNotif = true;
+  } else {
+    $scope.listBayNotif = false;
+    //Delete all notif weekend
+    deleteAllNotifWeekend();
+  }
+};

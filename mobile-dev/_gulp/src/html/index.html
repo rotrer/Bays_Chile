@@ -5,27 +5,33 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Mareas Chile</title>
 
-    <link href="assets/scripts/ionic/css/ionic.css" rel="stylesheet">
+    <link href="assets/scripts/onsen/css/onsenui.css" rel="stylesheet">
+    <link href="assets/scripts/onsen/css/onsen-css-components.css" rel="stylesheet">
     <link href="assets/styles/app.css" rel="stylesheet">
     
-    <!--script type="text/javascript" src="assets/scripts/jquery.min.js"></script-->
-    <script type="text/javascript" src="assets/scripts/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="assets/scripts/onsen/js/onsenui_all.js"></script>
+    <script type="text/javascript" src="assets/scripts/jquery.min.js"></script>
 
     <!-- Libs -->
     <script type="text/javascript" src="cordova.js"></script>
 
     <!-- App Angular -->
+    
     <script type="text/javascript" src="assets/scripts/app-global.js"></script>
     <script type="text/javascript" src="assets/scripts/controllers.js"></script>
     <script type="text/javascript" src="assets/scripts/factory.js"></script>
     <script type="text/javascript" src="assets/scripts/directives.js"></script>
     <script type="text/javascript" src="assets/scripts/helpers.js"></script>
+
     
     <!-- App Phonegap -->
     <!--script type="text/javascript" src="assets/scripts/phone.js"></script-->
 
   </head>
   <body ng-app="tideApp">
-    <ion-nav-view></ion-nav-view>
+    <ons-sliding-menu
+        menu-page="partials/menu.html" main-page="partials/base.html" side="left"
+        type="reveal" max-slide-distance="300px" swipable="true">
+      </ons-sliding-menu>
   </body>
 </html>

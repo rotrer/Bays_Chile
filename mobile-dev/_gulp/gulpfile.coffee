@@ -41,12 +41,18 @@ gulp.task "clean", ->
   .pipe clean()
 
 #copy js scripts app
-gulp.task "copy-ionic", ->
+gulp.task "copy-onsen-css", ->
   gulp.src [
-    "bower_components/ionic/release/**"
+    "bower_components/onsenui/build/css/**"
   ]
   #.pipe uglify()
-  .pipe gulp.dest dest + "scripts/ionic"
+  .pipe gulp.dest dest + "scripts/onsen/css"
+gulp.task "copy-onsen-js", ->
+  gulp.src [
+    "bower_components/onsenui/build/js/onsenui_all.js"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest dest + "scripts/onsen/js"
 #copy js scripts app
 gulp.task "copy-html", ->
   gulp.src [
@@ -148,12 +154,18 @@ gulp.task "copy-fonts", ->
 #     keepSpecialComments: 0
 #   .pipe gulp.dest dest + "/styles"
 #copy js scripts app
-gulp.task "copy-ionic-p", ->
+gulp.task "copy-onsen-css-p", ->
   gulp.src [
-    "bower_components/ionic/release/**"
+    "bower_components/onsenui/build/css/**"
   ]
   #.pipe uglify()
-  .pipe gulp.dest destPhonegap + "scripts/ionic"
+  .pipe gulp.dest destPhonegap + "scripts/onsen/css"
+gulp.task "copy-onsen-js-p", ->
+  gulp.src [
+    "bower_components/onsenui/build/js/onsenui_all.js"
+  ]
+  #.pipe uglify()
+  .pipe gulp.dest destPhonegap + "scripts/onsen/js"
 #copy html scripts app
 gulp.task "copy-html-p", ->
   gulp.src [
@@ -162,7 +174,6 @@ gulp.task "copy-html-p", ->
   .pipe gulp.dest "../../app/www/"
   .pipe livereload(server)
 # copy libs scritps
-gulp.task "copy-libs-p", ->
   gulp.src [
     "bower_components/jquery/jquery.min.js"
     "bower_components/underscore/underscore-min.js"
@@ -214,8 +225,8 @@ gulp.task 'watch-p', ->
 # default task
 gulp.task 'default', [
   "copy-html"
-  "copy-ionic"
-  "copy-libs"
+  "copy-onsen-css"
+  "copy-onsen-js"
   "copy-js"
   "copy-img"
   "copy-styles"
@@ -226,8 +237,8 @@ gulp.task 'default', [
 # dev phonegap task
 gulp.task 'phonegap', [
   "copy-html-p"
-  "copy-ionic-p"
-  "copy-libs-p"
+  "copy-onsen-css-p"
+  "copy-onsen-js-p"
   "copy-js-p"
   "copy-img-p"
   "copy-styles-p"

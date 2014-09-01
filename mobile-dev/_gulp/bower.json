@@ -14,8 +14,8 @@
     "tests"
   ],
   "devDependencies":{
-    "ionic": "1.0.0-beta.11",
     "jquery": "~2.0.3",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "onsenui": "git://github.com/OnsenUI/OnsenUI.git"
   }
 }

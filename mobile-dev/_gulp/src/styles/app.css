@@ -1,7 +1,4 @@
-.row.row-center{
-    background-color: #E9E9E9 !important;
-}
-.row.row-center.today_tide{
+.today_tide{
     background-color: #98CC98 !important;
 }
 .icon-moon{
