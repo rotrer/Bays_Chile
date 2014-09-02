@@ -1,4 +1,4 @@
-Ionic - Angular
+Angular + Onsen UI
 ===========
 
 - Clonar repo
