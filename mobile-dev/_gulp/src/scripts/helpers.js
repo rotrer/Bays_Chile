@@ -206,3 +206,56 @@ var weekendChange = function() {
     deleteAllNotifWeekend();
   }
 };
+
+function initGA(){
+    //Track an open event
+    //console.log("GA init");
+    analytics.trackEvent('App', 'Open', 'App', new Date());
+    // console.log("GA init after");
+
+    /*
+     * 
+     * Home links bahías
+     */
+    $(document).on('click', '.baySelect', function(){
+      analytics.trackEvent('Button', 'Click', 'Home bays list', new Date());
+      // console.log("Button event Home");
+    });
+
+    /*
+     * 
+     * Favorites links bahías
+     */
+    $(document).on('click', '.baySelectFavs', function(){
+      analytics.trackEvent('Button', 'Click', 'Favorites bays list', new Date());
+      // console.log("Button event Favoritos");
+    });
+
+    /*
+     * 
+     * Settings touchs
+     */
+    $(document).on('click', '#moonPhaseNotif', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif moon phase', new Date());
+        // console.log("Button event moon phase");
+    });
+    $(document).on('click', '#weekendNotif', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif weekend', new Date());
+        // console.log("Button event weekend_togg");
+    });
+    $(document).on('click', '.notifBaySel', function(){
+        analytics.trackEvent('Button', 'Click', 'Toggle notif weekend bay', new Date());
+        // console.log("Button event notifBaySel");
+    });
+}
+
+document.addEventListener('deviceready', function() {
+  StatusBar.overlaysWebView( false );
+  StatusBar.backgroundColorByName("gray");
+
+  //GA
+  alert("asdada");
+  var analyticsAccount = "UA-34567136-2";
+  analytics.startTrackerWithId(analyticsAccount);
+  initGA();
+}, false);

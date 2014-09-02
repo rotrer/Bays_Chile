@@ -10,7 +10,7 @@
     </ons-toolbar>
 
     <ons-list ng-if="baysAll.length > 0">
-      <ons-list-item class="list__item--tappable list__item__line-height" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
+      <ons-list-item class="list__item--tappable list__item__line-height baySelectFavs" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
         {{bay.name | capitalize}}
       </ons-list-item>
     </ons-list>

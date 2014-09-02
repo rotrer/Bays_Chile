@@ -16,8 +16,9 @@ angular.module('tideApp', ['onsen', 'controllers', 'factory', 'directives'])
 
 // Basic config phonegap
 .run(function() {
-	ons.ready(function() {
-	  StatusBar.styleDefault();
-	  navigator.splashscreen.hide();
-	});
+	// $( document ).on( "deviceready", function(){    
+ //  });
+	// ons.ready(function() {
+	  
+	// });
 });
