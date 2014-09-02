@@ -186,18 +186,22 @@ function notifScheduledLog(){
 var moonPhaseChange = function() {
   window.localStorage['moonPhaseNotif'] = moonPhaseNotif.isChecked();
   //Set local notifications
-  // setNotifMoonPhase($scope.moonPhaseNotif);
+  setNotifMoonPhase($scope.moonPhaseNotif);
 };
 
 //function listener notificacion fin de semana
 var weekendChange = function() {
-  $scope.weekendNotif = ! $scope.weekendNotif;
-  window.localStorage['weekendNotif'] = $scope.weekendNotif;
+  window.localStorage['weekendNotif'] = weekendNotif.isChecked();
+  var scope = angular.element($("#listBayNotif")).scope(); 
 
-  if ($scope.weekendNotif === true) {
-    $scope.listBayNotif = true;
+  if (weekendNotif.isChecked() === true) {
+    scope.$apply(function(){
+      scope.listBayNotif = true;
+    });
   } else {
-    $scope.listBayNotif = false;
+    scope.$apply(function(){
+      scope.listBayNotif = false;
+    });
     //Delete all notif weekend
     deleteAllNotifWeekend();
   }

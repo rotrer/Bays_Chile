@@ -19,34 +19,36 @@
 
       <ons-list-item>
         <span style="color: #666">Fin de semana</span>
-        <ons-switch modifier="list-item" var="weekendNotif" onchange="weekendChange()"></ons-switch>
+        <ons-switch modifier="list-item" var="weekendNotif" id="weekendNotif" onchange="weekendChange()"></ons-switch>
+
+        <ons-row>
+          <div ng-show="listBayNotif" id="listBayNotif">
+            <ul class="list margin-top-adjuster">
+              <li class="list__header"><h5>Notificaciones de tus favoritos</h5></li>
+
+              <li class="list__item list__item--tappable" ng-repeat="item in baysAll">
+                <span class="list__item__line-height">
+                  <label class="checkbox wrapper-label">
+                    <input type="checkbox" ng-model="item.checked" 
+                                           ng-checked="item.checked"
+                                           ng-change="bayChanged(item.bay.file, item.checked, item.bay.name)">
+                    <div class="checkbox__checkmark checkbox-list-left-section">
+                    </div>
+                    <div class="checkbox-list-right-section">{{item.bay.name | capitalize}}</div>
+                  </label>
+                </span>
+              </li>
+
+            </ul>
+
+            <div class="list" ng-if="baysAll.length === 0">
+              <div class="item item-divider">
+                <h4>Debes agregar bahías a tus favoritos.</h4>
+              </div>
+            </div>
+          </div>
+        </ons-row>
       </ons-list-item>
     </ons-list>
-
-    <!-- <ons-row>
-      <div class="list">
-
-        <div class="row row-center" ng-show="listBayNotif">
-          <div class="list" ng-if="baysAll.length > 0">
-            <div class="item item-divider">
-              Notificaciones de tus favoritos
-            </div>
-            <ion-checkbox ng-repeat="item in baysAll"
-                          ng-model="item.checked" 
-                          ng-checked="item.checked"
-                          ng-change="bayChanged(item.bay.file, item.checked, item.bay.name)">
-              {{item.bay.name | capitalize}}
-            </ion-checkbox>
-          </div>
-          <div class="list" ng-if="baysAll.length === 0">
-            <div class="item item-divider">
-              Debes agregar bahías a tus favoritos.
-            </div>
-          </div>
-        </div>
-          
-        </div>
-    </ons-row> -->
-
   </ons-page>
 </ons-navigator>

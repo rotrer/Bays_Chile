@@ -5,7 +5,6 @@ angular.module('controllers', [])
 
 
 .controller('homeController', function($scope, baysList) {
-
 	$scope.loadBay = function(bayID) {
 	  window.localStorage['currentBay'] = bayID;
     $scope.ons.navigator.pushPage('partials/bay.html');
@@ -14,11 +13,16 @@ angular.module('controllers', [])
   baysList.getAll().then(function(results) {
     window.localStorage['allBays'] = JSON.stringify(results);
     $scope.baysAll = results.bays;
+    $("#loadingApp").fadeOut();
   });
 
 })
 
-.controller('BayController', function($scope, $location, $anchorScroll, bayDetail) {
+.controller('BayController', function($scope, $location, bayDetail) {
+  $("#loadingApp").show();
+  setTimeout(function(){
+    $("#loadingApp").fadeOut();
+  }, 500);
 	var bayIdGet = window.localStorage['currentBay'];
 
   $scope.addFav = function() {
@@ -138,11 +142,11 @@ angular.module('controllers', [])
     });
     $scope.itemDays = items;
 
-    //Scroll a dia actual
-    $location.hash('current_day_scroll');
     // call $anchorScroll()
     setTimeout(function(){
-    	$anchorScroll();
+    	var altoScroll = parseInt($("#current_day_scroll").offset().top) - 100;
+			$(".page__content").animate({scrollTop:altoScroll}, '500', 'swing', function() {
+			});
     }, 500);
   });
   
@@ -171,7 +175,6 @@ angular.module('controllers', [])
 
   $scope.loadBay = function(bayID) {
 	  window.localStorage['currentBay'] = bayID;
-	  console.log($scope.ons);
     $scope.ons.navigator.pushPage('partials/bay.html');
   };
 
@@ -179,35 +182,15 @@ angular.module('controllers', [])
 
 .controller('settingsController', function($scope) {
 	//Helper setttings ONS
-	// angular.element("#moonPhaseNotif").attr('checked');
 	ons.ready(function() {
 		if (window.localStorage['moonPhaseNotif'] === 'true') {
 			$("#moonPhaseNotif").attr('checked', 'checked');
 		}
+
+		if (window.localStorage['weekendNotif'] === 'true') {
+			$("#weekendNotif").attr('checked', 'checked');
+		}
 	});
-	
-	// settingsBay();
-  // //function listener notificacion cambio de luna
-  // $scope.moonPhaseChange = function() {
-  //   $scope.moonPhaseNotif = ! $scope.moonPhaseNotif;
-  //   window.localStorage['moonPhaseNotif'] = $scope.moonPhaseNotif;
-  //   //Set local notifications
-  //   setNotifMoonPhase($scope.moonPhaseNotif);
-  // };
-
-  // //function listener notificacion fin de semana
-  // $scope.weekendChange = function() {
-  //   $scope.weekendNotif = ! $scope.weekendNotif;
-  //   window.localStorage['weekendNotif'] = $scope.weekendNotif;
-
-  //   if ($scope.weekendNotif === true) {
-  //     $scope.listBayNotif = true;
-  //   } else {
-  //     $scope.listBayNotif = false;
-  //     //Delete all notif weekend
-  //     deleteAllNotifWeekend();
-  //   }
-  // };
 
   //function listener notificacion fin de semana por bahia/puerto
   $scope.bayChanged = function(itemBay, itemBayState, itemBayName){
@@ -229,8 +212,8 @@ angular.module('controllers', [])
   * 
   * Web local storage, preferencias usuarios notificaciones
   **/
-  $scope.moonPhaseNotif = window.localStorage['moonPhaseNotif'] === "true" ? true : false;
-  $scope.weekendNotif 	= window.localStorage['weekendNotif'] === "true" ? true : false;
+  // $scope.moonPhaseNotif = window.localStorage['moonPhaseNotif'] === "true" ? true : false;
+  // $scope.weekendNotif 	= window.localStorage['weekendNotif'] === "true" ? true : false;
   $scope.listBayNotif 	= window.localStorage['weekendNotif'] === "true" ? true : false;
   
   /**
