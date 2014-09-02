@@ -2,7 +2,7 @@
 <widget id="com.tides.ng" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Mareas Chile</name>
     <description>
-        Mareas de Chile para pesca deportiva.
+        Mareas y Fase Lunar de Chile para pesca deportiva.
     </description>
     <author email="cristian@rotrer.com" href="http://twitter.com/rotrer">
         @rotrer

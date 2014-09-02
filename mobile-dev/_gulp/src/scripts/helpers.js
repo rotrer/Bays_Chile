@@ -254,7 +254,6 @@ document.addEventListener('deviceready', function() {
   StatusBar.backgroundColorByName("gray");
 
   //GA
-  alert("asdada");
   var analyticsAccount = "UA-34567136-2";
   analytics.startTrackerWithId(analyticsAccount);
   initGA();

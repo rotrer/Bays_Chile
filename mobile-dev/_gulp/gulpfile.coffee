@@ -94,77 +94,18 @@ gulp.task "copy-fonts", ->
   ]
   .pipe gulp.dest dest + "fonts"
 
-# coffee
-# gulp.task "coffee", ->
-#   gulp.src src + "/scripts/**/*.coffee"
-#   .pipe coffee
-#     bare: true
-#   .pipe concat("scripts.js")
-#   .pipe gulp.dest dest + "/scripts"
-#   .pipe livereload(server)
 
-# # scripts
-# gulp.task "scripts", ->
-#   gulp.src [
-#     "bower_components/detectizr/src/detectizr.js"
-#     "bower_components/H5F/src/H5F.js"
-#     "bower_components/slick-carousel/slick/slick.js"
-#     "bower_components/jquery.html5loader/src/jquery.html5Loader.js"
-#     "bower_components/scroll-depth/jquery.scrolldepth.js"
-#     "bower_components/boba/site/js/boba.js"
-#     dest + "/scripts/scripts.js"
-#   ]
-#   .pipe concat "scripts.js"
-#   .pipe gulp.dest dest + "/scripts"
-
-# # scripts-dist
-# gulp.task "scripts-dist",["coffee"], ->
-#   gulp.src [
-#     !src + "/vendor/scripts/plugins/_*.js"
-#     src + "/vendor/scripts/plugins/*.js"
-#     dest + "/scripts/scripts.js"
-#   ]
-#   .pipe concat "scripts.js"
-#   .pipe gulpStripDebug()
-#   .pipe uglify()
-#   .pipe gulp.dest dest + "/scripts"
-
-# # styles
-# gulp.task "styles", ->
-#   gulp.src src + "/styles/styles.scss"
-#   .pipe plumber()
-#   .pipe sass
-#     sourceComments: "normal"
-#     errLogToConsole: false
-#     onError: (err) -> notify().write(err)
-#   .pipe autoprefixer("last 15 version")
-#   .pipe gulp.dest dest + "/styles"
-#   .pipe livereload(server)
-
-# # styles-dist
-# gulp.task "styles-dist",  ->
-#   gulp.src src + "/styles/styles.scss"
-#   .pipe plumber()
-#   .pipe sass()
-#   .on "error", notify.onError()
-#   .on "error", (err) ->
-#     console.log "Error:", err
-#   .pipe autoprefixer("last 15 version")
-#   .pipe minifycss
-#     keepSpecialComments: 0
-#   .pipe gulp.dest dest + "/styles"
+#Phonegap Developer
 #copy js scripts app
 gulp.task "copy-onsen-css-p", ->
   gulp.src [
     "bower_components/onsenui/build/css/**"
   ]
-  #.pipe uglify()
   .pipe gulp.dest destPhonegap + "scripts/onsen/css"
 gulp.task "copy-onsen-js-p", ->
   gulp.src [
     "bower_components/onsenui/build/js/onsenui_all.js"
   ]
-  #.pipe uglify()
   .pipe gulp.dest destPhonegap + "scripts/onsen/js"
 #copy html scripts app
 gulp.task "copy-html-p", ->
@@ -184,7 +125,6 @@ gulp.task "copy-js-p", ->
   gulp.src [
     src + "/scripts/*.js"
   ]
-  #.pipe uglify()
   .pipe gulp.dest destPhonegap + "scripts"
   .pipe livereload(server)
 #copy imgs appp
@@ -218,6 +158,73 @@ gulp.task 'watch-p', ->
   gulp.watch [src + '/images/*'], ['copy-img-p']
   gulp.watch [src + '/styles/*'], ['copy-styles-p']
 
+
+
+#
+# Dist task
+# ====================
+# 
+#copy js scripts app
+gulp.task "copy-onsen-css-dist", ->
+  gulp.src [
+    "bower_components/onsenui/build/css/ionicons/**"
+  ]
+  .pipe gulp.dest destPhonegap + "scripts/onsen/css/ionicons"
+  gulp.src [
+    "bower_components/onsenui/build/css/font_awesome/**"
+  ]
+  .pipe gulp.dest destPhonegap + "scripts/onsen/css/font_awesome"
+gulp.task "copy-onsen-css-min-dist", ->
+  gulp.src [
+    "bower_components/onsenui/build/css/*.css"
+  ]
+  # .pipe minifycss
+  .pipe gulp.dest destPhonegap + "scripts/onsen/css"
+gulp.task "copy-onsen-js-dist", ->
+  gulp.src [
+    "bower_components/onsenui/build/js/onsenui_all.js"
+  ]
+  .pipe uglify()
+  .pipe gulpStripDebug()
+  .pipe gulp.dest destPhonegap + "scripts/onsen/js"
+#copy html scripts app
+gulp.task "copy-html-dist", ->
+  gulp.src [
+    src + "/html/**/*.html"
+  ]
+  .pipe gulp.dest "../../app/www/"
+
+#copy js scripts app
+gulp.task "copy-js-dist", ->
+  gulp.src [
+    src + "/scripts/*.js"
+    "bower_components/jquery/jquery.min.js"
+    "bower_components/underscore/underscore-min.js"
+  ]
+  .pipe gulp.dest destPhonegap + "scripts"
+#copy imgs appp
+gulp.task "copy-img-dist", ->
+  gulp.src [
+    src + "/images/*"
+  ]
+  .pipe gulp.dest destPhonegap + "img"
+#copy styles app
+gulp.task "copy-styles-dist", ->
+  gulp.src [
+    src + "/styles/*"
+  ]
+  .pipe minifycss
+  .pipe gulp.dest destPhonegap + "styles"
+#copy fonts app
+gulp.task "copy-fonts-dist", ->
+  gulp.src [
+    src + "/fonts/*"
+  ]
+  .pipe gulp.dest destPhonegap + "fonts"
+
+
+
+
 #
 #  main tasks
 #  ==========================================================================
@@ -244,4 +251,15 @@ gulp.task 'phonegap', [
   "copy-styles-p"
   "copy-fonts-p"
   "watch-p"
+]
+
+# dev phonegap task
+gulp.task 'dist', [
+  "copy-html-dist"
+  "copy-onsen-css-dist"
+  "copy-onsen-css-min-dist"
+  "copy-onsen-js-dist"
+  "copy-js-dist"
+  "copy-img-dist"
+  "copy-fonts-dist"
 ]
