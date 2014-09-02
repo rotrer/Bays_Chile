@@ -186,7 +186,7 @@ function notifScheduledLog(){
 var moonPhaseChange = function() {
   window.localStorage['moonPhaseNotif'] = moonPhaseNotif.isChecked();
   //Set local notifications
-  setNotifMoonPhase($scope.moonPhaseNotif);
+  setNotifMoonPhase(moonPhaseNotif.isChecked());
 };
 
 //function listener notificacion fin de semana
