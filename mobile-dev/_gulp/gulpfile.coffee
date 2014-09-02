@@ -185,7 +185,6 @@ gulp.task "copy-onsen-js-dist", ->
     "bower_components/onsenui/build/js/onsenui_all.js"
   ]
   .pipe uglify()
-  .pipe gulpStripDebug()
   .pipe gulp.dest destPhonegap + "scripts/onsen/js"
 #copy html scripts app
 gulp.task "copy-html-dist", ->
@@ -198,8 +197,13 @@ gulp.task "copy-html-dist", ->
 gulp.task "copy-js-dist", ->
   gulp.src [
     src + "/scripts/*.js"
+  ]
+  # .pipe uglify()
+  .pipe gulpStripDebug()
+  .pipe gulp.dest destPhonegap + "scripts"
+
+  gulp.src [
     "bower_components/jquery/jquery.min.js"
-    "bower_components/underscore/underscore-min.js"
   ]
   .pipe gulp.dest destPhonegap + "scripts"
 #copy imgs appp

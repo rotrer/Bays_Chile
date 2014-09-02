@@ -257,4 +257,33 @@ document.addEventListener('deviceready', function() {
   var analyticsAccount = "UA-34567136-2";
   analytics.startTrackerWithId(analyticsAccount);
   initGA();
+
+  // var now = new Date();
+  // var yearCurrent = now.getFullYear();//Año actual
+  // var monthCurrent = now.getMonth();//Mes actual
+  // var titleNotifWeekend = 'Mareas Chile.';
+  // var messageNotifWeekend = 'Revisa las mareas para mañana Viernes, en la localidad de Valparaiso';
+  // var dataNotif = JSON.stringify({type: 'weekend', bay: 'valparaiso', day: 3, month: monthCurrent});
+  // var notifNameWeekend = 'bay_valparaiso_3_' + monthCurrent;
+  // var dateOffset = 6*60*60*1000;
+  // var dateNotif = new Date(yearCurrent, monthCurrent, now.getDate());
+  //     dateNotif.setTime(dateNotif.getTime());
+  // addNotifBay(notifNameWeekend, titleNotifWeekend, messageNotifWeekend,  dataNotif, dateNotif);
+
+  //Notificaciones event listener
+  ons.ready(function() {
+    window.plugin.notification.local.onclick = function (id, state, json) {
+      //console.log(id, JSON.parse(json).test);
+      var dataNotif = JSON.parse(json);
+      if (dataNotif.type === 'weekend') {
+        if (dataNotif.bay !== null) {
+          $("#loadingApp").show();
+          window.localStorage['currentBay'] = dataNotif.bay;
+          ons.navigator.pushPage('partials/bay.html');
+        } else {
+            alert("Error: Bahía no existe.");
+        }
+      }
+    };
+  });
 }, false);
