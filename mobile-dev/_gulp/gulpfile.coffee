@@ -198,7 +198,7 @@ gulp.task "copy-js-dist", ->
   gulp.src [
     src + "/scripts/*.js"
   ]
-  # .pipe uglify()
+  .pipe uglify({mangle: false})
   .pipe gulpStripDebug()
   .pipe gulp.dest destPhonegap + "scripts"
 

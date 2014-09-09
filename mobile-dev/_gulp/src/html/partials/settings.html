@@ -13,18 +13,40 @@
       <ons-list-header><h4>Notificaciones</h4></ons-list-header>
 
       <ons-list-item>
-        <span style="color: #666">Cambio fase lunar</span>
-        <ons-switch modifier="list-item" var="moonPhaseNotif" id="moonPhaseNotif" onchange="moonPhaseChange()"></ons-switch>
-      </ons-list-item>
+        <ul class="list margin-top-adjuster">
 
-      <ons-list-item>
-        <span style="color: #666">Fin de semana</span>
-        <ons-switch modifier="list-item" var="weekendNotif" id="weekendNotif" onchange="weekendChange()"></ons-switch>
+          <li class="list__item list__item--tappable moonPhaseNotif">
+            <span class="list__item__line-height">
+              <label class="checkbox wrapper-label">
+                <input type="checkbox" ng-model="moonChk" 
+                                       ng-checked="moonChk"
+                                       ng-change="moonPhaseChange(moonChk)">
+                <div class="checkbox__checkmark checkbox-list-left-section">
+                </div>
+                <div class="checkbox-list-right-section"><span style="color: #666">Cambio fase lunar</span></div>
+              </label>
+            </span>
+          </li>
+
+          <li class="list__item list__item--tappable weekendNotif">
+            <span class="list__item__line-height">
+              <label class="checkbox wrapper-label">
+                <input type="checkbox" ng-model="weekendChk" 
+                                       ng-checked="weekendChk"
+                                       ng-change="weekendChange(weekendChk)">
+                <div class="checkbox__checkmark checkbox-list-left-section">
+                </div>
+                <div class="checkbox-list-right-section"><span style="color: #666">Fin de semana</span></div>
+              </label>
+            </span>
+          </li>
+
+        </ul>
 
         <ons-row>
           <div ng-show="listBayNotif" id="listBayNotif">
             <ul class="list margin-top-adjuster">
-              <li class="list__header"><h5>Notificaciones de tus favoritos</h5></li>
+              <li class="list__header"><h5>Notificaciones para tus favoritos</h5></li>
 
               <li class="list__item list__item--tappable notifBaySel" ng-repeat="item in baysAll">
                 <span class="list__item__line-height">

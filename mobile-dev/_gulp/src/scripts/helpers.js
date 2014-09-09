@@ -182,44 +182,17 @@ function notifScheduledLog(){
   });
 }
 
-//function listener notificacion cambio de luna
-var moonPhaseChange = function() {
-  window.localStorage['moonPhaseNotif'] = moonPhaseNotif.isChecked();
-  //Set local notifications
-  setNotifMoonPhase(moonPhaseNotif.isChecked());
-};
-
-//function listener notificacion fin de semana
-var weekendChange = function() {
-  window.localStorage['weekendNotif'] = weekendNotif.isChecked();
-  var scope = angular.element($("#listBayNotif")).scope(); 
-
-  if (weekendNotif.isChecked() === true) {
-    scope.$apply(function(){
-      scope.listBayNotif = true;
-    });
-  } else {
-    scope.$apply(function(){
-      scope.listBayNotif = false;
-    });
-    //Delete all notif weekend
-    deleteAllNotifWeekend();
-  }
-};
-
 function initGA(){
     //Track an open event
-    //console.log("GA init");
     analytics.trackEvent('App', 'Open', 'App', new Date());
-    // console.log("GA init after");
 
     /*
      * 
      * Home links bahías
      */
     $(document).on('click', '.baySelect', function(){
-      analytics.trackEvent('Button', 'Click', 'Home bays list', new Date());
-      // console.log("Button event Home");
+      var bayName = $(this).text().trim();
+      analytics.trackView('bay/' + bayName);
     });
 
     /*
@@ -227,48 +200,46 @@ function initGA(){
      * Favorites links bahías
      */
     $(document).on('click', '.baySelectFavs', function(){
-      analytics.trackEvent('Button', 'Click', 'Favorites bays list', new Date());
-      // console.log("Button event Favoritos");
+      var bayName = $(this).text().trim();
+    });
+
+    /*
+     * 
+     * Menu links
+     */
+    $(document).on('click', '#navHome', function(){
+      analytics.trackView('/home');
+    });
+    $(document).on('click', '#navFavs', function(){
+      analytics.trackView('/favorites');
+    });
+    $(document).on('click', '#navConf', function(){
+      analytics.trackView('/settings');
     });
 
     /*
      * 
      * Settings touchs
      */
-    $(document).on('click', '#moonPhaseNotif', function(){
+    $(document).on('click', '.moonPhaseNotif', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif moon phase', new Date());
-        // console.log("Button event moon phase");
     });
-    $(document).on('click', '#weekendNotif', function(){
+    $(document).on('click', '.weekendNotif', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif weekend', new Date());
-        // console.log("Button event weekend_togg");
     });
     $(document).on('click', '.notifBaySel', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif weekend bay', new Date());
-        // console.log("Button event notifBaySel");
     });
 }
-
 document.addEventListener('deviceready', function() {
   StatusBar.overlaysWebView( false );
   StatusBar.backgroundColorByName("gray");
 
   //GA
-  var analyticsAccount = "UA-34567136-2";
+  var analyticsAccount = "UA-34567136-3";
   analytics.startTrackerWithId(analyticsAccount);
   initGA();
-
-  // var now = new Date();
-  // var yearCurrent = now.getFullYear();//Año actual
-  // var monthCurrent = now.getMonth();//Mes actual
-  // var titleNotifWeekend = 'Mareas Chile.';
-  // var messageNotifWeekend = 'Revisa las mareas para mañana Viernes, en la localidad de Valparaiso';
-  // var dataNotif = JSON.stringify({type: 'weekend', bay: 'valparaiso', day: 3, month: monthCurrent});
-  // var notifNameWeekend = 'bay_valparaiso_3_' + monthCurrent;
-  // var dateOffset = 6*60*60*1000;
-  // var dateNotif = new Date(yearCurrent, monthCurrent, now.getDate());
-  //     dateNotif.setTime(dateNotif.getTime());
-  // addNotifBay(notifNameWeekend, titleNotifWeekend, messageNotifWeekend,  dataNotif, dateNotif);
+  
 
   //Notificaciones event listener
   ons.ready(function() {
@@ -278,7 +249,8 @@ document.addEventListener('deviceready', function() {
       if (dataNotif.type === 'weekend') {
         if (dataNotif.bay !== null) {
           $("#loadingApp").show();
-          window.localStorage['currentBay'] = dataNotif.bay;
+          // window.localStorage['currentBay'] = dataNotif.bay;
+          localStorage.setItem('currentBay', dataNotif.bay);
           ons.navigator.pushPage('partials/bay.html');
         } else {
             alert("Error: Bahía no existe.");

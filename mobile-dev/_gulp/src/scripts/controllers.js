@@ -55,6 +55,7 @@ angular.module('controllers', [])
     var items = [];
     var fechas = results.data;
     var currentMonth = parseInt(new Date().getMonth());
+    var currentYear = new Date().getFullYear();
     var monthToEvCurrent = 0,
         monthToEvMinusCt = 0;
 
@@ -74,10 +75,22 @@ angular.module('controllers', [])
     var moonPhase = { "nm" : ["Nueva", "new_moon.png"], "fq" : ["Creciente", "first_quarter.png"], "fm" : ["Llena", "full_moon.png"], "lq" : ["Menguante", "last_quarter.png"]};
    
     angular.forEach(fechas, function(val, key) {
-      var monthStr = key.split("-"),
+      var monthStr = key.trim().split("-"),
           monthNumber = parseInt(monthStr[1]),
           monthToEv = 0,
           monthToEvMin = 0;
+
+          //Fix raro :/
+          var tmpMonthYear8 = currentYear + "-08";
+          var tmpMonthYear9 = currentYear + "-09";
+          if (key == tmpMonthYear8)
+          {
+            monthNumber = 8;
+          }
+          else if (key == tmpMonthYear9)
+          {
+            monthNumber = 9;
+          }
 
           //Mes actual menos uno para forma JS 0-11
           monthToEv = monthNumber - 1;
@@ -88,12 +101,12 @@ angular.module('controllers', [])
           } else {
             monthToEvMin = monthNumber - 2;
           }
-          
+      
       if (
           monthToEvCurrent === monthToEv ||
           monthToEvMinusCt === monthToEvMin
-          ) {
-
+          ) 
+      {
         angular.forEach(val, function(valDay, keyDay) {
           var dateTide = keyDay.split("-");
           var mesInt = parseInt(dateTide[1]);
@@ -101,6 +114,15 @@ angular.module('controllers', [])
           var today = new Date();
           var mm = today.getMonth()+1;
           
+          //Fix raro :/
+          if (dateTide[1] == "08")
+          {
+            mesInt = 8;
+          }
+          else if (dateTide[1] == "09")
+          {
+            mesInt = 9;
+          }
           if (mesInt === mm) {
             /*
             * Calcula fase lunar
@@ -147,6 +169,7 @@ angular.module('controllers', [])
         }, items);
       }
     });
+
     $scope.itemDays = items;
 
     // call $anchorScroll()
@@ -196,17 +219,17 @@ angular.module('controllers', [])
 
 .controller('settingsController', function($scope) {
 	//Helper setttings ONS
-	ons.ready(function() {
-    // if (window.localStorage['moonPhaseNotif'] === 'true') {
-		if (localStorage.getItem('moonPhaseNotif') === 'true') {
-			$("#moonPhaseNotif").attr('checked', 'checked');
-		}
+	// ons.ready(function() {
+ //    // if (window.localStorage['moonPhaseNotif'] === 'true') {
+	// 	if (localStorage.getItem('moonPhaseNotif') === 'true') {
+	// 		$("#moonPhaseNotif").attr('checked', 'checked');
+	// 	}
 
-    // if (window.localStorage['weekendNotif'] === 'true') {
-		if (localStorage.getItem('weekendNotif') === 'true') {
-			$("#weekendNotif").attr('checked', 'checked');
-		}
-	});
+ //    // if (window.localStorage['weekendNotif'] === 'true') {
+	// 	if (localStorage.getItem('weekendNotif') === 'true') {
+	// 		$("#weekendNotif").attr('checked', 'checked');
+	// 	}
+	// });
 
   //function listener notificacion fin de semana por bahia/puerto
   $scope.bayChanged = function(itemBay, itemBayState, itemBayName){
@@ -223,6 +246,32 @@ angular.module('controllers', [])
     }
     // window.localStorage['weekendNotifBays'] = JSON.stringify(baysNotif);
     localStorage.setItem('weekendNotifBays', JSON.stringify(baysNotif));
+  }
+
+  $scope.moonPhaseChange = function(itemBayState){
+    localStorage.setItem('moonPhaseNotif', itemBayState);
+    //Set local notifications
+    setNotifMoonPhase(itemBayState);
+  }
+  if (localStorage.getItem('moonPhaseNotif') === 'true') {
+     $scope.moonChk = true;
+  } else {
+    $scope.moonChk = false;
+  }
+
+  $scope.weekendChange = function(itemWeekendState){
+    localStorage.setItem('weekendNotif', itemWeekendState);
+
+    $scope.listBayNotif = itemWeekendState;
+    if (itemWeekendState === false) {
+      //Delete all notif weekend
+      deleteAllNotifWeekend();
+    }
+  }
+  if (localStorage.getItem('weekendNotif') === 'true') {
+    $scope.weekendChk = true;
+  } else {
+    $scope.weekendChk = false;
   }
 
   /**

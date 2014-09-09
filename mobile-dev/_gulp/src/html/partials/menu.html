@@ -2,20 +2,23 @@
 
   <ons-list>
     <ons-list-item
+      id="navHome"
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/base.html', {closeMenu: true})">
 
       <i class="fa fa-home fa-lg" style="color: #666"></i> &nbsp; Home
     </ons-list-item>
 
-    <ons-list-item 
+    <ons-list-item
+      id="navFavs" 
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/favorites.html', {closeMenu: true})">
 
       <i class="fa fa-star fa-lg" style="color: #666"></i> &nbsp; Favoritos
     </ons-list-item>
 
-    <ons-list-item 
+    <ons-list-item
+      id="navConf" 
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/settings.html', {closeMenu: true})">
 
