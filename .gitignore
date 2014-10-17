@@ -1,4 +1,3 @@
-/bays/*
-/app/nbproject/private/
-/www/nbproject/private/
-/api/nbproject/private/
+**/node_modules/
+**/bower_components/
+**.DS_Store
