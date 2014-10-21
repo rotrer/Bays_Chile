@@ -1,14 +1,12 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-		Schema = mongoose.Schema;
+	Schema = mongoose.Schema;
 
-// mongoose.connect('mongodb://localhost/mareas');
-console.log(Locations);
 var tideSchema = new Schema({
-    // locations_id: ObjectId,
-    // years_id: ObjectId,
-    // months_id: ObjectId,
+    locations_id: { type: Schema.Types.ObjectId, ref: 'Location' },
+    years: Number,
+    months: Number,
     day: Number,
     h1st: String,
     m1st: String,

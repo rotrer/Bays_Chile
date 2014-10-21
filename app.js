@@ -4,12 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
+//Connect DB
+if(mongoose.connection.readyState === 0) mongoose.connect('mongodb://localhost/mareas');
 
+//Routes import
 var routes = require('./routes/index');
 var tides = require('./routes/tides');
 var locations = require('./routes/locations');
 
+//Start App
 var app = express();
 
 // view engine setup
@@ -23,10 +28,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//Config routes app
 app.use('/', routes);
-// app.use('/localidades', locations);
-// app.use('/mareas', tides);
+app.use('/mareas', tides);
+app.use('/localidades', locations);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
