@@ -11,16 +11,12 @@ var router = express.Router();
 var Location = require('../models/locations.js');
 var Tide = require('../models/tides.js');
 
-router.get('/', function(req, resRquest) {
-	resRquest.setHeader('Content-Type', 'application/json');
-	Month.find({}, function (err, locations) {
-		if (err) response = err;
-		resRquest.end(JSON.stringify( locations ));
-	});
-	
+router.get('/', function(req, resRequest) {
+	resRequest.setHeader('Content-Type', 'application/json');
+	resRequest.end(JSON.stringify( [{}] ));
 });
 
-router.get('/populate', function(req, resRquest) {
+router.get('/populate', function(req, resRequest) {
 	Location.find({}, function (err, locations) {
 		if (err) response = err;
 
@@ -146,9 +142,46 @@ router.get('/populate', function(req, resRquest) {
 	});
 
 	
-	resRquest.end('');
+	resRequest.end('');
 });
 
+router.get('/:bay', function(req, resRequest){
+	var bay = req.params.bay;
+
+	resRequest.setHeader('Content-Type', 'application/json');
+
+	Location.where({slug: bay}).findOne(function (err, locations) {
+		if (err) response = err;
+		if (locations !== null) {
+			Tide.find({locations_id: locations._id}, '-_id day h1st m1st t1st h2st m2st t2st h3st m3st t3st h4st m4st t4st', function(err, tides){
+				resRequest.end(JSON.stringify( tides ));
+			});
+		} else {
+			resRequest.end(JSON.stringify( {'error': 'bay not found'} ));
+		};
+	});
+});
+
+router.get('/:bay/:year/:month', function(req, resRequest){
+	var bay = req.params.bay;
+	var month = req.params.month;
+	var year = req.params.year;
+
+	resRequest.setHeader('Content-Type', 'application/json');
+
+	Location.where({slug: bay}).findOne(function (err, locations) {
+		if (err) response = err;
+		if (locations !== null) {
+			Tide.find({locations_id: locations._id, years: year, months: month}, '-_id day h1st m1st t1st h2st m2st t2st h3st m3st t3st h4st m4st t4st', function(err, tides){
+				resRequest.end(JSON.stringify( tides ));
+			});
+		} else {
+			resRequest.end(JSON.stringify( {'error': 'bay not found'} ));
+		};
+	});
+});
+
+module.exports = router;
 
 Array.prototype.clean = function(deleteValue) {
 	for (var i = 0; i < this.length; i++) {
@@ -159,5 +192,3 @@ Array.prototype.clean = function(deleteValue) {
 	}
 	return this;
 };
-
-module.exports = router;
