@@ -1,4 +1,8 @@
 Bays_Chile API
 ==========
 
-`npm install`
+#### == Node.js + Express.js + Mongodb ==
+
+- Instalar aplicación `npm install`
+
+- Poblar localidades `[URL]:[PORT]/localilades/populate`
