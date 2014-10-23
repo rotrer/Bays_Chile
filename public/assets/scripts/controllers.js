@@ -6,8 +6,10 @@ angular.module('controllers', [])
 
 .controller('homeController', function($scope, $analytics, baysList) {
   $analytics.pageTrack('/home');
-	$scope.loadBay = function(bayID) {
-	  window.localStorage['currentBay'] = bayID;
+	$scope.loadBay = function(bayID, bayName) {
+    $analytics.pageTrack('/bay/' + bayID);
+    window.localStorage['currentBay'] = bayID;
+	  window.localStorage['currentBayName'] = bayName;
     $scope.ons.navigator.pushPage('partials/bay.html');
   };
 
@@ -24,31 +26,13 @@ angular.module('controllers', [])
   setTimeout(function(){
     $("#loadingApp").fadeOut();
   }, 500);
-  // var bayIdGet = window.localStorage['currentBay'];
-	var bayIdGet = localStorage.getItem('currentBay');
+  var bayIdGet = window.localStorage['currentBay'];
+  var bayNameGet = window.localStorage['currentBayName'];
+  var yearCurrent = new Date().getFullYear();
+  var monthCurrent = parseInt( new Date().getMonth() ) + 1;
 
-  $scope.addFav = function() {
-    // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
-    favBays.bays.push(bayIdGet);
-    // window.localStorage['baysFav'] = JSON.stringify(favBays);
-    localStorage.setItem('baysFav', JSON.stringify(favBays));
-    $scope.favAdd = false;
-    $scope.favDelete = true;
-  };
-
-  $scope.deleteFav = function() {
-    // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
-    favBays.bays.remove(bayIdGet);
-    // window.localStorage['baysFav'] = JSON.stringify(favBays);
-    localStorage.setItem('baysFav', JSON.stringify(favBays));
-    $scope.favAdd = true;
-    $scope.favDelete = false;
-  };
-
-  bayDetail.getBay(bayIdGet).then(function(results) {
-    $scope.nameBay = results.name;
+  bayDetail.getBay(bayIdGet, yearCurrent, monthCurrent).then(function(results) {
+    $scope.nameBay = bayNameGet;
     //Mes actual de bahí seleccionada
     var todayClass = '';
     var items = [];
@@ -72,8 +56,9 @@ angular.module('controllers', [])
     */
     var fixMonth = { "m1": 0, "m2": 1, "m3": 0, "m4": 1, "m5": 2, "m6": 3, "m7": 4, "m8": 5, "m9": 6, "m10": 7, "m11": 8, "m12": 9 };
     var moonPhase = { "nm" : ["Nueva", "new_moon.png"], "fq" : ["Creciente", "first_quarter.png"], "fm" : ["Llena", "full_moon.png"], "lq" : ["Menguante", "last_quarter.png"]};
-   
+
     angular.forEach(fechas, function(val, key) {
+      console.log(val);
       var monthStr = key.trim().split("-"),
           monthNumber = parseInt(monthStr[1]),
           monthToEv = 0,

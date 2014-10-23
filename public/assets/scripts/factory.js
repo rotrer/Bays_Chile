@@ -18,10 +18,10 @@ angular.module('factory', [])
 
 .factory('bayDetail', function($http, dataApp) {
   return {
-    getBay: function(bayId) {
-      var url = dataApp.endPointBase + bayId + '.json';
+    getBay: function(bayId, year, month) {
+      var url = dataApp.endPointBase + "/mareas/" + bayId + "/" + year + "/" + month;
       var promise = $http.get(url).then(function (response) {
-        return response.data;
+        return response;
       });
       return promise;
     }

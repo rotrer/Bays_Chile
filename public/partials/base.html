@@ -11,7 +11,7 @@
 
     <ons-list>
       <!-- <ons-list-item modifier="tappable"> -->
-      <ons-list-item class="list__item--tappable list__item__line-height baySelect" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.slug )">
+      <ons-list-item class="list__item--tappable list__item__line-height baySelect" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.slug, bay.name )">
         {{bay.name | capitalize}}
       </ons-list-item>
     </ons-list>
