@@ -108,12 +108,12 @@ angular.module('controllers', [])
           todayClass = "";
         }
         
-        var hasH4th = 0;
-        if (valDay.hasOwnProperty("h4th")) {
-          hasH4th = 1;
+        var hasH4st = 0;
+        if (valDay.h4st !== "") {
+          hasH4st = 1;
         }
-        console.log(valDay);
-        this.push({data: valDay, todayClass: todayClass, moonPhaseDay: moonPhaseDay, moonPhaseDayImg: moonPhaseDayImg, hasH4th: hasH4th});
+
+        this.push({data: valDay, todayClass: todayClass, moonPhaseDay: moonPhaseDay, moonPhaseDayImg: moonPhaseDayImg, hasH4st: hasH4st});
       }
     }, items);
 
