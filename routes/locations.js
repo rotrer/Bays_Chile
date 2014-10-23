@@ -11,11 +11,21 @@ var router = express.Router();
 var Location = require('../models/locations.js');
 
 
-router.get('/', function(req, resRquest) {
-	resRquest.setHeader('Content-Type', 'application/json');
+router.get('/', function(req, resRequest) {
+	// // Website you wish to allow to connect
+	resRequest.setHeader('Access-Control-Allow-Origin', '*');
+	// Request methods you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET');
+	// Request headers you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	resRequest.setHeader('Access-Control-Allow-Credentials', true);
+	resRequest.setHeader('Content-Type', 'application/json');
+
 	Location.find({}, 'name slug -_id', function (err, locations) {
 		// if (err) response = err;
-		resRquest.end(JSON.stringify( locations ));
+		resRequest.end(JSON.stringify( locations ));
 	});
 });
 

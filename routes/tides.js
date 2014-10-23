@@ -12,6 +12,15 @@ var Location = require('../models/locations.js');
 var Tide = require('../models/tides.js');
 
 router.get('/', function(req, resRequest) {
+	// // Website you wish to allow to connect
+	resRequest.setHeader('Access-Control-Allow-Origin', '*');
+	// Request methods you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	// Request headers you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	resRequest.setHeader('Access-Control-Allow-Credentials', true);
 	resRequest.setHeader('Content-Type', 'application/json');
 	resRequest.end(JSON.stringify( [{}] ));
 });
@@ -148,6 +157,15 @@ router.get('/populate', function(req, resRequest) {
 router.get('/:bay', function(req, resRequest){
 	var bay = req.params.bay;
 
+	// // Website you wish to allow to connect
+	resRequest.setHeader('Access-Control-Allow-Origin', '*');
+	// Request methods you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	// Request headers you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	resRequest.setHeader('Access-Control-Allow-Credentials', true);
 	resRequest.setHeader('Content-Type', 'application/json');
 
 	Location.where({slug: bay}).findOne(function (err, locations) {
@@ -167,6 +185,15 @@ router.get('/:bay/:year/:month', function(req, resRequest){
 	var month = req.params.month;
 	var year = req.params.year;
 
+	// // Website you wish to allow to connect
+	resRequest.setHeader('Access-Control-Allow-Origin', '*');
+	// Request methods you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	// Request headers you wish to allow
+	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	resRequest.setHeader('Access-Control-Allow-Credentials', true);
 	resRequest.setHeader('Content-Type', 'application/json');
 
 	Location.where({slug: bay}).findOne(function (err, locations) {
