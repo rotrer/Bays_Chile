@@ -14,5 +14,5 @@
 /development/_gulp/node_modules/
 /development/assets/*
 /development/**.html
-
+.htaccess
 **/node_modules/
