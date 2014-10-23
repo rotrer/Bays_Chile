@@ -57,102 +57,65 @@ angular.module('controllers', [])
     var fixMonth = { "m1": 0, "m2": 1, "m3": 0, "m4": 1, "m5": 2, "m6": 3, "m7": 4, "m8": 5, "m9": 6, "m10": 7, "m11": 8, "m12": 9 };
     var moonPhase = { "nm" : ["Nueva", "new_moon.png"], "fq" : ["Creciente", "first_quarter.png"], "fm" : ["Llena", "full_moon.png"], "lq" : ["Menguante", "last_quarter.png"]};
 
-    angular.forEach(fechas, function(val, key) {
-      console.log(val);
-      var monthStr = key.trim().split("-"),
-          monthNumber = parseInt(monthStr[1]),
-          monthToEv = 0,
-          monthToEvMin = 0;
-
-          //Fix raro :/
-          var tmpMonthYear8 = currentYear + "-08";
-          var tmpMonthYear9 = currentYear + "-09";
-          if (key == tmpMonthYear8)
-          {
-            monthNumber = 8;
-          }
-          else if (key == tmpMonthYear9)
-          {
-            monthNumber = 9;
-          }
-
-          //Mes actual menos uno para forma JS 0-11
-          monthToEv = monthNumber - 1;
-          //Excepciones para primer mes del año
-          if (monthToEv === 0) {
-            monthToEvMin = 11;
-            monthToEv = 0;
-          } else {
-            monthToEvMin = monthNumber - 2;
-          }
+    angular.forEach(results.data, function(valDay, keyDay) {
+      var mesInt = parseInt(valDay.months);
+      var dayInt = parseInt(valDay.day);
+      var today = new Date();
+      var mm = today.getMonth()+1;
       
-      if (
-          monthToEvCurrent === monthToEv ||
-          monthToEvMinusCt === monthToEvMin
-          ) 
-      {
-        angular.forEach(val, function(valDay, keyDay) {
-          var dateTide = keyDay.split("-");
-          var mesInt = parseInt(dateTide[1]);
-          var dayInt = parseInt(dateTide[0]);
-          var today = new Date();
-          var mm = today.getMonth()+1;
-          
-          //Fix raro :/
-          if (dateTide[1] == "08")
-          {
-            mesInt = 8;
-          }
-          else if (dateTide[1] == "09")
-          {
-            mesInt = 9;
-          }
-          if (mesInt === mm) {
-            /*
-            * Calcula fase lunar
-            */
-            var monthCorr = "m" + mesInt;
-            var nroAureo = (parseInt(dateTide[2]) + 1) % 19;
-            var epacta = (nroAureo - 1) * 99;
-            var edadLunar = epacta + parseInt(fixMonth[monthCorr]) + dayInt;
-            var moonPhaseDay = '';
-            var moonPhaseDayImg = '';
-            //Correción si es mayor a 30 edad lunar
-            if (edadLunar > 30)
-              edadLunar = edadLunar - 30;
-            
-            //Fases Lunares según edad lunar
-            if (edadLunar >= 0 && edadLunar <= 6) {
-              moonPhaseDay = moonPhase.nm[0];
-              moonPhaseDayImg = moonPhase.nm[1];
-            } else if (edadLunar >= 7 && edadLunar <= 13) {
-              moonPhaseDay = moonPhase.fq[0];
-              moonPhaseDayImg = moonPhase.fq[1];
-            } else if (edadLunar >= 14 && edadLunar <= 21) {
-              moonPhaseDay = moonPhase.fm[0];
-              moonPhaseDayImg = moonPhase.fm[1];
-            } else if (edadLunar >= 22) {
-              moonPhaseDay = moonPhase.lq[0];
-              moonPhaseDayImg = moonPhase.lq[1];
-            }
-            
-            //Destacar dia actual de marea
-            if (today.getDate() === dayInt) {
-              todayClass = "today_tide";
-            } else {
-              todayClass = "";
-            }
-            
-            var hasH4th = 0;
-            if (valDay.hasOwnProperty("h4th")) {
-              hasH4th = 1;
-            }
-            
-            this.push({data: valDay, todayClass: todayClass, dayInt: dayInt, keyDay: keyDay, moonPhaseDay: moonPhaseDay, moonPhaseDayImg: moonPhaseDayImg, hasH4th: hasH4th});
-          }
-        }, items);
+      //Fix raro :/
+      // if (valDay.months == "08")
+      // {
+      //   mesInt = 8;
+      // }
+      // else if (dateTide[1] == "09")
+      // {
+      //   mesInt = 9;
+      // }
+      if (mesInt === mm) {
+        /*
+        * Calcula fase lunar
+        */
+        var monthCorr = "m" + mesInt;
+        var nroAureo = (parseInt(valDay.years) + 1) % 19;
+        var epacta = (nroAureo - 1) * 99;
+        var edadLunar = epacta + parseInt(fixMonth[monthCorr]) + dayInt;
+        var moonPhaseDay = '';
+        var moonPhaseDayImg = '';
+        //Correción si es mayor a 30 edad lunar
+        if (edadLunar > 30)
+          edadLunar = edadLunar - 30;
+        
+        //Fases Lunares según edad lunar
+        if (edadLunar >= 0 && edadLunar <= 6) {
+          moonPhaseDay = moonPhase.nm[0];
+          moonPhaseDayImg = moonPhase.nm[1];
+        } else if (edadLunar >= 7 && edadLunar <= 13) {
+          moonPhaseDay = moonPhase.fq[0];
+          moonPhaseDayImg = moonPhase.fq[1];
+        } else if (edadLunar >= 14 && edadLunar <= 21) {
+          moonPhaseDay = moonPhase.fm[0];
+          moonPhaseDayImg = moonPhase.fm[1];
+        } else if (edadLunar >= 22) {
+          moonPhaseDay = moonPhase.lq[0];
+          moonPhaseDayImg = moonPhase.lq[1];
+        }
+        
+        //Destacar dia actual de marea
+        if (today.getDate() === dayInt) {
+          todayClass = "today_tide";
+        } else {
+          todayClass = "";
+        }
+        
+        var hasH4th = 0;
+        if (valDay.hasOwnProperty("h4th")) {
+          hasH4th = 1;
+        }
+        console.log(valDay);
+        this.push({data: valDay, todayClass: todayClass, moonPhaseDay: moonPhaseDay, moonPhaseDayImg: moonPhaseDayImg, hasH4th: hasH4th});
       }
-    });
+    }, items);
 
     $scope.itemDays = items;
 
@@ -165,17 +128,6 @@ angular.module('controllers', [])
       }
     }, 500);
   });
-  
-  //Obtener estado de favorito bahía
-  //
-  // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-  var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
-  $scope.favAdd = false;
-  $scope.favDelete = true;
-  if (favBays.bays.indexOf(bayIdGet) === -1) {
-    $scope.favAdd = true;
-    $scope.favDelete = false;
-  }
   
 })
 

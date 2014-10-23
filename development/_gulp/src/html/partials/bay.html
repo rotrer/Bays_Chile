@@ -12,7 +12,7 @@
     <div id="current_day_scroll" ng-if="day.todayClass != ''"></div>
     <ons-list-header class="list__header ons-list-header-inner ng-binding {{day.todayClass}}">
       <div class="row row-center">
-        <div class="col col-50"><p><strong>{{day.keyDay}}</strong></p></div>
+        <div class="col col-50"><p><strong>{{day.data.day}}-{{day.data.months}}-{{day.data.years}}</strong></p></div>
         <div class="col">
           <p>{{day.moonPhaseDay}}</p>
         </div>
@@ -31,39 +31,25 @@
         </div>
         <div class="col">
           <p>
-            <b>{{day.data.h2nd}} hr</b>
-            <span class="p-hora">{{day.data.m2nd}} {{day.data.t2nd}}</span>
+            <b>{{day.data.h2st}} hr</b>
+            <span class="p-hora">{{day.data.m2st}} {{day.data.t2st}}</span>
           </p>
         </div>
         <div class="col">
           <p>
-            <b>{{day.data.h3rd}} hr</b>
-            <span class="p-hora">{{day.data.m3rd}} {{day.data.t3rd}}</span>
+            <b>{{day.data.h3st}} hr</b>
+            <span class="p-hora">{{day.data.m3st}} {{day.data.t3st}}</span>
           </p>
           
         </div>
         <div class="col">
           <p ng-show="day.hasH4th == 1">
-            <b>{{day.data.h4th}} hr</b>
-            <span class="p-hora">{{day.data.m4th}} {{day.data.t4th}}</span>
+            <b>{{day.data.h4st}} hr</b>
+            <span class="p-hora">{{day.data.m4st}} {{day.data.t4st}}</span>
           </p>
         </div>
       </div>
     </ons-list-item>
   </ons-list>
 
-  <ul class="list transparent">
-    <li class="list__item register-button-full">
-      <button class="button button--large fav-add" ng-show="favAdd" ng-click="addFav();">
-        <i class="fa fa-plus"></i>
-        Agregar a Favoritos
-      </button>
-
-      <button class="button button--large fav-delete" ng-show="favDelete" ng-click="deleteFav();">
-        <i class="fa fa-trash-o"></i>
-        Eliminar de Favoritos
-      </button>
-      <br>
-    </li>
-  </ul>
 </ons-page>
