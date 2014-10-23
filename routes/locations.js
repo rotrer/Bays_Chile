@@ -23,7 +23,7 @@ router.get('/', function(req, resRequest) {
 	resRequest.setHeader('Access-Control-Allow-Credentials', true);
 	resRequest.setHeader('Content-Type', 'application/json');
 
-	Location.find({}, 'name slug -_id', function (err, locations) {
+	Location.find({}, 'name slug -_id', {sort: {name: 1}}, function (err, locations) {
 		// if (err) response = err;
 		resRequest.end(JSON.stringify( locations ));
 	});
