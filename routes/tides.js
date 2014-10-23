@@ -15,7 +15,7 @@ router.get('/', function(req, resRequest) {
 	// // Website you wish to allow to connect
 	resRequest.setHeader('Access-Control-Allow-Origin', '*');
 	// Request methods you wish to allow
-	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET');
 	// Request headers you wish to allow
 	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	// Set to true if you need the website to include cookies in the requests sent
@@ -160,7 +160,7 @@ router.get('/:bay', function(req, resRequest){
 	// // Website you wish to allow to connect
 	resRequest.setHeader('Access-Control-Allow-Origin', '*');
 	// Request methods you wish to allow
-	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET');
 	// Request headers you wish to allow
 	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	// Set to true if you need the website to include cookies in the requests sent
@@ -188,7 +188,7 @@ router.get('/:bay/:year/:month', function(req, resRequest){
 	// // Website you wish to allow to connect
 	resRequest.setHeader('Access-Control-Allow-Origin', '*');
 	// Request methods you wish to allow
-	resRequest.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	resRequest.setHeader('Access-Control-Allow-Methods', 'GET');
 	// Request headers you wish to allow
 	resRequest.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	// Set to true if you need the website to include cookies in the requests sent
