@@ -2,16 +2,16 @@
   <ons-page>
     <ons-toolbar>
       <ons-toolbar>
-        <div class="left">
+        <!-- <div class="left">
           <ons-toolbar-button ng-click="ons.slidingMenu.toggleMenu()"><ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon></ons-toolbar-button>
-        </div>
+        </div> -->
         <div class="center">Mareas Chile</div>
       </ons-toolbar>
     </ons-toolbar>
 
     <ons-list>
       <!-- <ons-list-item modifier="tappable"> -->
-      <ons-list-item class="list__item--tappable list__item__line-height baySelect" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
+      <ons-list-item class="list__item--tappable list__item__line-height baySelect" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.slug )">
         {{bay.name | capitalize}}
       </ons-list-item>
     </ons-list>

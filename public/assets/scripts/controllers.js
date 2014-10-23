@@ -4,17 +4,16 @@
 angular.module('controllers', [])
 
 
-.controller('homeController', function($scope, baysList) {
+.controller('homeController', function($scope, $analytics, baysList) {
+  $analytics.pageTrack('/home');
 	$scope.loadBay = function(bayID) {
-	  // window.localStorage['currentBay'] = bayID;
-    localStorage.setItem('currentBay', bayID);
+	  window.localStorage['currentBay'] = bayID;
     $scope.ons.navigator.pushPage('partials/bay.html');
   };
 
   baysList.getAll().then(function(results) {
-    // window.localStorage['allBays'] = JSON.stringify(results);
-    localStorage.setItem('allBays', JSON.stringify(results));
-    $scope.baysAll = results.bays;
+    window.localStorage['allBays'] = JSON.stringify(results);
+    $scope.baysAll = results;
     $("#loadingApp").fadeOut();
   });
 

@@ -55,6 +55,8 @@ gulp.task "copy-libs", ->
   gulp.src [
     "bower_components/jquery/jquery.min.js"
     "bower_components/underscore/underscore-min.js"
+    "bower_components/angulartics/dist/angulartics.min.js"
+    "bower_components/angulartics/dist/angulartics-ga.min.js"
   ]
   .pipe gulp.dest dest + dirAssets + "scripts"
 #copy js scripts app
@@ -170,6 +172,7 @@ gulp.task 'default', [
   "copy-img"
   "copy-styles"
   "copy-fonts"
+  "copy-libs"
   "watch"
 ]
 

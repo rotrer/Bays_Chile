@@ -1,6 +1,6 @@
 'use strict';
 // Ionic App
-angular.module('tideApp', ['onsen', 'controllers', 'factory', 'directives'])
+angular.module('tideApp', ['onsen', 'angulartics', 'angulartics.google.analytics', 'controllers', 'factory', 'directives'])
 
 //Constantes App
 .value('dataApp', {

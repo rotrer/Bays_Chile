@@ -9,7 +9,6 @@ angular.module('factory', [])
     getAll: function(bayId) {
       var url = dataApp.endPointBase + '/localidades';
       var promise = $http.get(url).then(function (response) {
-        console.log(response);
         return response.data;
       });
       return promise;
