@@ -44,7 +44,7 @@ router.get('/populate', function(req, resRequest) {
 													{ "name" : "Puerto Montt", "slug" : "montt" },
 													{ "name" : "Puerto Natales", "slug" : "natales" },
 													{ "name" : "Puerto Arenas", "slug" : "arenas" },
-													{ "name" : "San Antonio", "slug" : "antonio" },
+													{ "name" : "San Antonio", "slug" : "sanantonio" },
 													{ "name" : "Talcahuano", "slug" : "talcahuano" }];
 	var calls = [];
 
