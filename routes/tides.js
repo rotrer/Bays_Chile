@@ -79,7 +79,7 @@ router.get('/populate', function(req, resRequest) {
 																	t4st = '';
 
 															//Si tiene todos los datos del dia
-															if (infoDay.length < 13) {
+															if (infoDay.length > 10) {
 																h4st = infoDay[10];
 																m4st = infoDay[11];
 																t4st = infoDay[12];
