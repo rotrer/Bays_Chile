@@ -9,7 +9,7 @@ npm install
 bower install
 ```
 
-Para desarrollo solo app mobile
+Para desarrollo app mobile
 ----
 ```sh
 gulp

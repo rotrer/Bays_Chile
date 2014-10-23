@@ -1,31 +1,5 @@
 /bays/*
 
-# ANDROID / ECLIPSE
-
-# built application files
-**.apk
-**.ap_
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# IOS / Xcode
-#build/*
-#*.pbxuser
-#!default.pbxuser
-#*.mode1v3
-#!default.mode1v3
-#*.mode2v3
-#!default.mode2v3
-#*.perspectivev3
-#!default.perspectivev3
-#*.xcworkspace
-#!default.xcworkspace
-#xcuserdata
-#profile
-#*.moved-aside
-#IOS/www/
-
 # OSX
 **.DS_Store
 
@@ -36,15 +10,9 @@ local.properties
 .Spotlight-V100
 .Trashes
 
-/mobile-dev/_gulp/bower_components/
-/mobile-dev/_gulp/node_modules/
-/mobile-dev/assets/*
-/mobile-dev/**.html
-
-/app/www/assets/*
-/app/www/*.html
-/app/www/**/*.html
-/app/plugins/*
-/app/platforms/*
+/development/_gulp/bower_components/
+/development/_gulp/node_modules/
+/development/assets/*
+/development/**.html
 
 **/node_modules/

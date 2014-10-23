@@ -12,9 +12,6 @@
     <script type="text/javascript" src="assets/scripts/onsen/js/onsenui_all.js"></script>
     <script type="text/javascript" src="assets/scripts/jquery.min.js"></script>
 
-    <!-- Libs -->
-    <script type="text/javascript" src="cordova.js"></script>
-
     <!-- App Angular -->
     
     <script type="text/javascript" src="assets/scripts/app-global.js"></script>
@@ -23,15 +20,20 @@
     <script type="text/javascript" src="assets/scripts/directives.js"></script>
     <script type="text/javascript" src="assets/scripts/helpers.js"></script>
 
-    
-    <!-- App Phonegap -->
-    <!--script type="text/javascript" src="assets/scripts/phone.js"></script-->
-
   </head>
   <body ng-app="tideApp">
     <ons-sliding-menu
-        menu-page="partials/menu.html" main-page="partials/base.html" side="left"
-        type="reveal" max-slide-distance="300px" swipable="true">
-      </ons-sliding-menu>
+      menu-page="partials/menu.html" main-page="partials/base.html" side="left"
+      type="reveal" max-slide-distance="300px" swipable="true">
+    </ons-sliding-menu>
+    <div class="content-l" id="loadingApp">
+    <div class="loading">
+        <span></span><!--
+     --><span></span><!--
+     --><span></span><!--
+     --><span></span><!--
+     --><span></span>
+      </div>
+    </div>
   </body>
 </html>

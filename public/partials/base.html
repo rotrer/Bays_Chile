@@ -1,4 +1,4 @@
-<ons-navigator title="Home" var="homeVar">
+<ons-navigator title="Home" var="homeVar" ng-controller="homeController">
   <ons-page>
     <ons-toolbar>
       <ons-toolbar>
@@ -9,9 +9,9 @@
       </ons-toolbar>
     </ons-toolbar>
 
-    <ons-list ng-controller="homeController">
+    <ons-list>
       <!-- <ons-list-item modifier="tappable"> -->
-      <ons-list-item class="list__item--tappable list__item__line-height" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
+      <ons-list-item class="list__item--tappable list__item__line-height baySelect" modifier="chevron" ng-repeat="bay in baysAll" ng-click="loadBay( bay.file )">
         {{bay.name | capitalize}}
       </ons-list-item>
     </ons-list>

@@ -22,23 +22,13 @@ server         = lr()
 
 # paths
 src          = "src"
-dest         = "../assets/"
+dest         = "../../public/"
+dirAssets    = "assets/"
 destPhonegap = "../../app/www/assets/"
 
 #
 #  gulp tasks
 #  ==========================================================================
-
-
-# clean
-gulp.task "clean", ->
-  gulp.src [
-    dest + "/scripts/*.*"
-    dest + "/styles/*.*"
-    dest + "/img/*.*"
-    dest + "*.html"
-  ]
-  .pipe clean()
 
 #copy js scripts app
 gulp.task "copy-onsen-css", ->
@@ -46,19 +36,19 @@ gulp.task "copy-onsen-css", ->
     "bower_components/onsenui/build/css/**"
   ]
   #.pipe uglify()
-  .pipe gulp.dest dest + "scripts/onsen/css"
+  .pipe gulp.dest dest + dirAssets + "scripts/onsen/css"
 gulp.task "copy-onsen-js", ->
   gulp.src [
     "bower_components/onsenui/build/js/onsenui_all.js"
   ]
   #.pipe uglify()
-  .pipe gulp.dest dest + "scripts/onsen/js"
+  .pipe gulp.dest dest + dirAssets + "scripts/onsen/js"
 #copy js scripts app
 gulp.task "copy-html", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  .pipe gulp.dest "../"
+  .pipe gulp.dest dest
   .pipe livereload(server)
 # copy libs scritps
 gulp.task "copy-libs", ->
@@ -66,33 +56,33 @@ gulp.task "copy-libs", ->
     "bower_components/jquery/jquery.min.js"
     "bower_components/underscore/underscore-min.js"
   ]
-  .pipe gulp.dest dest + "scripts"
+  .pipe gulp.dest dest + dirAssets + "scripts"
 #copy js scripts app
 gulp.task "copy-js", ->
   gulp.src [
     src + "/scripts/*.js"
   ]
   #.pipe uglify()
-  .pipe gulp.dest dest + "scripts"
+  .pipe gulp.dest dest + dirAssets + "scripts"
   .pipe livereload(server)
 #copy imgs appp
 gulp.task "copy-img", ->
   gulp.src [
     src + "/images/*"
   ]
-  .pipe gulp.dest dest + "img"
+  .pipe gulp.dest dest + dirAssets + "img"
 #copy styles app
 gulp.task "copy-styles", ->
   gulp.src [
     src + "/styles/*"
   ]
-  .pipe gulp.dest dest + "styles"
+  .pipe gulp.dest dest + dirAssets + "styles"
 #copy fonts app
 gulp.task "copy-fonts", ->
   gulp.src [
     src + "/fonts/*"
   ]
-  .pipe gulp.dest dest + "fonts"
+  .pipe gulp.dest dest + dirAssets + "fonts"
 
 #
 # Dist task
@@ -161,7 +151,11 @@ gulp.task "copy-fonts-dist", ->
   .pipe gulp.dest destPhonegap + "fonts"
 
 
-
+gulp.task 'watch', ->
+  gulp.watch [src + '/scripts/*.js'], ['copy-js']
+  gulp.watch [src + '/html/**/*.html'], ['copy-html']
+  gulp.watch [src + '/images/*'], ['copy-img']
+  gulp.watch [src + '/styles/*'], ['copy-styles']
 
 #
 #  main tasks
