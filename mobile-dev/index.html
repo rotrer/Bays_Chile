@@ -2,36 +2,52 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Mareas Chile</title>
 
-    <link href="assets/scripts/onsen/css/onsenui.css" rel="stylesheet">
-    <link href="assets/scripts/onsen/css/onsen-css-components.css" rel="stylesheet">
-    <link href="assets/styles/app.css" rel="stylesheet">
-    
-    <script type="text/javascript" src="assets/scripts/onsen/js/onsenui_all.js"></script>
-    <script type="text/javascript" src="assets/scripts/jquery.min.js"></script>
+    <link href="assets/styles/app-css.v1.css" rel="stylesheet">
+    <!-- <link href="assets/styles/app.css" rel="stylesheet"> -->
 
     <!-- Libs -->
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="assets/scripts/angular.min.js"></script>
+    <script type="text/javascript" src="assets/scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="assets/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/scripts/app-js.v1.js"></script>
 
     <!-- App Angular -->
-    
     <script type="text/javascript" src="assets/scripts/app-global.js"></script>
     <script type="text/javascript" src="assets/scripts/controllers.js"></script>
     <script type="text/javascript" src="assets/scripts/factory.js"></script>
     <script type="text/javascript" src="assets/scripts/directives.js"></script>
     <script type="text/javascript" src="assets/scripts/helpers.js"></script>
 
-    
-    <!-- App Phonegap -->
-    <!--script type="text/javascript" src="assets/scripts/phone.js"></script-->
-
   </head>
   <body ng-app="tideApp">
-    <ons-sliding-menu
-        menu-page="partials/menu.html" main-page="partials/base.html" side="left"
-        type="reveal" max-slide-distance="300px" swipable="true">
-      </ons-sliding-menu>
+    <!-- header -->
+    <header id="header" class="navbar navbar-sm bg bg-black">
+      <a class="navbar-brand" href="#/home">Mareas Chile</a>
+      <button type="button" class="btn btn-link nav-toggle pull-left hidden-desktop" data-toggle="class:show" data-target="#nav">
+        <i class="icon-reorder icon-xlarge text-default"></i>
+      </button>
+
+
+    </header>
+    <!-- / header -->
+
+    <!-- nav -->
+    <nav id="nav" class="nav-primary visible-desktop nav-vertical bg-light">
+      <ul class="nav">
+        <li><a href="#/home" class="active"><i class="icon-home icon-xlarge"></i>Inicio</a></li>
+        <li><a href="#/favorites"><i class="icon-star icon-xlarge"></i>Favoritos</a></li>
+        <li><a href="#/settings"><i class="icon-cog icon-xlarge"></i>Configuración</a></li>
+      </ul>
+    </nav>
+    <!-- / nav -->
+
+      <section id="content">
+        <main class="main" ng-view class="view-frame">
+        </main>
+      </section>
   </body>
 </html>

@@ -2,20 +2,23 @@
 
   <ons-list>
     <ons-list-item
+      id="navHome"
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/base.html', {closeMenu: true})">
 
       <i class="fa fa-home fa-lg" style="color: #666"></i> &nbsp; Home
     </ons-list-item>
 
-    <ons-list-item 
+    <ons-list-item
+      id="navFavs" 
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/favorites.html', {closeMenu: true})">
 
       <i class="fa fa-star fa-lg" style="color: #666"></i> &nbsp; Favoritos
     </ons-list-item>
 
-    <ons-list-item 
+    <ons-list-item
+      id="navConf" 
       modifier="chevron"
       ng-click="ons.slidingMenu.setMainPage('partials/settings.html', {closeMenu: true})">
 
@@ -25,36 +28,3 @@
   </ons-list>
 
 </ons-page>
-<!-- Side menu -->
-<!-- <ion-side-menus>
-
-  <ion-pane ion-side-menu-content>
-    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Volver</ion-nav-back-button>
-    </ion-nav-bar>
-    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
-  </ion-pane>
-
-  <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Menú</h1>
-    </header>
-    <ion-content class="has-header">
-      <ion-list>
-        <ion-item nav-clear menu-close href="#/app/home">
-          <i class="icon ion-home"></i>
-          Home
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/favorites">
-          <i class="icon ion-star"></i>
-          Favoritos
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/settings">
-          <i class="icon ion-settings"></i>
-          Configuración
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-side-menu>
-
-</ion-side-menus> -->

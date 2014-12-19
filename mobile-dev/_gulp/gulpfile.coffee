@@ -41,19 +41,6 @@ gulp.task "clean", ->
   .pipe clean()
 
 #copy js scripts app
-gulp.task "copy-onsen-css", ->
-  gulp.src [
-    "bower_components/onsenui/build/css/**"
-  ]
-  #.pipe uglify()
-  .pipe gulp.dest dest + "scripts/onsen/css"
-gulp.task "copy-onsen-js", ->
-  gulp.src [
-    "bower_components/onsenui/build/js/onsenui_all.js"
-  ]
-  #.pipe uglify()
-  .pipe gulp.dest dest + "scripts/onsen/js"
-#copy js scripts app
 gulp.task "copy-html", ->
   gulp.src [
     src + "/html/**/*.html"
@@ -64,7 +51,8 @@ gulp.task "copy-html", ->
 gulp.task "copy-libs", ->
   gulp.src [
     "bower_components/jquery/jquery.min.js"
-    "bower_components/underscore/underscore-min.js"
+    "bower_components/angular/angular.min.js"
+    "bower_components/angular-route/angular-route.min.js"
   ]
   .pipe gulp.dest dest + "scripts"
 #copy js scripts app
@@ -92,7 +80,7 @@ gulp.task "copy-fonts", ->
   gulp.src [
     src + "/fonts/*"
   ]
-  .pipe gulp.dest dest + "fonts"
+  .pipe gulp.dest dest + "styles/font"
 
 
 #Phonegap Developer
@@ -236,8 +224,7 @@ gulp.task "copy-fonts-dist", ->
 # default task
 gulp.task 'default', [
   "copy-html"
-  "copy-onsen-css"
-  "copy-onsen-js"
+  "copy-libs"
   "copy-js"
   "copy-img"
   "copy-styles"

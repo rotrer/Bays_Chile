@@ -1,10 +1,34 @@
 'use strict';
 // Ionic App
-angular.module('tideApp', ['onsen', 'controllers', 'factory', 'directives'])
+angular.module('tideApp', ['ngRoute', 'controllers', 'factory', 'directives'])
+
+.config(['$routeProvider', '$locationProvider',
+	function($routeProvider, $locationProvider) {
+		$routeProvider.
+			when('/home', {
+				templateUrl: 'partials/home.html',
+				controller: 'homeController'
+			}).
+			when('/bay/:baySlug', {
+				templateUrl: 'partials/bay.html',
+				controller: 'BayController'
+			}).
+			when('/favorites', {
+				templateUrl: 'partials/favorites.html',
+				controller: 'favoritesController'
+			}).
+			when('/settings', {
+				templateUrl: 'partials/settings.html',
+				controller: 'settingsController'
+			}).
+			otherwise({
+				redirectTo: 'home'
+			});
+}])
 
 //Constantes App
 .value('dataApp', {
-  endPointBase: 'http://tides.rotrer.com/bays/v2/' 
+  endPointBase: 'http://api.mareaschile.com' 
 })
 
 //Filters

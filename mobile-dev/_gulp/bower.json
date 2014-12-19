@@ -15,7 +15,7 @@
   ],
   "devDependencies":{
     "jquery": "~2.0.3",
-    "underscore": "~1.5.2",
-    "onsenui": "git://github.com/OnsenUI/OnsenUI.git"
+    "angular": "~1.2.24",
+    "angular-route": "~1.2.24"
   }
 }
