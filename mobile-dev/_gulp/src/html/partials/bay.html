@@ -1,44 +1,69 @@
 <div class="clearfix">
-  <h4>{{nameBay | capitalize}}</h4>
+  <h4>{{nameBay | capitalize}} <a href="#/home" class="label bg-default pull-right"><i class="icon-angle-left icon-xlarge text-default"></i> Volver</a></h4>
 </div>
 <div class="row-fluid">
   <div class="span6">
     <!-- .accordion -->
     <div class="accordion" id="accordion2">
-      <div class="accordion-group">
+      <div class="accordion-group ng-binding {{day.todayClass}}" ng-repeat="day in itemDays">
         <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-            Collapsible Group Item #1
-            <i class="icon-expand-alt icon-xlarge pull-right"></i>
+          <a class="accordion-toggle" data-target="#collapse-{{day.data.day}}" data-toggle="collapse" data-parent="#accordion2" href="javascript:;">
+            <!--  -->
+            <div class="span8">
+              <div class="row-fluid row-2-phone">
+                <div class="span6">
+                  <strong>{{day.data.day}}-{{day.data.months}}-{{day.data.years}}</strong>
+                </div>
+                <div class="span6">
+                  <!-- <p>{{day.moonPhaseDay}}</p> -->
+                  <!-- <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon"> -->
+                  <i class="icon-expand-alt icon-xlarge pull-right"></i>
+                </div>
+              </div>
+            </div>
+            <!--  -->
           </a>
         </div>
-        <div id="collapseOne" class="accordion-body collapse" style="height: 0px;">
+        <div id="collapse-{{day.data.day}}" class="accordion-body collapse {{ day.collapseClass }}">
           <div class="accordion-inner text-small">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-            Collapsible Group Item #2
-          </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body collapse" style="height: 0px;">
-          <div class="accordion-inner text-small">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-            Collapsible Group Item #3
-          </a>
-        </div>
-        <div id="collapseThree" class="accordion-body in collapse" style="height: auto;">
-          <div class="accordion-inner text-small">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            
+            <div class="span8">
+              <div class="row-fluid row-2-phone">
+                <div class="span6">
+                  <div class="col">
+                    <p>
+                      <b>{{day.data.h1st}} hr</b>
+                      <span class="p-hora">{{day.data.m1st}} {{day.data.t1st}}</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <p>
+                      <b>{{day.data.h2st}} hr</b>
+                      <span class="p-hora">{{day.data.m2st}} {{day.data.t2st}}</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <p>
+                      <b>{{day.data.h3st}} hr</b>
+                      <span class="p-hora">{{day.data.m3st}} {{day.data.t3st}}</span>
+                    </p>
+                    
+                  </div>
+                  <div class="col">
+                    <p ng-show="day.hasH4st == 1">
+                      <b>{{day.data.h4st}} hr</b>
+                      <span class="p-hora">{{day.data.m4st}} {{day.data.t4st}}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="span6">
+                  <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon pull-left">
+                  <p>{{day.moonPhaseDay}}</p>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -47,74 +72,14 @@
   </div>
 </div>
 
+<button class="btn btn-primary btn-block fav-add" ng-show="favAdd" ng-click="addFav();">
+  <i class="icon-star"></i>
+  Agregar a Favoritos
+</button>
 
-
-<ons-page>
-  <ons-toolbar>
-    <ons-toolbar>
-      <div class="left"><ons-back-button>Volver</ons-back-button></div>
-      <div class="center">{{nameBay | capitalize}}</div>
-    </ons-toolbar>
-  </ons-toolbar>
-  
-  <br>
-  
-  <ons-list ng-repeat="day in itemDays">
-    <div id="current_day_scroll" ng-if="day.todayClass != ''"></div>
-    <ons-list-header class="list__header ons-list-header-inner ng-binding {{day.todayClass}}">
-      <div class="row row-center">
-        <div class="col col-50"><p><strong>{{day.keyDay}}</strong></p></div>
-        <div class="col">
-          <p>{{day.moonPhaseDay}}</p>
-        </div>
-        <div class="col">
-          <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon">
-        </div>
-      </div>
-    </ons-list-header>
-    <ons-list-item>
-      <div class="row row-center">
-        <div class="col">
-          <p>
-            <b>{{day.data.h1st}} hr</b>
-            <span class="p-hora">{{day.data.m1st}} {{day.data.t1st}}</span>
-          </p>
-        </div>
-        <div class="col">
-          <p>
-            <b>{{day.data.h2nd}} hr</b>
-            <span class="p-hora">{{day.data.m2nd}} {{day.data.t2nd}}</span>
-          </p>
-        </div>
-        <div class="col">
-          <p>
-            <b>{{day.data.h3rd}} hr</b>
-            <span class="p-hora">{{day.data.m3rd}} {{day.data.t3rd}}</span>
-          </p>
-          
-        </div>
-        <div class="col">
-          <p ng-show="day.hasH4th == 1">
-            <b>{{day.data.h4th}} hr</b>
-            <span class="p-hora">{{day.data.m4th}} {{day.data.t4th}}</span>
-          </p>
-        </div>
-      </div>
-    </ons-list-item>
-  </ons-list>
-
-  <ul class="list transparent">
-    <li class="list__item register-button-full">
-      <button class="button button--large fav-add" ng-show="favAdd" ng-click="addFav();">
-        <i class="fa fa-plus"></i>
-        Agregar a Favoritos
-      </button>
-
-      <button class="button button--large fav-delete" ng-show="favDelete" ng-click="deleteFav();">
-        <i class="fa fa-trash-o"></i>
-        Eliminar de Favoritos
-      </button>
-      <br>
-    </li>
-  </ul>
-</ons-page>
+<button class="btn btn-danger btn-block fav-delete" ng-show="favDelete" ng-click="deleteFav();">
+  <i class="icon-remove"></i>
+  Eliminar de Favoritos
+</button>
+<p>&nbsp;</p>
+    
