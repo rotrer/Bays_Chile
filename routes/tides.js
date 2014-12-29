@@ -173,7 +173,7 @@ router.get('/:bay', function(req, resRequest){
 		if (locations !== null) {
 			Tide.find({locations_id: locations._id}, '-_id years months day h1st m1st t1st h2st m2st t2st h3st m3st t3st h4st m4st t4st', function(err, tides){
 				resRequest.end(JSON.stringify( tides ));
-			});
+			}).sort({months: 1, day: 1});
 		} else {
 			resRequest.end(JSON.stringify( {'error': 'bay not found'} ));
 		};
@@ -201,7 +201,7 @@ router.get('/:bay/:year/:month', function(req, resRequest){
 		if (locations !== null) {
 			Tide.find({locations_id: locations._id, years: year, months: month}, '-_id years months day h1st m1st t1st h2st m2st t2st h3st m3st t3st h4st m4st t4st', function(err, tides){
 				resRequest.end(JSON.stringify( tides ));
-			});
+			}).sort({day: 1});
 		} else {
 			resRequest.end(JSON.stringify( {'error': 'bay not found'} ));
 		};
