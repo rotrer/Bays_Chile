@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var tideSchema = new Schema({
+    keyday: String,
     locations_id: { type: Schema.Types.ObjectId, ref: 'Location' },
     years: Number,
     months: Number,

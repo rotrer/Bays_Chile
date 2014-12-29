@@ -63,6 +63,7 @@ router.get('/populate', function(req, resRequest) {
 														if (err)
 																return callback(err);
 
+														// console.log(idLocation + " | " + parseInt(dateTide[0]) + " | " + parseInt(dateTide[1]) + " | " + parseInt(dateTide[2]) + " | " + count);
 														if (count === 0) {
 															var	date = infoDay[0],
 																	h1st = infoDay[1],
@@ -86,6 +87,7 @@ router.get('/populate', function(req, resRequest) {
 															}
 															
 															callback(null, {
+																		keyday: idLocation + parseInt(dateTide[2]) + parseInt(dateTide[1]) + parseInt(dateTide[0]),
 																		locations_id: idLocation,
 																		years: parseInt(dateTide[2]),
 																		months: parseInt(dateTide[1]),
@@ -116,12 +118,14 @@ router.get('/populate', function(req, resRequest) {
 									if (err)
 										return console.log(err);
 									var cleanTides = result.clean("");
+									var beforeInsert = [];
+											beforeInsert = unique(cleanTides);
 
-									if (cleanTides.length > 0) {
-										var promise = Tide.create(cleanTides);
+									if (beforeInsert.length > 0) {
+										var promise = Tide.create(beforeInsert);
 										promise.then(function (resultInsert) {
 											callback2(null, location.name);
-											// console.log(resultInsert);
+											console.log(resultInsert);
 										});
 									} else {
 										callback2(null, location.name + ", len 0");
@@ -229,3 +233,27 @@ Array.prototype.clean = function(deleteValue) {
 	}
 	return this;
 };
+
+function unique(a) {
+		var isAdded,
+				arr = [];
+		for(var i = 0; i < a.length; i++) {
+				isAdded = arr.some(function(v) {
+						return isEqual(v, a[i]);
+				});
+				if( !isAdded ) {
+						arr.push(a[i]);
+				}
+		}
+		return arr; 
+}
+function isEqual(a, b) {
+		var prop;
+		for( prop in a ) {
+				if ( a[prop] !== b[prop] ) return false;
+		}
+		for( prop in b ) {
+				if ( b[prop] !== a[prop] ) return false;
+		}
+		return true;
+}
