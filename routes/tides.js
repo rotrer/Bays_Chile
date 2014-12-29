@@ -125,7 +125,7 @@ router.get('/populate', function(req, resRequest) {
 										var promise = Tide.create(beforeInsert);
 										promise.then(function (resultInsert) {
 											callback2(null, location.name);
-											console.log(resultInsert);
+											// console.log(resultInsert);
 										});
 									} else {
 										callback2(null, location.name + ", len 0");
