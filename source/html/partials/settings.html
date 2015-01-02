@@ -1,101 +1,24 @@
 <div class="clearfix">
-  <h4>Configuración <a href="#/home" class="label bg-default pull-right"><i class="icon-angle-left icon-xlarge text-default"></i> Volver</a></h4>
+  <h4>Notificaciones <a href="#/home" class="label bg-default pull-right"><i class="icon-angle-left icon-xlarge text-default"></i> Volver</a></h4>
 </div>
 <div class="row-fluid">
   <ul class="list-group">
     <li class="list-group-item">
       <div class="btn-group pull-right m-t-n-mini m-r-n-mini" data-toggle="buttons-radio">
-        <button type="button" class="btn btn-small btn-white btn-on">ON</button>
-        <button type="button" class="btn btn-small btn-white">OFF</button>
+        <button type="button" class="btn btn-small btn-white btn-on" ng-class="moon_active" ng-click="moonPhaseChange(true)">ON</button>
+        <button type="button" class="btn btn-small btn-white btn-on" ng-class="moon_inactive" ng-click="moonPhaseChange(false)">OFF</button>
       </div>
-      <i class="icon-bell"></i> Notificación Fase Lunar
+      <i class="icon-bell"></i> Cambio Fase Lunar
     </li>
     <li class="list-group-item">
       <div class="btn-group pull-right m-t-n-mini m-r-n-mini" data-toggle="buttons-radio">
         <!-- active -->
-        <button type="button" class="btn btn-small btn-white btn-on">ON</button>
-        <button type="button" class="btn btn-small btn-white">OFF</button>
+        <button type="button" class="btn btn-small btn-white btn-on" ng-class="weekend_active" ng-click="weekendChange(true)">ON</button>
+        <button type="button" class="btn btn-small btn-white btn-on" ng-class="weekend_inactive" ng-click="weekendChange(false)">OFF</button>
       </div>
-      <i class="icon-calendar"></i> Fines de Semana
+      <i class="icon-calendar"></i> Fines de Semana Favoritos
+    
+
     </li>
   </ul>
-
-
 </div>
-
-<ons-navigator title="Configuración" var="settinfsVar">
-  <ons-page ng-controller="settingsController">
-    <ons-toolbar>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button ng-click="ons.slidingMenu.toggleMenu()"><ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon></ons-toolbar-button>
-        </div>
-        <div class="center">Configuración</div>
-      </ons-toolbar>
-    </ons-toolbar>
-
-    <ons-list>
-      <ons-list-header><h4>Notificaciones</h4></ons-list-header>
-
-      <ons-list-item>
-        <ul class="list margin-top-adjuster">
-
-          <li class="list__item list__item--tappable moonPhaseNotif">
-            <span class="list__item__line-height">
-              <label class="checkbox wrapper-label">
-                <input type="checkbox" ng-model="moonChk" 
-                                       ng-checked="moonChk"
-                                       ng-change="moonPhaseChange(moonChk)">
-                <div class="checkbox__checkmark checkbox-list-left-section">
-                </div>
-                <div class="checkbox-list-right-section"><span style="color: #666">Cambio fase lunar</span></div>
-              </label>
-            </span>
-          </li>
-
-          <li class="list__item list__item--tappable weekendNotif">
-            <span class="list__item__line-height">
-              <label class="checkbox wrapper-label">
-                <input type="checkbox" ng-model="weekendChk" 
-                                       ng-checked="weekendChk"
-                                       ng-change="weekendChange(weekendChk)">
-                <div class="checkbox__checkmark checkbox-list-left-section">
-                </div>
-                <div class="checkbox-list-right-section"><span style="color: #666">Fin de semana</span></div>
-              </label>
-            </span>
-          </li>
-
-        </ul>
-
-        <ons-row>
-          <div ng-show="listBayNotif" id="listBayNotif">
-            <ul class="list margin-top-adjuster">
-              <li class="list__header"><h5>Notificaciones para tus favoritos</h5></li>
-
-              <li class="list__item list__item--tappable notifBaySel" ng-repeat="item in baysAll">
-                <span class="list__item__line-height">
-                  <label class="checkbox wrapper-label">
-                    <input type="checkbox" ng-model="item.checked" 
-                                           ng-checked="item.checked"
-                                           ng-change="bayChanged(item.bay.file, item.checked, item.bay.name)">
-                    <div class="checkbox__checkmark checkbox-list-left-section">
-                    </div>
-                    <div class="checkbox-list-right-section">{{item.bay.name | capitalize}}</div>
-                  </label>
-                </span>
-              </li>
-
-            </ul>
-
-            <div class="list" ng-if="baysAll.length === 0">
-              <div class="item item-divider">
-                <h4>Debes agregar bahías a tus favoritos.</h4>
-              </div>
-            </div>
-          </div>
-        </ons-row>
-      </ons-list-item>
-    </ons-list>
-  </ons-page>
-</ons-navigator>

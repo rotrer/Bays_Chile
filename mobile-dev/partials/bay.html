@@ -17,7 +17,7 @@
                 <div class="span6">
                   <!-- <p>{{day.moonPhaseDay}}</p> -->
                   <!-- <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon"> -->
-                  <i class="icon-chevron-sign-down icon-xlarge pull-right"></i>
+                  <i class="icon-expand-alt icon-xlarge pull-right"></i>
                 </div>
               </div>
             </div>
@@ -29,7 +29,44 @@
             
             <div class="span8">
               <div class="row-fluid row-2-phone">
-                <div class="span6">
+                  <div class="panel">
+                    <table class="table table-striped m-b-none text-small">
+                      <thead>
+                        <tr>
+                          <th>Hora</th>
+                          <th>Altura</th>
+                          <th>Marea</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{day.data.h1st}}</td>
+                          <td>{{day.data.m1st}}</td>
+                          <td>{{day.data.t1st}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{day.data.h2st}}</td>
+                          <td>{{day.data.m2st}}</td>
+                          <td>{{day.data.t2st}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{day.data.h3st}}</td>
+                          <td>{{day.data.m3st}}</td>
+                          <td>{{day.data.t3st}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{day.data.h4st}}</td>
+                          <td>{{day.data.m4st}}</td>
+                          <td>{{day.data.t4st}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel moon">
+                    <p>Fase lunar para hoy es {{day.moonPhaseDay}} <img src="assets/img/{{day.moonPhaseDayImg}}"></p>
+                    <div class="clearfix"></div>
+                  </div>
+                <!-- <div class="span6">
                   <div class="col">
                     <p>
                       <b>{{day.data.h1st}} hr</b>
@@ -55,13 +92,13 @@
                       <span class="p-hora">{{day.data.m4st}} {{day.data.t4st}}</span>
                     </p>
                   </div>
-                </div>
-                <div class="span6">
+                </div> -->
+                <!-- <div class="span6">
                   <img src="assets/img/{{day.moonPhaseDayImg}}" class="icon-moon pull-left">
                   <p>{{day.moonPhaseDay}}</p>
                   <div class="clearfix"></div>
                 </div>
-              </div>
+              </div> -->
             </div>
 
           </div>

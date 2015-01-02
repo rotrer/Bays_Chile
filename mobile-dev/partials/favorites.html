@@ -11,6 +11,8 @@
         {{bay.name | capitalize}}
       </a>
     </div>
-    <h4 ng-show="!hasFavorite">No tienes favoritos aún.</h4>
+  </div>
+  <div class="span6" ng-if="baysAll.length === 0">
+    <h4>No tienes favoritos aún!</h4>
   </div>
 </div>

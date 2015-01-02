@@ -8,10 +8,6 @@ angular.module('controllers', [])
   angular.element("#nav").removeClass("show");
 
 	$scope.loadBay = function(bayID) {
-	  // window.localStorage['currentBay'] = bayID;
-    // localStorage.setItem('currentBay', bayID);
-    // $scope.ons.navigator.pushPage('partials/bay.html');
-    // /bay/{{ bay.slug }}
     angular.forEach($scope.baysAll, function(val, key) {
       if (bayID == val.slug) {
         baysData.setSelectedBay( val.name, val.slug );
@@ -21,8 +17,6 @@ angular.module('controllers', [])
   };
 
   baysData.getAll().then(function(results) {
-    // window.localStorage['allBays'] = JSON.stringify(results);
-    // localStorage.setItem('allBays', JSON.stringify(results));
     $scope.baysAll = results;
     $("#loadingApp").fadeOut();
   });
@@ -33,28 +27,24 @@ angular.module('controllers', [])
   angular.element("#nav").removeClass("show");
 
   $scope.addFav = function() {
-    // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
+    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
     favBays.bays.push(bayIdGet);
-    // window.localStorage['baysFav'] = JSON.stringify(favBays);
-    localStorage.setItem('baysFav', JSON.stringify(favBays));
+    window.localStorage.setItem('baysFav', JSON.stringify(favBays));
     $scope.favAdd = false;
     $scope.favDelete = true;
   };
 
   $scope.deleteFav = function() {
-    // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
+    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
     favBays.bays.remove(bayIdGet);
-    // window.localStorage['baysFav'] = JSON.stringify(favBays);
-    localStorage.setItem('baysFav', JSON.stringify(favBays));
+    window.localStorage.setItem('baysFav', JSON.stringify(favBays));
     $scope.favAdd = true;
     $scope.favDelete = false;
   };
   
   // $routeParams.baySlug
-  // var bayInfo = baysData.getSelectedBay();
-  var bayInfo = {'name' : 'Valparaíso', 'slug': 'valparaiso'};
+  var bayInfo = baysData.getSelectedBay();
+  // var bayInfo = {'name' : 'Valparaíso', 'slug': 'valparaiso'};
   var bayIdGet = $routeParams.baySlug;
   var yearCurrent = new Date().getFullYear();
   var monthCurrent = parseInt( new Date().getMonth() ) + 1;
@@ -107,14 +97,14 @@ angular.module('controllers', [])
         */
         var monthCorr = "m" + mesInt;
         var nroAureo = (parseInt(valDay.years) + 1) % 19;
-        var epacta = (nroAureo - 1) * 99;
+        var epacta = (nroAureo - 1) * 11;
         var edadLunar = epacta + parseInt(fixMonth[monthCorr]) + dayInt;
         var moonPhaseDay = '';
         var moonPhaseDayImg = '';
         //Correción si es mayor a 30 edad lunar
         if (edadLunar > 30)
           edadLunar = edadLunar - 30;
-        
+
         //Fases Lunares según edad lunar
         if (edadLunar >= 0 && edadLunar <= 6) {
           moonPhaseDay = moonPhase.nm[0];
@@ -150,23 +140,26 @@ angular.module('controllers', [])
     
     $scope.itemDays = items;
     // Obtener estado de favorito bahía
-    // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-    var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
+    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+
     $scope.favAdd = false;
     $scope.favDelete = false;
     if (favBays.bays.indexOf(bayInfo.slug) === -1) {
       $scope.favAdd = true;
       $scope.favDelete = false;
+    } else {
+      $scope.favAdd = false;
+      $scope.favDelete = true;
     }
 
     // call $anchorScroll()
-    setTimeout(function(){
-      if($("#current_day_scroll").offset() !== undefined) {
-        var altoScroll = parseInt($("#current_day_scroll").offset().top) - 100;
-        $(".page__content").animate({scrollTop:altoScroll}, '500', 'swing', function() {
-        });
-      }
-    }, 500);
+    // setTimeout(function(){
+    //   if($("#current_day_scroll").offset() !== undefined) {
+    //     var altoScroll = parseInt($("#current_day_scroll").offset().top) - 100;
+    //     $(".page__content").animate({scrollTop:altoScroll}, '500', 'swing', function() {
+    //     });
+    //   }
+    // }, 500);
   });
   
 })
@@ -174,11 +167,9 @@ angular.module('controllers', [])
 .controller('favoritesController', function($scope, $location, baysData) {
   angular.element("#nav").removeClass("show");
 
-  // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-  var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
+  // var favBays = window.window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.window.localStorage['baysFav']);
+  var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
   var favBaysList = [];
-  // var allBays = JSON.parse(window.localStorage['allBays']);
-  // var allBays = JSON.parse(localStorage.getItem('allBays'));
 
   baysData.getAll().then(function(results) {
     angular.forEach(results, function(val, key) {
@@ -201,102 +192,69 @@ angular.module('controllers', [])
 
 .controller('settingsController', function($scope, $location, baysData) {
   angular.element("#nav").removeClass("show");
-	//Helper setttings ONS
-	// ons.ready(function() {
- //    // if (window.localStorage['moonPhaseNotif'] === 'true') {
-	// 	if (localStorage.getItem('moonPhaseNotif') === 'true') {
-	// 		$("#moonPhaseNotif").attr('checked', 'checked');
-	// 	}
-
- //    // if (window.localStorage['weekendNotif'] === 'true') {
-	// 	if (localStorage.getItem('weekendNotif') === 'true') {
-	// 		$("#weekendNotif").attr('checked', 'checked');
-	// 	}
-	// });
-
-  //function listener notificacion fin de semana por bahia/puerto
-  $scope.bayChanged = function(itemBay, itemBayState, itemBayName){
-    if (itemBayState === true) {
-      if (baysNotif.bays.indexOf(itemBay) === -1) {
-        baysNotif.bays.push(itemBay);
-      }
-      //Set local notifications weekend by Bay
-      setNotifBaysWeekend(itemBay, itemBayName);
-    } else {
-      baysNotif.bays.remove(itemBay);
-      //Delete all notif weekend by Bay
-      deleteNotifWeekendByBay(itemBay);
-    }
-    // window.localStorage['weekendNotifBays'] = JSON.stringify(baysNotif);
-    localStorage.setItem('weekendNotifBays', JSON.stringify(baysNotif));
-  }
 
   $scope.moonPhaseChange = function(itemBayState){
-    localStorage.setItem('moonPhaseNotif', itemBayState);
+    if (itemBayState === true) {
+      $scope.moon_active = 'active';
+      $scope.moon_inactive = '';
+    } else{
+      $scope.moon_active = '';
+      $scope.moon_inactive = 'active';
+    };
+    window.localStorage.setItem('moonPhaseNotif', itemBayState);
     //Set local notifications
     setNotifMoonPhase(itemBayState);
   }
 
   $scope.weekendChange = function(itemWeekendState){
-    localStorage.setItem('weekendNotif', itemWeekendState);
+    if (itemWeekendState === true) {
+      $scope.weekend_active = 'active';
+      $scope.weekend_inactive = '';
+      /**
+      * 
+      * Web local storage, arreglo de bahias favoritas con notificacion
+      **/
+      var baysNotif = window.localStorage.getItem('weekendNotifBays') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('weekendNotifBays'));
+      baysData.getAll().then(function(results) {
+        /*
+        * 
+        * Lista de favoritos para notificaciones
+        */
+        var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+        var favBaysList = { "bays" : [] };
+        var allBays = results;
 
-    $scope.listBayNotif = itemWeekendState;
-    if (itemWeekendState === false) {
+        angular.forEach(allBays, function(val, key) {
+          if (favBays.bays.indexOf(val.slug) !== -1)
+            setNotifBaysWeekend(val.slug, val.name);
+        });
+      });
+    } else {
+      $scope.weekend_active = '';
+      $scope.weekend_inactive = 'active';
+      $scope.baysAll = null;
       //Delete all notif weekend
       deleteAllNotifWeekend();
-    }
+    };
+    $scope.weekendNotif = itemWeekendState;
+    window.localStorage.setItem('weekendNotif', itemWeekendState);
+
   }
 
-  // if (localStorage.getItem('moonPhaseNotif') === 'true') {
-  //    $scope.moonChk = true;
-  // } else {
-  //   $scope.moonChk = false;
-  // }
+  if (window.localStorage.getItem('moonPhaseNotif') === 'true') {
+    $scope.moon_active = 'active';
+    $scope.moon_inactive = '';
+  } else {
+    $scope.moon_active = '';
+    $scope.moon_inactive = 'active';
+  }
   
-  // if (localStorage.getItem('weekendNotif') === 'true') {
-  //   $scope.weekendChk = true;
-  // } else {
-  //   $scope.weekendChk = false;
-  // }
+  if (window.localStorage.getItem('weekendNotif') === 'true') {
+    $scope.weekend_active = 'active';
+    $scope.weekend_inactive = '';
+  } else {
+    $scope.weekend_active = '';
+    $scope.weekend_inactive = 'active';
+  }
 
-  // /**
-  // * 
-  // * Web local storage, preferencias usuarios notificaciones
-  // **/
-  // // $scope.listBayNotif   = window.localStorage['weekendNotif'] === "true" ? true : false;
-  // $scope.listBayNotif 	= localStorage.getItem('weekendNotif') === "true" ? true : false;
-  
-  // /**
-  // * 
-  // * Web local storage, arreglo de bahias favoritas con notificacion
-  // **/
-  // // var baysNotif = window.localStorage['weekendNotifBays'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['weekendNotifBays']);
-  // var baysNotif = localStorage.getItem('weekendNotifBays') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('weekendNotifBays'));
-
-  // *
-  // * 
-  // * Lista de favoritos para notificaciones
-  // *
-  // // var favBays = window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localStorage['baysFav']);
-  // var favBays = localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localStorage.getItem('baysFav'));
-  // var favBaysList = { "bays" : [] };
-  // // var allBays = JSON.parse(window.localStorage['allBays']);
-  // var allBays = JSON.parse(localStorage.getItem('allBays'));
-
-  // angular.forEach(allBays.bays, function(val, key) {
-  //   if (favBays.bays.indexOf(val.file) !== -1)
-  //     favBaysList.bays.push(val);
-  // });
-  
-  // var favsState = [];
-  // var checkedBay;
-  // angular.forEach(favBaysList.bays, function(val, key) {
-  //   //Busca la bahia en el arreglo local
-  //   if (baysNotif.bays.indexOf(val.file) !== -1)
-  //     checkedBay = true;
-  //   else
-  //     checkedBay = false;
-  //   favsState.push({bay: val, checked: checkedBay});
-  // });
-  // $scope.baysAll = favsState;
 });

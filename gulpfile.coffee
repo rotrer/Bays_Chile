@@ -18,11 +18,12 @@ browserSync    = require("browser-sync")
 gulpStripDebug = require("gulp-strip-debug")
 lr             = require("tiny-lr")
 livereload     = require("gulp-livereload")
+connect        = require("gulp-connect")
 server         = lr()
 
 # paths
-src          = "src"
-dest         = "../assets/"
+src          = "source"
+dest         = "mobile-dev/"
 destPhonegap = "../../app/www/assets/"
 
 #
@@ -33,20 +34,17 @@ destPhonegap = "../../app/www/assets/"
 # clean
 gulp.task "clean", ->
   gulp.src [
-    dest + "/scripts/*.*"
-    dest + "/styles/*.*"
-    dest + "/img/*.*"
-    dest + "*.html"
+    dest + "**"
   ]
   .pipe clean()
 
-#copy js scripts app
+#copy html app
 gulp.task "copy-html", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  .pipe gulp.dest "../"
-  .pipe livereload(server)
+  .pipe gulp.dest dest
+  .pipe connect.reload()
 # copy libs scritps
 gulp.task "copy-libs", ->
   gulp.src [
@@ -54,34 +52,43 @@ gulp.task "copy-libs", ->
     "bower_components/angular/angular.min.js"
     "bower_components/angular-route/angular-route.min.js"
   ]
-  .pipe gulp.dest dest + "scripts"
+  .pipe gulp.dest dest + "assets/scripts"
 #copy js scripts app
 gulp.task "copy-js", ->
   gulp.src [
     src + "/scripts/*.js"
   ]
   #.pipe uglify()
-  .pipe gulp.dest dest + "scripts"
-  .pipe livereload(server)
+  .pipe gulp.dest dest + "assets/scripts"
+  .pipe connect.reload()
 #copy imgs appp
 gulp.task "copy-img", ->
   gulp.src [
     src + "/images/*"
   ]
-  .pipe gulp.dest dest + "img"
+  .pipe gulp.dest dest + "assets/img"
+  .pipe connect.reload()
 #copy styles app
 gulp.task "copy-styles", ->
   gulp.src [
     src + "/styles/*"
   ]
-  .pipe gulp.dest dest + "styles"
+  .pipe gulp.dest dest + "assets/styles"
+  .pipe connect.reload()
 #copy fonts app
 gulp.task "copy-fonts", ->
   gulp.src [
     src + "/fonts/*"
   ]
-  .pipe gulp.dest dest + "styles/font"
+  .pipe gulp.dest dest + "assets/styles/font"
+  .pipe connect.reload()
 
+gulp.task "webserver", ->
+  connect.server
+    livereload: true
+    # port: 80
+    # host: "bays.app"
+    root: "mobile-dev"
 
 #Phonegap Developer
 #copy js scripts app
@@ -230,6 +237,7 @@ gulp.task 'default', [
   "copy-styles"
   "copy-fonts"
   "watch"
+  "webserver"
 ]
 
 # dev phonegap task
