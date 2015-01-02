@@ -36,14 +36,12 @@ local.properties
 .Spotlight-V100
 .Trashes
 
-/mobile-dev/_gulp/bower_components/
-/mobile-dev/_gulp/node_modules/
-/mobile-dev/assets/*
-/mobile-dev/**.html
+bower_components
+node_modules
+mobile-dev/**
 
 /app/www/assets/*
 /app/www/*.html
 /app/www/**/*.html
 /app/plugins/*
 /app/platforms/*
-node_modules
