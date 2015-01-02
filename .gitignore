@@ -46,3 +46,4 @@ local.properties
 /app/www/**/*.html
 /app/plugins/*
 /app/platforms/*
+node_modules
