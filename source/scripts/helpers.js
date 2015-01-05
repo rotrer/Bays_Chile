@@ -42,7 +42,7 @@ function setNotifMoonPhase(state){
         moonPhase = { "nm" : ["Luna Nueva", "nueva"], "fq" : ["Cuarto Creciente", "creciente"], "fm" : ["Luna Llena", "llena"], "lq" : ["Cuarto Menguante", "menguante"]},//Fase lunares
         fixMonth = { "m1": 0, "m2": 1, "m3": 0, "m4": 1, "m5": 2, "m6": 3, "m7": 4, "m8": 5, "m9": 6, "m10": 7, "m11": 8, "m12": 9 },//Correlacion meses fase lunar
         nroAureo = (parseInt(yearCurrent) + 1) % 19,
-        epacta = (nroAureo - 1) * 99;
+        epacta = (nroAureo - 1) * 11;
     
     //Calcular fase de la luna por mes actual
     for (var i = dayCurrent; i <= qtyDaysCurrentMmonth; i++) {
@@ -178,7 +178,7 @@ function cancelNotifByID(id){
 
 function notifScheduledLog(){
   window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
-    console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
+    // console.log('Scheduled IDs: ' + scheduledIds.join(' ,'));
   });
 }
 
@@ -191,7 +191,7 @@ function initGA(){
      * Home links bahías
      */
     $(document).on('click', '.baySelect', function(){
-      var bayName = $(this).text().trim();
+      var bayName = $(this).attr("data-bay");
       analytics.trackView('bay/' + bayName);
     });
 
@@ -200,7 +200,12 @@ function initGA(){
      * Favorites links bahías
      */
     $(document).on('click', '.baySelectFavs', function(){
-      var bayName = $(this).text().trim();
+      var bayName = $(this).attr("data-bay");
+      analytics.trackEvent('Fav', 'Click', 'Add ' + bayName, 1);
+    });
+    $(document).on('click', '.baySelectFavsDelete', function(){
+      var bayName = $(this).attr("data-bay");
+      analytics.trackEvent('Fav', 'Click', 'Add ' + bayName, 1);
     });
 
     /*
@@ -226,9 +231,6 @@ function initGA(){
     });
     $(document).on('click', '.weekendNotif', function(){
         analytics.trackEvent('Button', 'Click', 'Toggle notif weekend', new Date());
-    });
-    $(document).on('click', '.notifBaySel', function(){
-        analytics.trackEvent('Button', 'Click', 'Toggle notif weekend bay', new Date());
     });
 }
 document.addEventListener('deviceready', function() {

@@ -109,12 +109,12 @@
   </div>
 </div>
 
-<button class="btn btn-primary btn-block fav-add" ng-show="favAdd" ng-click="addFav();">
+<button class="btn btn-primary btn-block fav-add baySelectFavs" ng-show="favAdd" ng-click="addFav();" data-bay="{{nameBay | capitalize}}">
   <i class="icon-star"></i>
   Agregar a Favoritos
 </button>
 
-<button class="btn btn-danger btn-block fav-delete" ng-show="favDelete" ng-click="deleteFav();">
+<button class="btn btn-danger btn-block fav-delete baySelectFavsDelete" ng-show="favDelete" ng-click="deleteFav();" data-bay="{{nameBay | capitalize}}">
   <i class="icon-remove"></i>
   Eliminar de Favoritos
 </button>

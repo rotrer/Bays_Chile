@@ -13,7 +13,6 @@ rename         = require("gulp-rename")
 uglify         = require("gulp-uglify")
 coffee         = require("gulp-coffee")
 cache          = require("gulp-cached")
-clean          = require("gulp-clean")
 browserSync    = require("browser-sync")
 gulpStripDebug = require("gulp-strip-debug")
 lr             = require("tiny-lr")
@@ -24,19 +23,11 @@ server         = lr()
 # paths
 src          = "source"
 dest         = "mobile-dev/"
-destPhonegap = "../../app/www/assets/"
+destPhonegap = "app/www/"
 
 #
 #  gulp tasks
 #  ==========================================================================
-
-
-# clean
-gulp.task "clean", ->
-  gulp.src [
-    dest + "**"
-  ]
-  .pipe clean()
 
 #copy html app
 gulp.task "copy-html", ->
@@ -51,8 +42,9 @@ gulp.task "copy-libs", ->
     "bower_components/jquery/jquery.min.js"
     "bower_components/angular/angular.min.js"
     "bower_components/angular-route/angular-route.min.js"
+    src + "/lib/app-js.v1.js"
   ]
-  .pipe gulp.dest dest + "assets/scripts"
+  .pipe gulp.dest dest + "assets/lib"
 #copy js scripts app
 gulp.task "copy-js", ->
   gulp.src [
@@ -90,56 +82,63 @@ gulp.task "webserver", ->
     # host: "bays.app"
     root: "mobile-dev"
 
-#Phonegap Developer
-#copy js scripts app
-gulp.task "copy-onsen-css-p", ->
-  gulp.src [
-    "bower_components/onsenui/build/css/**"
-  ]
-  .pipe gulp.dest destPhonegap + "scripts/onsen/css"
-gulp.task "copy-onsen-js-p", ->
-  gulp.src [
-    "bower_components/onsenui/build/js/onsenui_all.js"
-  ]
-  .pipe gulp.dest destPhonegap + "scripts/onsen/js"
-#copy html scripts app
+
+#
+# Phonegap Developer
+# ====================
+#
+#copy html app
 gulp.task "copy-html-p", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  .pipe gulp.dest "../../app/www/"
-  .pipe livereload(server)
+  .pipe gulp.dest destPhonegap
+  .pipe connect.reload()
 # copy libs scritps
+gulp.task "copy-libs-p", ->
   gulp.src [
     "bower_components/jquery/jquery.min.js"
-    "bower_components/underscore/underscore-min.js"
+    "bower_components/angular/angular.min.js"
+    "bower_components/angular-route/angular-route.min.js"
+    src + "/lib/app-js.v1.js"
   ]
-  .pipe gulp.dest destPhonegap + "scripts"
+  .pipe gulp.dest destPhonegap + "assets/lib"
 #copy js scripts app
 gulp.task "copy-js-p", ->
   gulp.src [
     src + "/scripts/*.js"
   ]
-  .pipe gulp.dest destPhonegap + "scripts"
-  .pipe livereload(server)
+  #.pipe uglify()
+  .pipe gulp.dest destPhonegap + "assets/scripts"
+  .pipe connect.reload()
 #copy imgs appp
 gulp.task "copy-img-p", ->
   gulp.src [
     src + "/images/*"
   ]
-  .pipe gulp.dest destPhonegap + "img"
+  .pipe gulp.dest destPhonegap + "assets/img"
+  .pipe connect.reload()
 #copy styles app
 gulp.task "copy-styles-p", ->
   gulp.src [
     src + "/styles/*"
   ]
-  .pipe gulp.dest destPhonegap + "styles"
+  .pipe gulp.dest destPhonegap + "assets/styles"
+  .pipe connect.reload()
 #copy fonts app
 gulp.task "copy-fonts-p", ->
   gulp.src [
     src + "/fonts/*"
   ]
-  .pipe gulp.dest destPhonegap + "fonts"
+  .pipe gulp.dest destPhonegap + "assets/styles/font"
+  .pipe connect.reload()
+
+gulp.task "webserver-p", ->
+  connect.server
+    livereload: true
+    # port: 80
+    # host: "bays.app"
+    root: "mobile-dev"
 
 gulp.task 'watch', ->
   gulp.watch [src + '/scripts/*.js'], ['copy-js']
@@ -160,34 +159,21 @@ gulp.task 'watch-p', ->
 # ====================
 # 
 #copy js scripts app
-gulp.task "copy-onsen-css-dist", ->
-  gulp.src [
-    "bower_components/onsenui/build/css/ionicons/**"
-  ]
-  .pipe gulp.dest destPhonegap + "scripts/onsen/css/ionicons"
-  gulp.src [
-    "bower_components/onsenui/build/css/font_awesome/**"
-  ]
-  .pipe gulp.dest destPhonegap + "scripts/onsen/css/font_awesome"
-gulp.task "copy-onsen-css-min-dist", ->
-  gulp.src [
-    "bower_components/onsenui/build/css/*.css"
-  ]
-  # .pipe minifycss
-  .pipe gulp.dest destPhonegap + "scripts/onsen/css"
-gulp.task "copy-onsen-js-dist", ->
-  gulp.src [
-    "bower_components/onsenui/build/js/onsenui_all.js"
-  ]
-  .pipe uglify()
-  .pipe gulp.dest destPhonegap + "scripts/onsen/js"
-#copy html scripts app
+#copy html app
 gulp.task "copy-html-dist", ->
   gulp.src [
     src + "/html/**/*.html"
   ]
-  .pipe gulp.dest "../../app/www/"
-
+  .pipe gulp.dest destPhonegap
+# copy libs scritps
+gulp.task "copy-libs-dist", ->
+  gulp.src [
+    "bower_components/jquery/jquery.min.js"
+    "bower_components/angular/angular.min.js"
+    "bower_components/angular-route/angular-route.min.js"
+    src + "/lib/app-js.v1.js"
+  ]
+  .pipe gulp.dest destPhonegap + "assets/lib"
 #copy js scripts app
 gulp.task "copy-js-dist", ->
   gulp.src [
@@ -195,31 +181,26 @@ gulp.task "copy-js-dist", ->
   ]
   .pipe uglify({mangle: false})
   .pipe gulpStripDebug()
-  .pipe gulp.dest destPhonegap + "scripts"
-
-  gulp.src [
-    "bower_components/jquery/jquery.min.js"
-  ]
-  .pipe gulp.dest destPhonegap + "scripts"
+  .pipe gulp.dest destPhonegap + "assets/scripts"
 #copy imgs appp
 gulp.task "copy-img-dist", ->
   gulp.src [
     src + "/images/*"
   ]
-  .pipe gulp.dest destPhonegap + "img"
+  .pipe gulp.dest destPhonegap + "assets/img"
 #copy styles app
 gulp.task "copy-styles-dist", ->
   gulp.src [
     src + "/styles/*"
   ]
-  .pipe minifycss
-  .pipe gulp.dest destPhonegap + "styles"
+  .pipe minifycss()
+  .pipe gulp.dest destPhonegap + "assets/styles"
 #copy fonts app
 gulp.task "copy-fonts-dist", ->
   gulp.src [
     src + "/fonts/*"
   ]
-  .pipe gulp.dest destPhonegap + "fonts"
+  .pipe gulp.dest destPhonegap + "assets/styles/font"
 
 
 
@@ -243,22 +224,21 @@ gulp.task 'default', [
 # dev phonegap task
 gulp.task 'phonegap', [
   "copy-html-p"
-  "copy-onsen-css-p"
-  "copy-onsen-js-p"
+  "copy-libs-p"
   "copy-js-p"
   "copy-img-p"
   "copy-styles-p"
   "copy-fonts-p"
   "watch-p"
+  "webserver-p"
 ]
 
 # dev phonegap task
 gulp.task 'dist', [
   "copy-html-dist"
-  "copy-onsen-css-dist"
-  "copy-onsen-css-min-dist"
-  "copy-onsen-js-dist"
+  "copy-libs-dist"
   "copy-js-dist"
   "copy-img-dist"
+  "copy-styles-dist"
   "copy-fonts-dist"
 ]

@@ -27,17 +27,17 @@ angular.module('controllers', [])
   angular.element("#nav").removeClass("show");
 
   $scope.addFav = function() {
-    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+    var favBays = localS.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localS.getItem('baysFav'));
     favBays.bays.push(bayIdGet);
-    window.localStorage.setItem('baysFav', JSON.stringify(favBays));
+    localS.setItem('baysFav', JSON.stringify(favBays));
     $scope.favAdd = false;
     $scope.favDelete = true;
   };
 
   $scope.deleteFav = function() {
-    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+    var favBays = localS.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localS.getItem('baysFav'));
     favBays.bays.remove(bayIdGet);
-    window.localStorage.setItem('baysFav', JSON.stringify(favBays));
+    localS.setItem('baysFav', JSON.stringify(favBays));
     $scope.favAdd = true;
     $scope.favDelete = false;
   };
@@ -140,7 +140,7 @@ angular.module('controllers', [])
     
     $scope.itemDays = items;
     // Obtener estado de favorito bahía
-    var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+    var favBays = localS.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localS.getItem('baysFav'));
 
     $scope.favAdd = false;
     $scope.favDelete = false;
@@ -167,8 +167,8 @@ angular.module('controllers', [])
 .controller('favoritesController', function($scope, $location, baysData) {
   angular.element("#nav").removeClass("show");
 
-  // var favBays = window.window.localStorage['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.window.localStorage['baysFav']);
-  var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+  // var favBays = window.localS['baysFav'] === null ? { "bays" : [] } : JSON.parse(window.localS['baysFav']);
+  var favBays = localS.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localS.getItem('baysFav'));
   var favBaysList = [];
 
   baysData.getAll().then(function(results) {
@@ -201,7 +201,7 @@ angular.module('controllers', [])
       $scope.moon_active = '';
       $scope.moon_inactive = 'active';
     };
-    window.localStorage.setItem('moonPhaseNotif', itemBayState);
+    localS.setItem('moonPhaseNotif', itemBayState);
     //Set local notifications
     setNotifMoonPhase(itemBayState);
   }
@@ -214,13 +214,13 @@ angular.module('controllers', [])
       * 
       * Web local storage, arreglo de bahias favoritas con notificacion
       **/
-      var baysNotif = window.localStorage.getItem('weekendNotifBays') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('weekendNotifBays'));
+      var baysNotif = localS.getItem('weekendNotifBays') === null ? { "bays" : [] } : JSON.parse(localS.getItem('weekendNotifBays'));
       baysData.getAll().then(function(results) {
         /*
         * 
         * Lista de favoritos para notificaciones
         */
-        var favBays = window.localStorage.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(window.localStorage.getItem('baysFav'));
+        var favBays = localS.getItem('baysFav') === null ? { "bays" : [] } : JSON.parse(localS.getItem('baysFav'));
         var favBaysList = { "bays" : [] };
         var allBays = results;
 
@@ -237,11 +237,11 @@ angular.module('controllers', [])
       deleteAllNotifWeekend();
     };
     $scope.weekendNotif = itemWeekendState;
-    window.localStorage.setItem('weekendNotif', itemWeekendState);
+    localS.setItem('weekendNotif', itemWeekendState);
 
   }
 
-  if (window.localStorage.getItem('moonPhaseNotif') === 'true') {
+  if (localS.getItem('moonPhaseNotif') === 'true') {
     $scope.moon_active = 'active';
     $scope.moon_inactive = '';
   } else {
@@ -249,7 +249,7 @@ angular.module('controllers', [])
     $scope.moon_inactive = 'active';
   }
   
-  if (window.localStorage.getItem('weekendNotif') === 'true') {
+  if (localS.getItem('weekendNotif') === 'true') {
     $scope.weekend_active = 'active';
     $scope.weekend_inactive = '';
   } else {

@@ -1,5 +1,6 @@
 'use strict';
-// Ionic App
+var localS = window.localStorage;
+// App
 angular.module('tideApp', ['ngRoute', 'controllers', 'factory', 'directives'])
 
 .config(['$routeProvider', '$locationProvider',
