@@ -26,6 +26,9 @@ Agregar plataforma android
 
 - En raíz proyecto
 ```sh
+cd app
+mkdir plugins
+mkdir platforms
 cordova platform add android
 ```
 

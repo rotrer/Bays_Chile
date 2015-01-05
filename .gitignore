@@ -26,3 +26,6 @@ mobile-dev/**
 /app/www/assets/*
 /app/www/*.html
 /app/www/**/*.html
+
+/app/plugins/*
+/app/platforms/*
