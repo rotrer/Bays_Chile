@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: ApiMareasChile
+        psr4_prefix: ApiMareasChile
+        src_path: app

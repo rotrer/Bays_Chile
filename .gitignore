@@ -1,6 +1,20 @@
-**/node_modules/
-**/bower_components/
-**/mobile-dev/
+/bootstrap/compiled.php
+/vendor
+/express
+composer.phar
+composer.lock
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+
+
+# OSX
 **.DS_Store
-.idea/
-**/app/
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes

@@ -1,20 +1,24 @@
 Bays_Chile API
 ==========
 
-### == Node.js + Express.js + Mongodb ==
+### == Laravel 5 + MySql ==
 
 #### Setup
 
-- Instalar aplicación `npm install`
+- Clonar repositorio
 
-- Poblar localidades `[URL]:[PORT]/localilades/populate`
+- Instalar aplicaciÃ³n `composer update`
+
+- Migraciones `php artisan migrate`
+
+- Poblar localidades `php artisan db:seed `
 
 - Poblar mareas `[URL]:[PORT]/mareas/populate`
 
 #### Endpoints
 
-- Todas localidades `[URL]:[PORT]/localilades`
+- Todas localidades `[URL]/localilades`
 
-- Marea por localidad `[URL]:[PORT]/mareas/[SLUG_LOCALIDAD]`
+- Marea por localidad `[URL]/mareas/[SLUG_LOCALIDAD]`
 
-- Marea por localidad por año/mes `[URL]:[PORT]/mareas/[SLUG_LOCALIDAD]/[AÑO]/[MES]`
+- Marea por localidad por aï¿½o/mes `[URL]/mareas/[SLUG_LOCALIDAD]/[Aï¿½O]/[MES]`
