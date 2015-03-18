@@ -26,8 +26,8 @@
   <body ng-app="tideApp">
     <!-- header -->
     <header id="header" class="navbar navbar-sm bg bg-black">
-      <a class="navbar-brand" href="#/home">Mareas Chile</a>
-      <button type="button" class="btn btn-link nav-toggle pull-left hidden-desktop" data-toggle="class:show" data-target="#nav">
+      <a class="navbar-brand hide header_logo" href="#/home">Mareas Chile</a>
+      <button type="button" class="btn btn-link nav-toggle pull-left hidden-desktop hide header_button" data-toggle="class:show" data-target="#nav">
         <i class="icon-reorder icon-xlarge text-default"></i>
       </button>
 
@@ -37,9 +37,9 @@
     <!-- nav -->
     <nav id="nav" class="nav-primary visible-desktop nav-vertical bg-light">
       <ul class="nav">
-        <li><a href="#/home" class="active"><i class="icon-home icon-xlarge"></i>Inicio</a></li>
-        <li><a href="#/favorites"><i class="icon-star icon-xlarge"></i>Favoritos</a></li>
-        <li><a href="#/settings"><i class="icon-cog icon-xlarge"></i>Configuración</a></li>
+        <li><a href="#/home" id="navHome" class="active"><i class="icon-home icon-xlarge"></i>Inicio</a></li>
+        <li><a href="#/favorites" id="navFavs"><i class="icon-star icon-xlarge"></i>Favoritos</a></li>
+        <li><a href="#/settings" id="navConf"><i class="icon-cog icon-xlarge"></i>Configuración</a></li>
       </ul>
     </nav>
     <!-- / nav -->

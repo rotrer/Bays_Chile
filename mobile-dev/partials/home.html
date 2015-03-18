@@ -4,7 +4,7 @@
 <div class="row-fluid">
   <div class="span6">
     <div class="list-group m-b-small">
-      <a href="" class="list-group-item" ng-repeat="bay in baysAll" ng-click="loadBay( bay.slug )">
+      <a href="" class="list-group-item baySelect" ng-repeat="bay in baysAll" ng-click="loadBay( bay.slug )" data-bay="{{bay.slug}}">
         <i class="icon-chevron-right"></i>
         <span class="badge"></span>
         <!-- <i class="icon-envelope"></i>  -->

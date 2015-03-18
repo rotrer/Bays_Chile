@@ -6,6 +6,8 @@ angular.module('controllers', [])
 
 .controller('homeController', function($scope, $location, baysData) {
   angular.element("#nav").removeClass("show");
+  angular.element(".header_logo").removeClass("hide");
+  angular.element(".header_button").removeClass("hide");
 
 	$scope.loadBay = function(bayID) {
     angular.forEach($scope.baysAll, function(val, key) {
@@ -18,7 +20,15 @@ angular.module('controllers', [])
 
   baysData.getAll().then(function(results) {
     $scope.baysAll = results;
-    $("#loadingApp").fadeOut();
+    if (localS.getItem('currentBay') !== null) {
+      angular.forEach(results, function(valLocal, keyLocal) {
+        if (valLocal.slug == localS.getItem('currentBay')) {
+          baysData.setSelectedBay( valLocal.name, valLocal.slug );
+          $location.path('/bay/' + valLocal.slug);
+          localS.setItem('currentBay', null);
+        };
+      });
+    }
   });
 
 })

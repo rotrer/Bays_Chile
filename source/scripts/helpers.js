@@ -234,30 +234,22 @@ function initGA(){
     });
 }
 document.addEventListener('deviceready', function() {
-  StatusBar.overlaysWebView( false );
-  StatusBar.backgroundColorByName("gray");
+  // StatusBar.overlaysWebView( false );
+  // StatusBar.backgroundColorByName("gray");
 
   //GA
   var analyticsAccount = "UA-34567136-3";
   analytics.startTrackerWithId(analyticsAccount);
   initGA();
-  
-
   //Notificaciones event listener
-  ons.ready(function() {
-    window.plugin.notification.local.onclick = function (id, state, json) {
-      //console.log(id, JSON.parse(json).test);
-      var dataNotif = JSON.parse(json);
-      if (dataNotif.type === 'weekend') {
-        if (dataNotif.bay !== null) {
-          $("#loadingApp").show();
-          // window.localStorage['currentBay'] = dataNotif.bay;
-          localStorage.setItem('currentBay', dataNotif.bay);
-          ons.navigator.pushPage('partials/bay.html');
-        } else {
-            alert("Error: Bahía no existe.");
-        }
+  window.plugin.notification.local.onclick = function (id, state, json) {
+    var dataNotif = JSON.parse(json);
+    if (dataNotif.type === 'weekend') {
+      if (dataNotif.bay !== null) {
+        localS.setItem('currentBay', dataNotif.bay);
+      } else {
+          alert("Error: Bahía no existe.");
       }
-    };
-  });
+    }
+  };
 }, false);
