@@ -15,8 +15,6 @@ class CreateTidesTable extends Migration {
 		Schema::create('tides', function($table)
 		{
 			$table->increments('id');
-			$table->string('name', 50);
-			$table->string('slug', 50);
 			$table->string('keyday', 20);
 			$table->integer('locations_id')->unsigned();
 			$table->integer('year');

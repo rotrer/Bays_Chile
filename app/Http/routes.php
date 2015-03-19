@@ -15,5 +15,7 @@ Route::get('/', 'WelcomeController@index');
 
 Route::resource('localidades', 'LocationsController');
 Route::get('mareas/populate', 'TidesController@populate');
+Route::get('mareas/{slug}', 'TidesController@show');
+Route::get('mareas/{bay}/{year}/{month}', 'TidesController@bayfilter');
 Route::resource('mareas', 'TidesController');
 
