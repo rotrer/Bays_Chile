@@ -11,7 +11,7 @@ Bays_Chile API
 
 - Migraciones `php artisan migrate`
 
-- Poblar localidades `php artisan db:seed `
+- Poblar localidades `php artisan db:seed`
 
 - Poblar mareas `[URL]:[PORT]/mareas/populate`
 
