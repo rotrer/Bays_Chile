@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mDialog.setCancelable(false);
 
         //Load list locations
-        getLocations();
+        //getLocations();
     }
 
     @Override
