@@ -22,6 +22,18 @@ class LocationsController extends Controller {
 	}
 
 	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function all()
+	{
+		$locations = new Location();
+		$data = array("data" => $locations->select( array('name', 'slug') )->orderBy('name', 'asc')->get());
+		return response()->json( $data );
+	}
+
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response

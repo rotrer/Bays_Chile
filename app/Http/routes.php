@@ -13,6 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('localidades/all', 'LocationsController@all');
 Route::resource('localidades', 'LocationsController');
 Route::get('mareas/populate', 'TidesController@populate');
 Route::get('mareas/{slug}', 'TidesController@show');
