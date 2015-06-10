@@ -29,9 +29,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final String END_TIDES = "/mareas";
     //private Button mainButton;
     //private EditText mainEditText;
-    //private ListView mainListView;
+    private ListView mainListView;
     private JSONAdapter mJSONAdapter;
-    //private ArrayList mNameList;
+    private ArrayList mNameList;
     private ProgressDialog mDialog;
 
     @Override
@@ -44,8 +44,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mDialog.setMessage("Cargando localidades");
         mDialog.setCancelable(false);
 
+        mNameList = new ArrayList();
+        mainListView = (ListView) findViewById(R.id.localidades_list);
+
+        // Create a JSONAdapter for the ListView
+        mJSONAdapter = new JSONAdapter(this, getLayoutInflater());
+
+        // Set the ListView to use the ArrayAdapter
+        mainListView.setAdapter(mJSONAdapter);
+
         //Load list locations
-        //getLocations();
+        getLocations();
+        //mainButton = (Button) findViewById(R.id.testbtn);
+        //mainButton.setOnClickListener(this);
     }
 
     @Override
@@ -72,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
+        //getLocations();
     }
 
     @Override
@@ -86,6 +97,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     *
      */
     private void getLocations() {
+        //Url query
+        String urlString = QUERY_BASE + END_LOCATION + "/all";
         //Show loading
         mDialog.show();
         // Create a client to perform networking
@@ -93,21 +106,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         // Have the client get a JSONArray of data
         // and define how to respond
-        client.get(QUERY_BASE + END_LOCATION,
+        client.get(urlString,
             new JsonHttpResponseHandler() {
+
+                @Override
+                public void onStart() {
+                    //Log.d("omg", "start request");
+                }
 
                 @Override
                 public void onSuccess(JSONObject jsonObject) {
                     mDialog.dismiss();
                     // Display a "Toast" message
                     // to announce your success
-                    //Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Listo!", Toast.LENGTH_LONG).show();
 
                     // 8. For now, just log results
-                    Log.d("omg", jsonObject.toString());
+                    //Log.d("omg", jsonObject.optJSONArray("data").toString());
 
                     // update the data in your custom method.
-                    //mJSONAdapter.updateData(jsonObject.optJSONArray("docs"));
+                    mJSONAdapter.updateData(jsonObject.optJSONArray("data"));
                 }
 
                 @Override
@@ -122,6 +140,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     // to help solve any problems
                     //Log.e("omg android", statusCode + " " + throwable.getMessage());
                 }
+
+                //@Override
+                //public void onRetry(int retryNo) {
+                //    Log.d("omg", "retry request");
+                //}
             });
     }
 
