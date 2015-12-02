@@ -106,6 +106,40 @@ class TidesController extends Controller {
 	}
 
 	/**
+	 * Display filter by bay, year, month
+	 *
+	 * @param  string  $bay
+	 * @param  int  $year
+	 * @param  int  $month
+	 * @return Response
+	 */
+	public function bayfilterV2($bay, $year, $month)
+	{
+		// Instance Models
+		$tides = new Tide;
+		$location = new Location;
+		$response = array();
+		if ( isset($bay) && !empty($bay) && isset($year) && !empty($year)  && isset($month) && !empty($month) ) {
+			//get location
+			$locationData = $location->where( 'slug', '=', $bay)->first();
+			//get tide info
+			$response = $tides->select( array('year as years', 'month as months', 'day', 'h1st', 'm1st', 't1st', 'h2st', 'm2st', 't2st', 'h3st', 'm3st', 't3st', 'h4st', 'm4st', 't4st') )
+																						->where( 'locations_id', '=', $locationData->id)
+																						->where( 'year', '=', $year)
+																						->where( 'month', '=', $month)
+																						->orderBy('years', 'desc')
+																						->orderBy('months', 'asc')
+																						->orderBy('day', 'asc')
+																						->get();
+		} else {
+			$response = array('ERROR');
+		}
+		
+
+		return response()->json( array("data" => $response) );
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
